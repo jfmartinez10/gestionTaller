@@ -1,12 +1,17 @@
-package GestionTaller.src;
-
+import java.sql.Connection;
 import java.util.Scanner;
-
 public class App {
     public static void main(String[] args){
+        Connection conexion = ConexionBD.conectar();
+        
+            if (conexion != null) {
+                System.out.println("Conexión establecida correctamente.");
+            } else {
+                System.out.println("No se pudo establecer la conexión.");
+            }
         Scanner scanner = new Scanner(System.in);
         int opcion;
-
+ 
         do {
             System.out.println("\nMenú del Taller");
             System.out.println(" Seleciona tu rol");
@@ -21,16 +26,18 @@ public class App {
                         System.out.println("1. Registrar Cliente");
                         System.out.println("2. Eliminar Cliente");
                         System.out.println("3. Registrar Vehiculo");
-                        System.out.println("4. Registrar Problema");
+                        System.out.println("4. Eliminar Vehiculo");
+                        System.out.println("5. Registrar Problema");
                         
                         switch (opcion){
                             case 1 -> {} //registrarCliente
                             case 2 -> {} //eliminarCliente
                             case 3 -> {} //registrarVehiculo
-                            case 4 -> {} //registrarProblema
+                            case 4 -> {} //eliminarVehiculo
+                            case 5 -> {} //registrarProblema
                         }
 
-                    } while (opcion != 4);
+                    } while (opcion != 5);
                 }
                 case 2 -> {
                     do { 
@@ -52,3 +59,4 @@ public class App {
             System.out.println("Numero no valido, prueba otra vez.");
     }
 }
+
