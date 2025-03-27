@@ -9,16 +9,16 @@ public class Taller {
 
         Scanner scanner = new Scanner(System.in);
 
-        String nombre="";
+        String nombreCliente="";
         int telefono=0;
         String DNI ="";
-        String query = "INSERT INTO clientes (nombre, telefono, DNI) VALUES ("+nombre+"," +telefono+","+DNI+")";
+        String query = "INSERT INTO clientes (nombre, telefono, DNI) VALUES ("+nombreCliente+"," +telefono+","+DNI+")";
 
             try (PreparedStatement stmt = conexion.prepareStatement(query)) {
                 
                 System.out.println("Escribe tu nombre");
-                nombre = scanner.next();
-                stmt.setString(1, nombre); // Asigna el valor del
+                nombreCliente = scanner.next();
+                stmt.setString(1, nombreCliente); // Asigna el valor del
                 System.out.println("Escribe tu telefono"); 
                 telefono = scanner.nextInt();
                 stmt.setInt(2, telefono); // Asigna el valor del 
