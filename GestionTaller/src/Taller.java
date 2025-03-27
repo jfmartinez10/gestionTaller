@@ -23,7 +23,7 @@ public class Taller {
                 telefono = scanner.nextInt();
                 stmt.setInt(2, telefono); // Asigna el valor del 
                 System.out.println("Escribe tu DNI");
-                nombre = scanner.next();
+                DNI = scanner.next();
                 stmt.setString(3, DNI); // Asigna el valor del 
                 stmt.executeUpdate(); // Ejecuta la consulta de inserción
                 System.out.println("Cliente agregado exitosamente.");
