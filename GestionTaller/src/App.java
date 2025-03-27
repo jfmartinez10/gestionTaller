@@ -1,7 +1,7 @@
 import java.sql.Connection;
 import java.util.Scanner;
 public class App {
-    public static void main(String[] args){
+    public static void main(String[] args) throws Exception{
         Connection conexion = ConexionBD.conectar();
         
             if (conexion != null) {
