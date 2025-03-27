@@ -1,4 +1,3 @@
-
 import java.util.Scanner;
 
 public class App {
@@ -6,9 +5,10 @@ public class App {
         Scanner scanner = new Scanner(System.in);
         int opcion;
         String contraseñaCorrecta = "pene";
+        Taller taller = new Taller();
 
         do {
-            System.out.println("¡Bienbenido al mejor taller de Zaragoza!");
+            System.out.println("¡Bienvenido al mejor taller de Zaragoza!");
             System.out.println("1. Cliente");
             System.out.println("2. Empleado");
             System.out.println("3. Salir");
@@ -26,8 +26,8 @@ public class App {
                     int subopcion = scanner.nextInt();
 
                         switch (subopcion) {
-                            case 1 -> {}//Método iniciarSesión 
-                            case 2 -> {}//Método crearUsuario 
+                            case 1 -> taller.iniciarSesion();
+                            case 2 -> taller.crearCuenta();
                         }
                     }
 
@@ -35,14 +35,13 @@ public class App {
                     System.out.print("Introduzca contraseña necesaria: ");
                     String contraseñaIngresada = scanner.nextLine();
                     if (contraseñaIngresada.equals(contraseñaCorrecta)) {
-                        //Método mostrarMenuEmpleado
+                        taller.mostrarMenuEmpleado();
                     } else {
                         System.out.println("Contraseña incorrecta. Inténtalo de nuevo.");
                     }
                 }
             }
         } catch (NumberFormatException e) {
-            // Captura la excepción si la entrada del usuario no es un número válido
             System.out.println("\u001B[31mEntrada inválida. Por favor, ingresa un número.\u001B[0m");
             //Método main
         }  
