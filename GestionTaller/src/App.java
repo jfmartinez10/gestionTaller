@@ -1,7 +1,7 @@
 import java.sql.Connection;
 import java.util.Scanner;
 public class App {
-    public static void main(String[] args){
+    public static void main(String[] args) throws Exception{
         Connection conexion = ConexionBD.conectar();
         
             if (conexion != null) {
@@ -11,52 +11,47 @@ public class App {
             }
         Scanner scanner = new Scanner(System.in);
         int opcion;
- 
+        String contraseñaCorrecta = "pene";
+        Taller taller = new Taller();
+
         do {
-            System.out.println("\nMenú del Taller");
-            System.out.println(" Seleciona tu rol");
+            System.out.println("¡Bienvenido al mejor taller de Zaragoza!");
             System.out.println("1. Cliente");
-            System.out.println("2. Trabajador");
+            System.out.println("2. Empleado");
             System.out.println("3. Salir");
+            System.out.print("Seleccione una opción: ");
             opcion = scanner.nextInt();
-        switch (opcion){
+        }while(opcion !=3);
+        
+        try {
+            switch (opcion) {
                 case 1 -> {
-                    do { 
-                        System.out.println("\nBienvenido Cliente, que queires hacer");
-                        System.out.println("1. Registrar Cliente");
-                        System.out.println("2. Eliminar Cliente");
-                        System.out.println("3. Registrar Vehiculo");
-                        System.out.println("4. Eliminar Vehiculo");
-                        System.out.println("5. Registrar Problema");
-                        
-                        switch (opcion){
-                            case 1 -> {} //registrarCliente
-                            case 2 -> {} //eliminarCliente
-                            case 3 -> {} //registrarVehiculo
-                            case 4 -> {} //eliminarVehiculo
-                            case 5 -> {} //registrarProblema
-                        }
+                    System.out.println("1. Iniciar sesion");
+                    System.out.println("2. Crear usuario");
+                    System.out.println("3. Salir");
+                    System.out.println("Introduce una opción: ");
+                    int subopcion = scanner.nextInt();
 
-                    } while (opcion != 5);
-                }
+                        switch (subopcion) {
+                            case 1 -> taller.iniciarSesion();
+                            case 2 -> taller.crearCuenta();
+                        }
+                    }
+
                 case 2 -> {
-                    do { 
-                        System.out.println("\nBienvenido Trabajador, que quieres hacer");
-                        System.out.println("1. Fichar");
-                        System.out.println("2. Ver trabajos");
-
-                        switch (opcion){
-                            case 1 -> {} //fichar
-                            case 2 -> {} //verTrabajos
-                        }
-                    } while (opcion != 2);
-                }
-                case 3 -> {
-                    System.out.println("Has salido, gracias por escogernos una vez mas.");
+                    System.out.print("Introduzca contraseña necesaria: ");
+                    String contraseñaIngresada = scanner.nextLine();
+                    if (contraseñaIngresada.equals(contraseñaCorrecta)) {
+                        taller.mostrarMenuEmpleado();
+                    } else {
+                        System.out.println("Contraseña incorrecta. Inténtalo de nuevo.");
+                    }
                 }
             }
-        } while (opcion != 3);
-            System.out.println("Numero no valido, prueba otra vez.");
+        } catch (NumberFormatException e) {
+            System.out.println("\u001B[31mEntrada inválida. Por favor, ingresa un número.\u001B[0m");
+            //Método main
+        }
     }
 }
 
