@@ -8,8 +8,7 @@ public class App {
         Taller taller = new Taller();
 
         do {
-            System.out.println("¡Bienvenido al mejor taller de Zaragoza!");
-            System.out.println("1. Cliente");
+            System.out.println("¡Bienvenido al mejor taller de Zaragoza!");            System.out.println("1. Cliente");
             System.out.println("2. Empleado");
             System.out.println("3. Salir");
             System.out.print("Seleccione una opción: ");
