@@ -22,6 +22,7 @@ public class App {
             System.out.print("Seleccione una opción: ");
             opcion = scanner.nextInt();
         }while(opcion !=3);
+        System.out.println("Has salido.");
         
         try {
             switch (opcion) {
