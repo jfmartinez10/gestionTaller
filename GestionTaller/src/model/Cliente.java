@@ -1,4 +1,7 @@
+package model;
+
 import java.util.*;
+
 public class Cliente {
 
     //Atributos

@@ -1,9 +1,13 @@
+package view;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import dao.ConexionBD;
+import model.Cliente;
 
 public class Taller {
     Connection conexion = ConexionBD.conectar();

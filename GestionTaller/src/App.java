@@ -1,5 +1,8 @@
 import java.sql.Connection;
 import java.util.Scanner;
+
+import dao.ConexionBD;
+import view.Taller;
 public class App {
     public static void main(String[] args) throws Exception{
         Connection conexion = ConexionBD.conectar();
@@ -23,7 +26,7 @@ public class App {
             opcion = scanner.nextInt();
         }while(opcion !=3);
         System.out.println("Has salido.");
-        
+
         try {
             switch (opcion) {
                 case 1 -> {
