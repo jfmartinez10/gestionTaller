@@ -9,10 +9,12 @@ CREATE TABLE Cliente (
     email VARCHAR(100) NOT NULL
 );
 
-
 CREATE TABLE Empleado (
-
-)
+    idEmpleado INT PRIMARY KEY AUTO_INCREMENT,
+    nombre VARCHAR(100) NOT NULL,
+    apellido VARCHAR(100) NOT NULL,
+    telefono int NOT NULL
+);
 
 CREATE TABLE Vehiculo (
     matricula VARCHAR(20) PRIMARY KEY,
@@ -23,3 +25,10 @@ CREATE TABLE Vehiculo (
     FOREIGN KEY (DNI) REFERENCES Cliente (DNI)
 );
 
+CREATE TABLE Cita (
+    idCita INT PRIMARY KEY AUTO_INCREMENT,
+    cliente VARCHAR(100) NOT NULL,
+    fecha DATE NOT NULL,
+    hora TIME NOT NULL,
+    descripcion VARCHAR(200) NOT NULL
+);
