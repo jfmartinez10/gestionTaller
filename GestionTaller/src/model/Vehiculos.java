@@ -2,23 +2,24 @@ package model;
 
 public class Vehiculos {
 
-    int matricula;
+    String matricula;
     int año;
+    String modelo;
     String marca;
 
-    public Vehiculos(int matricula, int año, String marca){
+    public Vehiculos(String matricula, int año, String marca, String modelo){
 
         this.matricula = matricula;
         this.año = año;
         this.marca = marca;
-        
+        this.modelo=modelo;
     }
 
-    public int getMatricula() {
+    public String getMatricula() {
         return matricula;
     }
 
-    public void setMatricula(int matricula) {
+    public void setMatricula(String matricula) {
         this.matricula = matricula;
     }
 

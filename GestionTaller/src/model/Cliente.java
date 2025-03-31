@@ -1,33 +1,60 @@
 package model;
 
-import java.util.*;
-
 public class Cliente {
 
     //Atributos
-    private String nombreCliente;
-    private String contraseña; 
+    String DNI;
+    String nombre;
+    String apellido;
+    int telefono;
+    String email;
 
-    //Constructor
-    public Cliente(String nombreCliente, String contraseña) {
-        this.nombreCliente = nombreCliente;
-        this.contraseña = contraseña;
+    public Cliente (String DNI, String nombre, String apellido, int telefono, String email){
+        this.DNI = DNI;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.telefono = telefono;
+        this.email = email;
     }
 
-    // Getters y setters para todos los atributos
-    public String getNombreCliente() {
-        return nombreCliente;
+
+    public String getDNI() {
+        return DNI;
     }
 
-    public void setNombreCliente(String nombreCliente) {
-        this.nombreCliente = nombreCliente;
+    public void setDNI(String DNI) {
+        this.DNI = DNI;
     }
 
-    public String getContraseña() {
-        return contraseña;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setContraseña(String contraseña) {
-        this.contraseña = contraseña;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    public int getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(int telefono) {
+        this.telefono = telefono;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
