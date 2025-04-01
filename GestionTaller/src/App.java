@@ -1,10 +1,7 @@
 import dao.ConexionBD;
 import java.sql.Connection;
 import java.util.Scanner;
-<<<<<<< HEAD
 import view.EmpleadoView;
-=======
->>>>>>> 1f8f3a747901cf0ef10c05892c0783cf742f0fd2
 import view.TallerView;
 
 public class App {
@@ -30,7 +27,6 @@ public class App {
             System.out.println("3. Salir");
             System.out.print("Seleccione una opción: ");
             opcion = scanner.nextInt();
-<<<<<<< HEAD
             scanner.nextLine();
 
             switch (opcion) {
@@ -64,8 +60,6 @@ public class App {
             }
 
         } while (opcion != 3);
-        scanner.close();
-=======
                 switch (opcion) {
                     case 1 -> {
                         System.out.println("1. Iniciar sesion");
@@ -89,11 +83,11 @@ public class App {
                             System.out.println("Contraseña incorrecta. Inténtalo de nuevo.");
                         }
                     }
-                }
+                }while(opcion !=3);
+                System.out.println("Has salido.");
 
-        }while(opcion !=3);
-        System.out.println("Has salido.");
-
->>>>>>> 1f8f3a747901cf0ef10c05892c0783cf742f0fd2
-    }
+        }
 }
+
+
+
