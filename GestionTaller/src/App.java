@@ -1,7 +1,6 @@
+import dao.ConexionBD;
 import java.sql.Connection;
 import java.util.Scanner;
-
-import dao.ConexionBD;
 import view.TallerView;
 public class App {
     public static void main(String[] args) throws Exception{
@@ -24,37 +23,33 @@ public class App {
             System.out.println("3. Salir");
             System.out.print("Seleccione una opción: ");
             opcion = scanner.nextInt();
+                switch (opcion) {
+                    case 1 -> {
+                        System.out.println("1. Iniciar sesion");
+                        System.out.println("2. Crear usuario");
+                        System.out.println("3. Salir");
+                        System.out.println("Introduce una opción: ");
+                        int subopcion = scanner.nextInt();
+    
+                            switch (subopcion) {
+                                case 1 -> taller.iniciarSesion();
+                                case 2 -> taller.crearCuenta();
+                            }
+                        }
+    
+                    case 2 -> {
+                        System.out.print("Introduzca contraseña necesaria: ");
+                        String contraseñaIngresada = scanner.nextLine();
+                        if (contraseñaIngresada.equals(contraseñaCorrecta)) {
+                            //TallerView.mostrarMenuEmpleado();
+                        } else {
+                            System.out.println("Contraseña incorrecta. Inténtalo de nuevo.");
+                        }
+                    }
+                }
+
         }while(opcion !=3);
         System.out.println("Has salido.");
 
-        try {
-            switch (opcion) {
-                case 1 -> {
-                    System.out.println("1. Iniciar sesion");
-                    System.out.println("2. Crear usuario");
-                    System.out.println("3. Salir");
-                    System.out.println("Introduce una opción: ");
-                    int subopcion = scanner.nextInt();
-
-                        switch (subopcion) {
-                            case 1 -> taller.iniciarSesion();
-                            case 2 -> taller.crearCuenta();
-                        }
-                    }
-
-                case 2 -> {
-                    System.out.print("Introduzca contraseña necesaria: ");
-                    String contraseñaIngresada = scanner.nextLine();
-                    if (contraseñaIngresada.equals(contraseñaCorrecta)) {
-                        taller.mostrarMenuEmpleado();
-                    } else {
-                        System.out.println("Contraseña incorrecta. Inténtalo de nuevo.");
-                    }
-                }
-            }
-        } catch (NumberFormatException e) {
-            System.out.println("\u001B[31mEntrada inválida. Por favor, ingresa un número.\u001B[0m");
-            //Método main
-        }
     }
 }
