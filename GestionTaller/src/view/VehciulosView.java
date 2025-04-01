@@ -24,8 +24,10 @@ public void agregarVehiculos(){
         System.out.println("Introduce la modelo del vehiculo: ");
         String modelo = scanner.next();
 
-        VehiuclosModel vehiculo = new VehiculosModel(matricula, año, marca, modelo);
+        VehiculosModel vehiculo = new VehiculosModel(matricula, año, marca, modelo);
 
-        VehiculoDAO clientedb = new VehiculoDAO();
+        VehiculoDAO vehiculodb = new VehiculoDAO();
+
+        System.out.println("Vehiculo agregado correctamente");
     }
 }
