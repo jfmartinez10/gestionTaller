@@ -18,43 +18,23 @@ public class ClienteModel {
     }
 
 
-    public String getDNI() {
-        return DNI;
-    }
+    public String getDNI() {return DNI; }
 
-    public void setDNI(String DNI) {
-        this.DNI = DNI;
-    }
+    public void setDNI(String DNI) {this.DNI = DNI; }
 
-    public String getNombre() {
-        return nombre;
-    }
+    public String getNombre() {return nombre;}
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
+    public void setNombre(String nombre) {this.nombre = nombre;}
 
-    public String getApellido() {
-        return apellido;
-    }
+    public String getApellido() {return apellido;}
 
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
-    }
+    public void setApellido(String apellido) {this.apellido = apellido;}
 
-    public int getTelefono() {
-        return telefono;
-    }
+    public int getTelefono() {return telefono;}
 
-    public void setTelefono(int telefono) {
-        this.telefono = telefono;
-    }
+    public void setTelefono(int telefono) {this.telefono = telefono;}
 
-    public String getEmail() {
-        return email;
-    }
+    public String getEmail() {return email;}
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+    public void setEmail(String email) {this.email = email;}
 }
