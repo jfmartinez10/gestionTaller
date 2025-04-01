@@ -66,31 +66,6 @@ public class TallerView {
         clienteView.mostrarMenuCliente(); // Llamar al método mostrarMenuCliente()
     }
 
-    public void registrarCliente() {
-
-        Scanner scanner = new Scanner(System.in);
-
-        String nombreCliente = "";
-        int telefono = 0;
-        String DNI = "";
-        String query = "INSERT INTO clientes (nombre, telefono, DNI) VALUES (?, ?, ?)"; // Usar parámetros preparados
-
-        try (PreparedStatement stmt = conexion.prepareStatement(query)) {
-
-            System.out.println("Escribe tu nombre");
-            nombreCliente = scanner.next();
-            stmt.setString(1, nombreCliente); // Asigna el valor del nombre
-            System.out.println("Escribe tu telefono");
-            telefono = scanner.nextInt();
-            stmt.setInt(2, telefono); // Asigna el valor del teléfono
-            System.out.println("Escribe tu DNI");
-            DNI = scanner.next();
-            stmt.setString(3, DNI); // Asigna el valor del DNI
-            stmt.executeUpdate(); // Ejecuta la consulta de inserción
-            System.out.println("Cliente agregado exitosamente.");
-
-        } catch (SQLException e) {
-            System.out.println("Error al agregar cliente: " + e.getMessage());
-        }
+    
     }
 }
