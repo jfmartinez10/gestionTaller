@@ -2,7 +2,7 @@ import java.sql.Connection;
 import java.util.Scanner;
 
 import dao.ConexionBD;
-import view.Taller;
+import view.TallerView;
 public class App {
     public static void main(String[] args) throws Exception{
         Connection conexion = ConexionBD.conectar();
@@ -15,7 +15,7 @@ public class App {
         Scanner scanner = new Scanner(System.in);
         int opcion;
         String contraseñaCorrecta = "pene";
-        Taller taller = new Taller();
+        TallerView taller = new TallerView();
 
         do {
             System.out.println("¡Bienvenido al mejor taller de Zaragoza!");

@@ -1,13 +1,13 @@
 package model;
 
-public class Empleados {
+public class EmpleadosModel {
 
     int id_empleado;
     String nombre;
     String apellido;
     int telefono;
 
- public Empleados (int id_empleado, String nombre, String apellido, int telefono){
+ public EmpleadosModel (int id_empleado, String nombre, String apellido, int telefono){
         this.id_empleado= id_empleado;
         this.nombre = nombre;
         this.apellido = apellido;
