@@ -16,6 +16,7 @@ public class App {
 
         Scanner scanner = new Scanner(System.in);
         int opcion;
+        int subopcion;
         String contraseñaCorrecta = "MecanicosZGZ";
         TallerView taller = new TallerView();
         EmpleadoView empleadoView = new EmpleadoView();
@@ -31,17 +32,20 @@ public class App {
 
             switch (opcion) {
                 case 1 -> {
-                    System.out.println("1. Iniciar sesion");
-                    System.out.println("2. Crear usuario");
-                    System.out.println("3. Salir");
-                    System.out.println("Introduce una opción: ");
-                    int subopcion = scanner.nextInt();
-                    scanner.nextLine();
+                    do {
+                        System.out.println("1. Iniciar sesion");
+                        System.out.println("2. Crear usuario");
+                        System.out.println("3. Salir");
+                        System.out.println("Introduce una opción: ");
+                        subopcion = scanner.nextInt();
+                        scanner.nextLine();
 
-                    switch (subopcion) {
-                        case 1 -> taller.iniciarSesion();
-                        case 2 -> taller.crearCuenta();
-                    }
+                        switch (subopcion) {
+                            case 1 -> taller.iniciarSesion();
+                            case 2 -> taller.crearCuenta();
+                        }
+                    }while(subopcion !=3);
+                    System.out.println("Has salido.");
                 }
 
                 case 2 -> {
@@ -53,40 +57,12 @@ public class App {
                         System.out.println("Contraseña incorrecta. Inténtalo de nuevo.");
                     }
                 }
-
-                case 3 -> System.out.println("Has salido.");
-
                 default -> System.out.println("\u001B[31mOpción inválida. Por favor, selecciona una opción válida.\u001B[0m");
             }
 
         } while (opcion != 3);
-                switch (opcion) {
-                    case 1 -> {
-                        System.out.println("1. Iniciar sesion");
-                        System.out.println("2. Crear usuario");
-                        System.out.println("3. Salir");
-                        System.out.println("Introduce una opción: ");
-                        int subopcion = scanner.nextInt();
-    
-                            switch (subopcion) {
-                                case 1 -> taller.iniciarSesion();
-                                case 2 -> taller.crearCuenta();
-                            }
-                        }
-    
-                    case 2 -> {
-                        System.out.print("Introduzca contraseña necesaria: ");
-                        String contraseñaIngresada = scanner.nextLine();
-                        if (contraseñaIngresada.equals(contraseñaCorrecta)) {
-                            //TallerView.mostrarMenuEmpleado();
-                        } else {
-                            System.out.println("Contraseña incorrecta. Inténtalo de nuevo.");
-                        }
-                    }
-                }while(opcion !=3);
-                System.out.println("Has salido.");
-
-        }
+        System.out.println("Has salido.");
+    }
 }
 
 

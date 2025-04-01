@@ -24,8 +24,8 @@ public class TallerView {
             if (u.getNombre().equals(cliente) && u.getContraseña().equals(contraseña)) {
                 nombreCliente = cliente;
                 System.out.println("Inicio de sesión exitoso. ¡Bienvenido, " + nombreCliente + "!");
-                ClienteView clienteView = new ClienteView(); // Crear instancia de ClienteView
-                clienteView.mostrarMenuCliente(); // Llamar al método mostrarMenuCliente()
+                ClienteView clienteView = new ClienteView(); 
+                clienteView.mostrarMenuCliente(); 
                 return; // Salir del método iniciarSesion()
             }
         }
@@ -64,8 +64,5 @@ public class TallerView {
         System.out.println("Cuenta creada con éxito. ¡Bienvenido, " + nuevoNombre + "!");
         ClienteView clienteView = new ClienteView(); // Crear instancia de ClienteView
         clienteView.mostrarMenuCliente(); // Llamar al método mostrarMenuCliente()
-    }
-
-    
     }
 }
