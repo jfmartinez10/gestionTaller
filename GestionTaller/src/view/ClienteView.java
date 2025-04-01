@@ -23,7 +23,6 @@ public class ClienteView {
 
             switch (opcion) {
                 case 1 -> {
-
                 } // mostrarVehiculos()
                 case 2 -> {
                 } // agregarVehiculo()
