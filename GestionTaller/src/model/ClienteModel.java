@@ -8,13 +8,16 @@ public class ClienteModel {
     String apellido;
     int telefono;
     String email;
+    String contraseña;
 
-    public ClienteModel (String DNI, String nombre, String apellido, int telefono, String email){
+    public ClienteModel (String DNI, String nombre, String apellido, int telefono, String email, String contraseña){
         this.DNI = DNI;
         this.nombre = nombre;
         this.apellido = apellido;
         this.telefono = telefono;
         this.email = email;
+        this.contraseña=contraseña;
+        
     }
 
 
@@ -37,4 +40,8 @@ public class ClienteModel {
     public String getEmail() {return email;}
 
     public void setEmail(String email) {this.email = email;}
+
+    public String getContraseña() {return contraseña;}
+
+    public void setContraseña(String contraseña) {this.contraseña = contraseña;}
 }
