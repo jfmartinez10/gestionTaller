@@ -14,7 +14,6 @@ CREATE TABLE Empleado (
     nombre VARCHAR(100) NOT NULL,
     apellido VARCHAR(100) NOT NULL,
     telefono int NOT NULL,
-    email
 );
 
 CREATE TABLE Vehiculo (

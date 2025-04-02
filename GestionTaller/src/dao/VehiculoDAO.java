@@ -38,27 +38,51 @@ public class VehiculoDAO {
 
         ConexionBD bd = new ConexionBD();
         Connection conexion = bd.conectar();
-        ArrayList<VehiculosModel> vehiculos = new ArrayList<>();
 
         if (conexion != null) {
             String query = "SELECT * FROM Vehiculo";
 
-            try (Statement stmt = conexion.createStatement();
-                    ResultSet rs = stmt.executeQuery(query)) {
-                while (rs.next()) {
-                    String matricula = rs.getString("matricula");
-                    int año = rs.getInt("año");
-                    String marca = rs.getString("marca");
-                    String modelo = rs.getString("modelo");
-                    
-                    Cliente titular = new ClienteDAO().getClienteDNI(rs.getString("DNI"));
-                    vehiculos.add(new Vehiculo(matricula, año, marca, modelo));
-                }
+            try (Statement stmt = conexion.createStatement(); 
+            ResultSet rs = stmt.executeQuery(query)) {
+                    while (rs.next()) {
+                        System.out.println("matricula: " + rs.getInt("matricula"));
+                        System.out.println("año: " + rs.getString("año "));
+                        System.out.println("marca: " + rs.getString("marca"));
+                        System.out.println("modelo: " + rs.getString("modelo"));
+
+                        }
+                
             } catch (SQLException e) {
                 System.err.println("Error al listar vehiculos: " + e.getMessage());
                 
             }
         }
     }
+
+    public void eliminarVehiculo(VehiculosModel vehiculo){
+
+        String matricula = vehiculo.getMatricula();
+
+        ConexionBD bd = new ConexionBD();
+        Connection conexion = bd.conectar();
+
+        if (conexion != null) {
+            String query = "DELETE FROM Vehiculos WHERE matricula = ?";
+            try (PreparedStatement stmt = conexion.prepareStatement(query)) {
+                stmt.setString(1, matricula); 
+                stmt.executeUpdate();
+
+                System.out.println("Cliente eliminado.");
+            } catch (SQLException e) {
+                System.out.println("Error al eliminar cliente: " + e.getMessage());
+            }
+        }
+    }
     
+    public void modificarMatricula(String matricula){
+
+    }
 }
+    
+    
+
