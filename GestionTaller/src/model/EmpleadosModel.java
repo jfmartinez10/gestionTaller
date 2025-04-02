@@ -3,9 +3,10 @@ package model;
 public class EmpleadosModel {
 
     int id_empleado;
+    int telefono;
+
     String nombre;
     String apellido;
-    int telefono;
    
    public EmpleadosModel (int id_empleado, String nombre, String apellido, int telefono){
         this.id_empleado= id_empleado;

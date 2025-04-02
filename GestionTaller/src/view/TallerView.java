@@ -62,7 +62,7 @@ public class TallerView {
         scanner.nextLine();
 
         System.out.println("Cuenta creada con éxito. ¡Bienvenido, " + nuevoNombre + "!");
-        ClienteView clienteView = new ClienteView(); // Crear instancia de ClienteView
-        clienteView.mostrarMenuCliente(); // Llamar al método mostrarMenuCliente()
+        ClienteView clienteView = new ClienteView(); 
+        clienteView.mostrarMenuCliente(); 
     }
 }
