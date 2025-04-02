@@ -1,55 +1,95 @@
 package view;
 
 import java.util.*;
-import model.ClienteModel;
-import model.EmpleadosModel;
-import dao.ClienteDAO;
 import dao.EmpleadoDAO;
+import dao.ClienteDAO;
+import model.EmpleadosModel;
+import model.ClienteModel;
 
 public class EmpleadoView {
     private Scanner sc = new Scanner(System.in);
-    private ClienteDAO clienteDAO = new ClienteDAO();
     private EmpleadoDAO empleadoDAO = new EmpleadoDAO();
+    private ClienteDAO clienteDAO = new ClienteDAO();
 
     public void mostrarMenuEmpleado() {
-        int opcion;
+        int opcion; 
 
         do {
             System.out.println("¡Bienvenido al menú de empleados!");
-            System.out.println("1. Modificar Cliente");
-            System.out.println("2. Eliminar Cliente");
-            System.out.println("5. Eliminar Vehículos de Cliente");
-            System.out.println("6. Mostrar Órdenes de Trabajo");
-            System.out.println("8. Eliminar Órdenes de Trabajo");
-            System.out.println("9. Salir");
+            System.out.println("1. Insertar Empleado");
+            System.out.println("2. Modificar Empleado");
+            System.out.println("3. Buscar Empleado por ID");
+            System.out.println("4. Buscar Cliente por ID");
+            System.out.println("5. Eliminar Empleado");
+            System.out.println("6. Salir");
             System.out.print("Ingrese una opción: ");
-            opcion = sc.nextInt();
-            sc.nextLine();
+
+            try {
+                opcion = sc.nextInt();
+                sc.nextLine(); 
+            } catch (InputMismatchException e) {
+                System.out.println("Opción no válida. Ingrese un número.");
+                sc.nextLine(); 
+                opcion = 0; 
+            }
 
             switch (opcion) {
-                case 1 -> modificarCliente();
-                case 2 -> eliminarCliente();
-                case 5 -> eliminarVehiculoCliente();
-                case 6 -> mostrarEmpleados();
-                case 8 -> modificarEmpleado();
+                case 1 -> insertarEmpleado();
+                case 2 -> modificarEmpleado();
+                case 3 -> buscarEmpleadoPorId();
+                case 4 -> buscarClientePorId();
+                case 5 -> eliminarEmpleado();
+                case 6 -> System.out.println("Saliendo del programa.");
+                default -> {
+                    if (opcion != 6 && opcion != 0) {
+                    System.out.println("Opción no válida.");
+                    }
+                }
             }
-        } while (opcion != 9);
+        } while (opcion != 6);
     }
 
-    public void modificarCliente(ClienteModel cliente) {
-        if (cliente == null) {
-            System.out.println("Cliente no encontrado.");
+    public void insertarEmpleado() {
+        try {
+            System.out.print("Ingrese el nombre del empleado: ");
+            String nombre = sc.nextLine();
+            System.out.print("Ingrese el apellido del empleado: ");
+            String apellido = sc.nextLine();
+            System.out.print("Ingrese el ID del empleado: ");
+            int idEmpleado = sc.nextInt();
+            System.out.print("Ingrese el teléfono del empleado: ");
+            int telefono = sc.nextInt();
+            sc.nextLine();
+
+            EmpleadosModel empleado = new EmpleadosModel(idEmpleado, nombre, apellido, telefono);
+            empleadoDAO.insertarEmpleado(empleado);
+            System.out.println("Empleado insertado correctamente.");
+        } catch (InputMismatchException e) {
+            System.out.println("Error al ingresar datos. Asegúrese de que los datos sean correctos.");
+            sc.nextLine(); 
+        }
+    }
+
+    public void modificarEmpleado() {
+        System.out.print("Ingrese el ID del empleado a modificar: ");
+        int idEmpleado = sc.nextInt();
+        sc.nextLine();
+
+        EmpleadosModel empleado = empleadoDAO.getIdEmpleado(idEmpleado);
+        if (empleado == null) {
+            System.out.println("Empleado no encontrado.");
             return;
         }
 
         int opcion;
         do {
-            System.out.println("Modificar cliente");
+            System.out.println("Modificar empleado");
             System.out.println("1. Modificar nombre");
             System.out.println("2. Modificar apellido");
-            System.out.println("3. Modificar telefono");
-            System.out.println("4. Salir");
-            System.out.print("Ingrese una opcion: ");
+            System.out.println("3. Modificar teléfono");
+            System.out.println("4. Modificar ID");
+            System.out.println("5. Salir");
+            System.out.print("Ingrese una opción: ");
             opcion = sc.nextInt();
             sc.nextLine();
 
@@ -57,53 +97,88 @@ public class EmpleadoView {
                 case 1 -> {
                     System.out.print("Introducir nombre: ");
                     String nombre = sc.nextLine();
-                    clienteDAO.modificarNombreCliente(cliente.getDNI(), nombre);
+                    empleadoDAO.modificarNombreEmpleado(nombre, idEmpleado);
                     System.out.println("Nombre modificado correctamente");
                 }
                 case 2 -> {
                     System.out.print("Introducir apellido: ");
                     String apellido = sc.nextLine();
-                    clienteDAO.actualizarApellidoCliente(cliente.getDNI(), apellido);
+                    empleadoDAO.modificarApellidoEmpleado(apellido, idEmpleado);
                     System.out.println("Apellido modificado correctamente");
                 }
                 case 3 -> {
                     System.out.print("Introducir teléfono: ");
                     int telefono = sc.nextInt();
                     sc.nextLine();
-                    clienteDAO.actualizarTlfCliente(cliente.getDNI(), telefono);
-                    System.out.println("Telefono modificado correctamente");
+                    empleadoDAO.modificarTlfEmpleado(telefono, idEmpleado);
+                    System.out.println("Teléfono modificado correctamente");
                 }
-<<<<<<< HEAD
-=======
                 case 4 -> {
-                    System.out.print("Introduce el email: ");
-                    String email = sc.nextLine();
-                    // clienteDAO.actualizarEmailCliente(cliente.getDNI(), email);
-                    System.out.println("Email modificado correctamente");
+                    System.out.print("Introducir nuevo ID: ");
+                    int nuevoId = sc.nextInt();
+                    sc.nextLine();
+                    empleadoDAO.modificarIdEmpleado(nuevoId, idEmpleado);
+                    System.out.println("ID modificado correctamente");
                 }
-                case 5 -> {
-                    System.out.print("Introduce el DNI: ");
-                    String DNI = sc.nextLine();
-                    // clienteDAO.actualizarDniCliente(dni);
-                    System.out.println("DNI modificado correctamente");
-                }
->>>>>>> fd9751f845b2ddda4d7c772315c3561f6d0d4b39
             }
-            
-        } while (opcion != 4);
-        System.out.println("Saliendo del menú");
+        } while (opcion != 5);
+        System.out.println("Saliendo del menú de modificación");
     }
 
-    public void eliminarCliente() {
+    public void buscarEmpleadoPorId() {
+        try {
+            System.out.print("Ingrese el ID del empleado a buscar: ");
+            int idEmpleado = sc.nextInt();
+            sc.nextLine();
+
+            EmpleadosModel empleado = empleadoDAO.getIdEmpleado(idEmpleado);
+            if (empleado == null) {
+                System.out.println("Empleado no encontrado.");
+            } else {
+                System.out.println("Empleado encontrado:");
+                System.out.println(empleado);
+            }
+        } catch (InputMismatchException e) {
+            System.out.println("ID no válido. Ingrese un número.");
+            sc.nextLine();
+        }
     }
 
-    public void eliminarVehiculoCliente() {
+    public void buscarClientePorId() {
+        System.out.print("Ingrese el DNI del cliente a buscar: ");
+        String dni = sc.nextLine();
+
+        ClienteModel cliente = clienteDAO.getDNI(dni);
+        if (cliente == null) {
+            System.out.println("Cliente no encontrado.");
+        } else {
+            System.out.println("Cliente encontrado:");
+            System.out.println(cliente);
+        }
     }
 
-    public void mostrarEmpleados() {
-    }
+    public void eliminarEmpleado() {
+        try {
+            System.out.print("Ingrese el ID del empleado a eliminar: ");
+            int idEmpleado = sc.nextInt();
+            sc.nextLine();
 
-    public void modificarEmpleado() {
+            EmpleadosModel empleado = empleadoDAO.getIdEmpleado(idEmpleado);
+            if (empleado == null) {
+                System.out.println("Empleado no encontrado.");
+            } else {
+                System.out.print("¿Está seguro de que desea eliminar a este empleado? (s/n): ");
+                String confirmacion = sc.nextLine();
+                if (confirmacion.equalsIgnoreCase("s")) {
+                    empleadoDAO.eliminarEmpleado(idEmpleado);
+                    System.out.println("Empleado eliminado correctamente.");
+                } else {
+                    System.out.println("Eliminación cancelada.");
+                }
+            }
+        } catch (InputMismatchException e) {
+            System.out.println("ID no válido. Ingrese un número.");
+            sc.nextLine();
+        }
     }
-
 }

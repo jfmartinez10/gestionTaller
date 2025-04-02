@@ -6,7 +6,8 @@ import view.TallerView;
 
 public class App {
     public static void main(String[] args) throws Exception {
-        Connection conexion = ConexionBD.conectar();
+        ConexionBD bd = new ConexionBD();
+        Connection conexion = bd.conectar();
 
         if (conexion != null) {
             System.out.println("Conexión establecida correctamente.");

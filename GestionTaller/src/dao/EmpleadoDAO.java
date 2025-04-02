@@ -1,13 +1,16 @@
 package dao;
 
 import java.sql.*;
-import java.util.*;
-
 import model.EmpleadosModel;
 
 public class EmpleadoDAO {
 
     public void insertarEmpleado(EmpleadosModel empleado) {
+        String nombre = empleado.getNombre();
+        String apellido = empleado.getApellido();
+        int telefono = empleado.getTelefono();
+        int id_empleado = empleado.getId_empleado();
+        
         ConexionBD bd = new ConexionBD();
 
         try (Connection conexion = bd.conectar();
@@ -27,19 +30,24 @@ public class EmpleadoDAO {
     public EmpleadosModel getIdEmpleado(int idEmpleado) {
         EmpleadosModel empleado = null;
         ConexionBD bd = new ConexionBD();
-
-        try (Connection conexion = bd.conectar();
-             PreparedStatement ps = conexion.prepareStatement("SELECT * FROM Empleado WHERE idEmpleado = ?")) {
-
+    
+        try (Connection conexionbd = bd.conectar();
+             PreparedStatement ps = conexionbd.prepareStatement("SELECT * FROM Empleado WHERE idEmpleado = ?")) {
+    
             ps.setInt(1, idEmpleado);
+    
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
                     empleado = new EmpleadosModel(rs.getInt("idEmpleado"), rs.getString("nombre"), rs.getString("apellido"), rs.getInt("telefono"));
                 }
+            } catch (SQLException e) {
+                System.err.println("Error al obtener empleado con ID: " + e.getMessage());
             }
+    
         } catch (SQLException e) {
-            System.err.println("Error al obtener empleado por ID: " + e.getMessage());
+            System.err.println("Error al conectar o ejecutar la consulta: " + e.getMessage());
         }
+    
         return empleado;
     }
     public void modificarNombreEmpleado(String nombre, int idEmpleado) {

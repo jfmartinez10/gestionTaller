@@ -6,7 +6,8 @@ import java.util.*;
 import model.ClienteModel;
 
 public class TallerView {
-    Connection conexion = ConexionBD.conectar();
+    ConexionBD bd = new ConexionBD();
+    Connection conexion = bd.conectar();
 
     // Atributos
     private List<ClienteModel> clientes = new ArrayList<>();

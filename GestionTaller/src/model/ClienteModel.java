@@ -2,7 +2,6 @@ package model;
 
 public class ClienteModel {
 
-    //Atributos
     String DNI;
     String nombre;
     String apellido;
