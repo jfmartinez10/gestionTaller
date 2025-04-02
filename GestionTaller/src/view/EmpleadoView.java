@@ -78,10 +78,10 @@ public class EmpleadoView {
                     System.out.println("Email modificado correctamente");
                 }
                 case 5 -> {
-                    System.out.print("Introduce el dni: ");
-                    String dni = sc.nextLine();
+                    System.out.print("Introduce el DNI: ");
+                    String DNI = sc.nextLine();
                     // clienteDAO.actualizarDniCliente(dni);
-                    System.out.println("Dni modificado correctamente");
+                    System.out.println("DNI modificado correctamente");
                 }
             }
             

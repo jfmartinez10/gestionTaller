@@ -1,14 +1,11 @@
 package view;
 
-import java.util.Scanner;
-
-import dao.ClienteDAO;
 import dao.VehiculoDAO;
-import model.ClienteModel;
+import java.util.Scanner;
 import model.VehiculosModel;
 
-public class VehciulosView {
-public void agregarVehiculos(){
+public class VehiculosView {
+    public void agregarVehiculos(){
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Agregar Vehiculo");
@@ -28,6 +25,12 @@ public void agregarVehiculos(){
 
         VehiculoDAO vehiculodb = new VehiculoDAO();
 
+        vehiculodb.añadirVehiculo(vehiculo);
+
         System.out.println("Vehiculo agregado correctamente");
+    }
+    
+    public void mostrarVehiculos(){
+        //VehiculoDAO.mostrarVehiculos();
     }
 }
