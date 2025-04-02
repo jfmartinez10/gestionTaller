@@ -13,7 +13,8 @@ CREATE TABLE Empleado (
     idEmpleado INT PRIMARY KEY AUTO_INCREMENT,
     nombre VARCHAR(100) NOT NULL,
     apellido VARCHAR(100) NOT NULL,
-    telefono int NOT NULL
+    telefono int NOT NULL,
+    email
 );
 
 CREATE TABLE Vehiculo (

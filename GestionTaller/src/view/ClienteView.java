@@ -65,24 +65,4 @@ public class ClienteView {
         System.out.println("Cliente agregado correctamente");
     }
 
-    public void agregarVehiculos(){
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.println("Agregar Vehiculo");
-        System.out.println("Introduce el matricula: ");
-        String matricula = scanner.nextLine();
-
-        System.out.println("Introduce el año: ");
-        int año = scanner.nextInt();
-
-        System.out.println("Introduce el marca vehiculo: ");
-        String marca = scanner.next();
-
-        System.out.println("Introduce la modelo del vehiculo: ");
-        String modelo = scanner.next();
-
-        ClienteModel cliente = new VehiculosModel(matricula, año, marca, modelo);
-
-        ClienteDAO clientedb = new VehiculoDAO();
-    }
 }

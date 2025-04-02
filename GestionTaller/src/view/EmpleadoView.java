@@ -73,6 +73,21 @@ public class EmpleadoView {
                     clienteDAO.actualizarTlfCliente(cliente.getDNI(), telefono);
                     System.out.println("Telefono modificado correctamente");
                 }
+<<<<<<< HEAD
+=======
+                case 4 -> {
+                    System.out.print("Introduce el email: ");
+                    String email = sc.nextLine();
+                    // clienteDAO.actualizarEmailCliente(cliente.getDNI(), email);
+                    System.out.println("Email modificado correctamente");
+                }
+                case 5 -> {
+                    System.out.print("Introduce el DNI: ");
+                    String DNI = sc.nextLine();
+                    // clienteDAO.actualizarDniCliente(dni);
+                    System.out.println("DNI modificado correctamente");
+                }
+>>>>>>> fd9751f845b2ddda4d7c772315c3561f6d0d4b39
             }
             
         } while (opcion != 4);
