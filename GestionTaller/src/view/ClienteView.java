@@ -5,6 +5,7 @@ import java.util.*;
 import model.ClienteModel;
 
 public class ClienteView {
+    private Scanner sc = new Scanner(System.in);
     public void mostrarMenuCliente() {
         Scanner scanner = new Scanner(System.in);
         int opcion;
@@ -62,6 +63,12 @@ public class ClienteView {
         clientedb.añadirCliente(cliente);
 
         System.out.println("Cliente agregado correctamente");
+    }
+
+    public ClienteModel getClienteDNI() {
+        System.out.println("Introduzca el DNI del cliente: ");
+        String dni = sc.nextLine();
+        return new ClienteModel(dni); // Asumiendo que ClienteModel tiene un constructor que acepta el DNI
     }
 
 }

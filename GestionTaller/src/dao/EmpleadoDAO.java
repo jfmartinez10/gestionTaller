@@ -9,16 +9,15 @@ public class EmpleadoDAO {
         String nombre = empleado.getNombre();
         String apellido = empleado.getApellido();
         int telefono = empleado.getTelefono();
-        int id_empleado = empleado.getId_empleado();
-        
+
         ConexionBD bd = new ConexionBD();
 
         try (Connection conexion = bd.conectar();
-             PreparedStatement ps = conexion.prepareStatement("INSERT INTO Empleado (nombre, apellido, idEmpleado, telefono, email) VALUES (?, ?, ?, ?)")) {
+             PreparedStatement ps = conexion.prepareStatement("INSERT INTO Empleado (nombre, apellido, idEmpleado, telefono) VALUES (?, ?, ?, ?)")) {
 
             ps.setString(1, empleado.getNombre());
             ps.setString(2, empleado.getApellido());
-            ps.setInt(3, empleado.getId_empleado());
+            ps.setInt(3, empleado.getIdEmpleado());
             ps.setInt(4, empleado.getTelefono());
             ps.executeUpdate();
 
@@ -27,29 +26,32 @@ public class EmpleadoDAO {
         }
     }
 
-    public EmpleadosModel getIdEmpleado(int idEmpleado) {
+    public EmpleadosModel getIdEmpleado(int idEmpleado) { // Corregido aquí
         EmpleadosModel empleado = null;
         ConexionBD bd = new ConexionBD();
-    
-        try (Connection conexionbd = bd.conectar();
-             PreparedStatement ps = conexionbd.prepareStatement("SELECT * FROM Empleado WHERE idEmpleado = ?")) {
-    
-            ps.setInt(1, idEmpleado);
-    
-            try (ResultSet rs = ps.executeQuery()) {
-                if (rs.next()) {
-                    empleado = new EmpleadosModel(rs.getInt("idEmpleado"), rs.getString("nombre"), rs.getString("apellido"), rs.getInt("telefono"));
+        Connection conexion = bd.conectar();
+
+        if (conexion != null) {
+            String query = "SELECT * FROM Empleados WHERE idEmpleado = ?";
+            try (PreparedStatement ps = conexion.prepareStatement(query)) {
+                ps.setInt(1, idEmpleado);
+                try (ResultSet rs = ps.executeQuery()) {
+                    if (rs.next()) {
+                        empleado = new EmpleadosModel(
+                            rs.getInt("idEmpleado"),
+                            rs.getString("nombre"),
+                            rs.getString("apellido"),
+                            rs.getInt("telefono")
+                        );
+                    }
                 }
             } catch (SQLException e) {
-                System.err.println("Error al obtener empleado con ID: " + e.getMessage());
+                System.err.println("Error al obtener empleado: " + e.getMessage());
             }
-    
-        } catch (SQLException e) {
-            System.err.println("Error al conectar o ejecutar la consulta: " + e.getMessage());
         }
-    
         return empleado;
     }
+
     public void modificarNombreEmpleado(String nombre, int idEmpleado) {
         ConexionBD bd = new ConexionBD();
 
@@ -107,6 +109,17 @@ public class EmpleadoDAO {
 
         } catch (SQLException e) {
             System.err.println("Error al actualizar ID del empleado: " + e.getMessage());
+        }
+    }
+
+    public void eliminarEmpleado(int idEmpleado) {
+        ConexionBD bd = new ConexionBD();
+        try (Connection conexion = bd.conectar();
+             PreparedStatement ps = conexion.prepareStatement("DELETE FROM Empleado WHERE idEmpleado = ?")) {
+            ps.setInt(1, idEmpleado);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.err.println("Error al eliminar empleado: " + e.getMessage());
         }
     }
 }

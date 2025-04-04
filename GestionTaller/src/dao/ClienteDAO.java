@@ -1,8 +1,6 @@
 package dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 import model.ClienteModel;
 public class ClienteDAO {
     
@@ -37,5 +35,34 @@ public class ClienteDAO {
         
         
         }
+    }
+
+    //método añadido
+    public ClienteModel getClienteDNI(String dni) {
+        ClienteModel cliente = null;
+        ConexionBD bd = new ConexionBD();
+        Connection conexion = bd.conectar();
+
+        if (conexion != null) {
+            String query = "SELECT * FROM Cliente WHERE DNI = ?";
+            try (PreparedStatement ps = conexion.prepareStatement(query)) {
+                ps.setString(1, dni);
+                try (ResultSet rs = ps.executeQuery()) {
+                    if (rs.next()) {
+                        cliente = new ClienteModel(
+                            rs.getString("DNI"),
+                            rs.getString("nombre"),
+                            rs.getString("apellido"),
+                            rs.getInt("telefono"),
+                            rs.getString("email"),
+                            rs.getString("contraseña")
+                        );
+                    }
+                }
+            } catch (SQLException e) {
+                System.err.println("Error al buscar cliente por DNI: " + e.getMessage());
+            }
+        }
+        return cliente;
     }
 }
