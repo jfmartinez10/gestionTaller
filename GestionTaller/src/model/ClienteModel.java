@@ -2,15 +2,15 @@ package model;
 
 public class ClienteModel {
 
-    String DNI;
+    String dni;
     String nombre;
     String apellido;
     int telefono;
     String email;
     String contraseña;
 
-    public ClienteModel (String DNI, String nombre, String apellido, int telefono, String email, String contraseña){
-        this.DNI = DNI;
+    public ClienteModel (String dni, String nombre, String apellido, int telefono, String email, String contraseña){
+        this.dni = dni;
         this.nombre = nombre;
         this.apellido = apellido;
         this.telefono = telefono;
@@ -20,9 +20,9 @@ public class ClienteModel {
     }
 
 
-    public String getDNI() {return DNI; }
+    public String getDni() {return dni;}
 
-    public void setDNI(String DNI) {this.DNI = DNI; }
+    public void setDni(String dni) {this.dni = dni;}
 
     public String getNombre() {return nombre;}
 
@@ -43,4 +43,6 @@ public class ClienteModel {
     public String getContraseña() {return contraseña;}
 
     public void setContraseña(String contraseña) {this.contraseña = contraseña;}
+
+    
 }

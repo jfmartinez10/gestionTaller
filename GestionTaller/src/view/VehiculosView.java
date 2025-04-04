@@ -5,7 +5,7 @@ import java.util.Scanner;
 import model.VehiculosModel;
 
 public class VehiculosView {
-    VehiculoDAO vehiculoDAO = new VehiculoDAO();
+    VehiculoDAO vehiculoDao = new VehiculoDAO();
     public void agregarVehiculos(){
         Scanner scanner = new Scanner(System.in);
 
@@ -32,7 +32,7 @@ public class VehiculosView {
     }
     
     public void mostrarVehiculos(){
-        //vehiculoView vehciulo =new vehiculoView(); 
-        //vehiculoDAO.mostrarVehiculos(vehiculo);
+        VehiculosModel vehiculo = new VehiculosModel(matricula, año, marca, modelo);
+        vehiculoDao.mostrarVehiculos(vehiculo);
     }
 }

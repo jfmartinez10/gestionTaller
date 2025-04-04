@@ -2,6 +2,8 @@ package view;
 
 import dao.ClienteDAO;
 import java.util.*;
+
+import model.Cliente;
 import model.ClienteModel;
 
 public class ClienteView {
@@ -14,11 +16,13 @@ public class ClienteView {
         do {
             System.out.println("¡Bienvenido al menú de clientes!");
             System.out.println("1. Introducir tus datos");
-            System.out.println("2. Agregar Vehículo");
-            System.out.println("3. Mostrar Vehículos");
-            System.out.println("4. Eliminar Vehículo");
-            System.out.println("5. Reportar problema");
-            System.out.println("6.Salir");
+            System.out.println("2. Modificar tus datos");
+            System.out.println("3. Agregar Vehículo");
+            System.out.println("4. Mostrar Vehículos");
+            System.out.println("5. Eliminar Vehículo");
+            System.out.println("6. Eliminar Vehículo");
+            System.out.println("7. Reportar problema");
+            System.out.println("8.Salir");
             System.out.print("Ingrese una opción: ");
             opcion = scanner.nextInt();
 
@@ -31,16 +35,18 @@ public class ClienteView {
                 } // reportarProblema()
                 case 5 ->{   
                 }
+                case 6->{}
+                case 7->{}
             }
 
-        } while (opcion != 6);
+        } while (opcion != 8);
     }
     public void registrarCliente() {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Agregar cliente");
-        System.out.println("Introduce el DNI: ");
-        String DNI = scanner.nextLine();
+        System.out.println("Introduce el dni: ");
+        String dni = scanner.nextLine();
 
         System.out.println("Introduce el nombre: ");
         String nombre = scanner.nextLine();
@@ -56,7 +62,7 @@ public class ClienteView {
         
         
  
-        ClienteModel cliente = new ClienteModel(DNI, nombre, apellido, telefono, email, "");
+        ClienteModel cliente = new ClienteModel(dni, nombre, apellido, telefono, email, "");
 
         ClienteDAO clientedb = new ClienteDAO();
 
@@ -65,10 +71,16 @@ public class ClienteView {
         System.out.println("Cliente agregado correctamente");
     }
 
-    public ClienteModel getClienteDNI() {
-        System.out.println("Introduzca el DNI del cliente: ");
+    public Cliente getClienteDni() {
+        System.out.println("Introduce el dni del cliente: ");
         String dni = sc.nextLine();
-        return new ClienteModel(dni); // Asumiendo que ClienteModel tiene un constructor que acepta el DNI
+        sc.next();
+        Cliente cliente = clienteDAO.getClienteDni(dni);
+        return cliente;
+    }
+    
+    public void modificarCliente(){
+
     }
 
 }

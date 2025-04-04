@@ -5,22 +5,23 @@ import model.ClienteModel;
 public class ClienteDAO {
     
 //metodo añardirCliente()
+
  public void añadirCliente(ClienteModel cliente) {
 
         String nombre = cliente.getNombre();
         String apellido = cliente.getApellido();
         int telefono = cliente.getTelefono();
         String email = cliente.getEmail();
-        String DNI = cliente.getDNI();
+        String dni = cliente.getDni();
 
         ConexionBD bd = new ConexionBD();
         Connection conexion = bd.conectar();
         
         if (conexion != null) {
-            String query = "INSERT INTO Cliente (DNI, nombre, apellido, telefono, email) VALUES ( ?, ?, ?, ?, ?)";
+            String query = "INSERT INTO Cliente (dni, nombre, apellido, telefono, email) VALUES ( ?, ?, ?, ?, ?)";
             
             try (PreparedStatement ps = conexion.prepareStatement(query)) {
-                ps.setString(1, DNI);
+                ps.setString(1, dni);
                 ps.setString(2, nombre);
                 ps.setString(3, apellido);
                 ps.setInt(4, telefono);
@@ -65,4 +66,22 @@ public class ClienteDAO {
         }
         return cliente;
     }
+    public void actualizarNombreCliente(String dni, String nombre) {
+
+        ConexionBD bd = new ConexionBD();
+        Connection conexion = bd.conectar();
+
+        if (conexion != null) {
+            String query = "UPDATE Cliente SET nombre = ? WHERE dni = ?";
+
+            try (PreparedStatement ps = conexion.prepareStatement(query)) {
+                ps.setString(1, nombre);
+                ps.setString(2, dni);
+                ps.executeUpdate();
+            } catch (SQLException e) {
+                System.err.println("Error al actualizar nombre del cliente: " + e.getMessage());
+            }
+        }
+    }
+
 }
