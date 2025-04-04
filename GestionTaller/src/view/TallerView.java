@@ -58,10 +58,6 @@ public class TallerView {
             return;
         }
 
-        System.out.print("Introduce tu saldo inicial: ");
-        int saldoInicial = scanner.nextInt();
-        scanner.nextLine();
-
         System.out.println("Cuenta creada con éxito. ¡Bienvenido, " + nuevoNombre + "!");
         ClienteView clienteView = new ClienteView(); 
         clienteView.mostrarMenuCliente(); 
