@@ -8,6 +8,7 @@ public class ClienteView {
     public void mostrarMenuCliente() {
         Scanner scanner = new Scanner(System.in);
         int opcion;
+        VehiculosView vehiculosView = new VehiculosView();
 
         do {
             System.out.println("¡Bienvenido al menú de clientes!");
@@ -21,10 +22,8 @@ public class ClienteView {
             opcion = scanner.nextInt();
 
             switch (opcion) {
-                case 1 -> {
-                } // mostrarVehiculos()
-                case 2 -> {
-                } // agregarVehiculo()
+                case 1 -> registrarCliente();
+                case 2 -> vehiculosView.agregarVehiculos();
                 case 3 -> {
                 } // eliminarVehiculo()
                 case 4 -> {
