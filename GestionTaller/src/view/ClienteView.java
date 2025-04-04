@@ -1,12 +1,7 @@
 package view;
 
 import java.util.*;
-<<<<<<< HEAD
-
-import model.Cliente;
-=======
 import dao.ClienteDAO;
->>>>>>> e043f7cc9baa48a91b14bc69e45f70c3ea84aed0
 import model.ClienteModel;
 
 public class ClienteView {
@@ -77,7 +72,6 @@ public class ClienteView {
     public Cliente getClienteDni() {
         System.out.println("Introduce el dni del cliente: ");
         String dni = sc.nextLine();
-<<<<<<< HEAD
         sc.next();
         Cliente cliente = clienteDAO.getClienteDni(dni);
         return cliente;
@@ -85,10 +79,10 @@ public class ClienteView {
     
     public void modificarCliente(){
 
-=======
+
         ClienteDAO clienteDAO = new ClienteDAO(); // Crea una instancia de ClienteDAO
         return clienteDAO.getClienteDNI(dni); // Usa el método de ClienteDAO
->>>>>>> e043f7cc9baa48a91b14bc69e45f70c3ea84aed0
+
     }
 
 }
