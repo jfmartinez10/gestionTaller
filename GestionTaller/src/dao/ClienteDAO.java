@@ -18,7 +18,7 @@ public class ClienteDAO {
         Connection conexion = bd.conectar();
         
         if (conexion != null) {
-            String query = "INSERT INTO Cliente (dni, nombre, apellido, telefono, email) VALUES ( ?, ?, ?, ?, ?)";
+            String query = "INSERT INTO Clientes (dni, nombre, apellido, telefono, email) VALUES ( ?, ?, ?, ?, ?)";
             
             try (PreparedStatement ps = conexion.prepareStatement(query)) {
                 ps.setString(1, dni);
