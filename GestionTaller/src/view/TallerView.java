@@ -1,40 +1,49 @@
 package view;
 
-import dao.ClienteDAO;
-import java.util.Scanner;
+import dao.ConexionBD;
+import java.sql.*;
+import java.util.*;
 import model.ClienteModel;
 
 public class TallerView {
-    private ClienteDAO clienteDAO = new ClienteDAO();
-    private ClienteModel clienteLogueado;
+    ConexionBD bd = new ConexionBD();
+    Connection conexion = bd.conectar();
+
+    // Atributos
+    private List<ClienteModel> clientes = new ArrayList<>();
+    private String nombreCliente;
     private Scanner scanner = new Scanner(System.in);
 
     public void iniciarSesion() {
-        System.out.print("Introduce tu DNI: ");
-        String dni = scanner.nextLine();
+
+        System.out.print("Introduce tu nombre: ");
+        String cliente = scanner.nextLine();
         System.out.print("Introduce tu contraseña: ");
         String contraseña = scanner.nextLine();
 
-        ClienteModel cliente = clienteDAO.getClienteDNI(dni);
-
-        if (cliente != null && cliente.getContraseña().equals(contraseña)) {
-            clienteLogueado = cliente;
-            System.out.println("Inicio de sesión exitoso. ¡Bienvenido, " + clienteLogueado.getNombre() + "!");
-            ClienteView clienteView = new ClienteView();
-            clienteView.mostrarMenuCliente();
-        } else {
-            System.out.println("\u001B[31mError al iniciar sesión: DNI o contraseña incorrectos.\u001B[0m");
+        for (ClienteModel u : clientes) {
+            if (u.getNombre().equals(cliente) && u.getContraseña().equals(contraseña)) {
+                nombreCliente = cliente;
+                System.out.println("Inicio de sesión exitoso. ¡Bienvenido, " + nombreCliente + "!");
+                ClienteView clienteView = new ClienteView(); 
+                clienteView.mostrarMenuCliente(); 
+                return; 
+            }
         }
+
+        System.out.println("\u001B[31mCredenciales incorrectas. Por favor, intenta de nuevo o crea una cuenta.\u001B[0m");
     }
 
     public void crearCuenta() {
-        System.out.println("Creando una nueva cuenta de cliente:");
-        System.out.print("Introduce tu DNI: ");
-        String nuevoDni = scanner.nextLine();
+        System.out.print("Introduce tu nombre: ");
+        String nuevoNombre = scanner.nextLine();
 
-        if (clienteDAO.getClienteDNI(nuevoDni) != null) {
-            System.out.println("\u001B[31mError al crear cuenta: Ya existe un cliente con ese DNI. Por favor, utiliza otro o inicia sesión.\u001B[0m");
-            return;
+        for (ClienteModel u : clientes) {
+            if (u.getNombre().equals(nuevoNombre)) {
+                System.out.println("\u001B[31mEl nombre de usuario ya existe. Por favor, elige otro.\u001B[0m");
+                crearCuenta();
+                return;
+            }
         }
 
         System.out.print("Introduce tu contraseña: ");
@@ -43,19 +52,13 @@ public class TallerView {
         String confirmarContraseña = scanner.nextLine();
 
         if (!nuevaContraseña.equals(confirmarContraseña)) {
-            System.out.println("\u001B[31mError al crear cuenta: Las contraseñas no coinciden. Por favor, inténtalo de nuevo.\u001B[0m");
-            crearCuenta(); // Llamada recursiva para intentarlo de nuevo
+            System.out.println("\u001B[31mLas contraseñas no coinciden. Por favor, inténtalo de nuevo.\u001B[0m");
+            crearCuenta();
             return;
         }
 
-        // Si llegamos aquí, el DNI no existe y las contraseñas coinciden.
-        // Ahora creamos un ClienteModel con la información básica y lo guardamos.
-        ClienteModel nuevoCliente = new ClienteModel(nuevoDni, "", "", 0, "", nuevaContraseña);
-        clienteDAO.añadirCliente(nuevoCliente);
-        System.out.println("Cuenta creada con éxito. Ahora puedes iniciar sesión e introducir tus datos en el menú de cliente.");
-    }
-
-    public ClienteModel getClienteLogueado() {
-        return clienteLogueado;
+        System.out.println("Cuenta creada con éxito. ¡Bienvenido, " + nuevoNombre + "!");
+        ClienteView clienteView = new ClienteView(); 
+        clienteView.mostrarMenuCliente(); 
     }
 }
