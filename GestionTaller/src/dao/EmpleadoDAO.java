@@ -6,6 +6,8 @@ import model.EmpleadosModel;
 public class EmpleadoDAO {
 
     public void insertarEmpleado(EmpleadosModel empleado) {
+        
+        int id = empleado.getId();
         String nombre = empleado.getNombre();
         String apellido = empleado.getApellido();
         int telefono = empleado.getTelefono();
@@ -17,7 +19,7 @@ public class EmpleadoDAO {
 
             ps.setString(1, empleado.getNombre());
             ps.setString(2, empleado.getApellido());
-            ps.setInt(3, empleado.getIdEmpleado());
+            ps.setInt(3, empleado.getId());
             ps.setInt(4, empleado.getTelefono());
             ps.executeUpdate();
 

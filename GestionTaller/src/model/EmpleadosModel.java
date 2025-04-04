@@ -2,14 +2,14 @@ package model;
 
 public class EmpleadosModel {
 
-    int id; // Cambiado a idEmpleado
+    int id; 
     int telefono;
 
     String nombre;
     String apellido;
 
     public EmpleadosModel(int id, String nombre, String apellido, int telefono) {
-        this.id = id; // Cambiado a idEmpleado
+        this.id = id; 
         this.nombre = nombre;
         this.apellido = apellido;
         this.telefono = telefono;

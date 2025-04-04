@@ -27,7 +27,7 @@ public class CitasDao {
                 ps.setString(2, hora);
                 ps.setString(3, descripcion);
                 ps.setString(4, cliente.getDni());
-                ps.setInt(5, empleado.getIdEmpleado());
+                ps.setInt(5, empleado.getId());
                 ps.executeUpdate();
 
             } catch (SQLException e) {
@@ -154,7 +154,7 @@ public class CitasDao {
     }
 
     public void modificarEmpleadoCita(EmpleadosModel empleado, CitasModel cita) {
-        int empleadoId = empleado.getIdEmpleado();
+        int empleadoId = empleado.getId();
         int idCita = cita.getIdCita();
         ConexionBD bd = new ConexionBD();
         Connection conexion = bd.conectar();
