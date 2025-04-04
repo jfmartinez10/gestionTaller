@@ -1,37 +1,40 @@
 package view;
 
+import dao.ClienteDAO;
 import dao.VehiculoDAO;
-import java.util.*;
-import model.VehiculosModel;
+import java.util.Scanner;
+import model.ClienteModel;
+import model.VehiculosModel; // Asegúrate de importar ClienteModel
 
 public class VehiculosView {
-    VehiculoDAO vehiculoDao = new VehiculoDAO();
-    public void agregarVehiculos(){
-        Scanner scanner = new Scanner(System.in);
+    private Scanner scanner = new Scanner(System.in);
+    private VehiculoDAO vehiculoDAO = new VehiculoDAO();
+    private ClienteDAO clienteDAO = new ClienteDAO(); 
 
-        System.out.println("Agregar Vehiculo");
-        System.out.println("Introduce el matricula: ");
+    public void agregarVehiculos() {
+        System.out.println("Agregar vehículo:");
+        System.out.print("Introduce la matrícula: ");
         String matricula = scanner.nextLine();
-
-        System.out.println("Introduce el año: ");
+        System.out.print("Introduce el año de fabricación: ");
         int año = scanner.nextInt();
+        scanner.nextLine(); 
+        System.out.print("Introduce la marca: ");
+        String marca = scanner.nextLine();
+        System.out.print("Introduce el modelo: ");
+        String modelo = scanner.nextLine();
+        System.out.print("Introduce el DNI del cliente propietario: ");
+        String dniCliente = scanner.nextLine();
 
-        System.out.println("Introduce el marca vehiculo: ");
-        String marca = scanner.next();
+        // Verificar si el cliente con este DNI existe en la base de datos
+        ClienteModel cliente = clienteDAO.getClienteDNI(dniCliente);
 
-        System.out.println("Introduce la modelo del vehiculo: ");
-        String modelo = scanner.next();
-
-        System.out.println("Introduce tu dni:  ");
-        String dni = scanner.next();
-
-        VehiculosModel vehiculo = new VehiculosModel(matricula, año, marca, modelo, dni);
-
-        VehiculoDAO vehiculodb = new VehiculoDAO();
-
-        vehiculodb.añadirVehiculo(vehiculo);
-
-        System.out.println("Vehiculo agregado correctamente");
+        if (cliente != null) {
+            VehiculosModel nuevoVehiculo = new VehiculosModel(matricula, año, marca, modelo, dniCliente);
+            vehiculoDAO.añadirVehiculo(nuevoVehiculo);
+            System.out.println("Vehículo agregado correctamente.");
+        } else {
+            System.out.println("\u001B[31mError al agregar vehículo: No existe ningún cliente registrado con el DNI: " + dniCliente + ". Por favor, registre al cliente primero.\u001B[0m");
+        }
     }
     
     /*public void mostrarVehiculos(){
