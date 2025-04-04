@@ -26,7 +26,7 @@ public class CitasDao {
                 ps.setString(1, fecha);
                 ps.setString(2, hora);
                 ps.setString(3, descripcion);
-                ps.setString(4, cliente.getDNI());
+                ps.setString(4, cliente.getDni());
                 ps.setInt(5, empleado.getIdEmpleado());
                 ps.executeUpdate();
 
@@ -135,7 +135,7 @@ public class CitasDao {
     }
 
     public void modificarClienteCita(ClienteModel cliente, CitasModel cita) {
-        String dni = cliente.getDNI();
+        String dni = cliente.getDni();
         int idCita = cita.getIdCita();
         ConexionBD bd = new ConexionBD();
         Connection conexion = bd.conectar();

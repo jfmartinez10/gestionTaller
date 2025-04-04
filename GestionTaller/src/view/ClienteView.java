@@ -1,7 +1,7 @@
 package view;
 
-import java.util.*;
 import dao.ClienteDAO;
+import java.util.*;
 import model.ClienteModel;
 
 public class ClienteView {
@@ -41,48 +41,37 @@ public class ClienteView {
     }
     public void registrarCliente() {
         Scanner scanner = new Scanner(System.in);
-
+    
         System.out.println("Agregar cliente");
         System.out.println("Introduce el dni: ");
         String dni = scanner.nextLine();
-
+    
         System.out.println("Introduce el nombre: ");
         String nombre = scanner.nextLine();
-        
+    
         System.out.println("Introduce el apellido: ");
         String apellido = scanner.nextLine();
-        
+    
         System.out.println("Introduce el telefono: ");
         int telefono = scanner.nextInt();
-        
+        scanner.nextLine(); // Consumir el carácter de nueva línea
+    
         System.out.println("Introduce el email: ");
         String email = scanner.nextLine();
-        
-        
- 
+    
         ClienteModel cliente = new ClienteModel(dni, nombre, apellido, telefono, email, "");
-
+    
         ClienteDAO clientedb = new ClienteDAO();
-
+    
         clientedb.añadirCliente(cliente);
-
+    
         System.out.println("Cliente agregado correctamente");
     }
 
-    public Cliente getClienteDni() {
-        System.out.println("Introduce el dni del cliente: ");
+    public ClienteModel getClienteDNI() {
+        System.out.println("Introduzca el DNI del cliente: ");
         String dni = sc.nextLine();
-        sc.next();
-        Cliente cliente = clienteDAO.getClienteDni(dni);
-        return cliente;
+        ClienteDAO clienteDAO = new ClienteDAO(); 
+        return clienteDAO.getClienteDNI(dni); 
     }
-    
-    public void modificarCliente(){
-
-
-        ClienteDAO clienteDAO = new ClienteDAO(); // Crea una instancia de ClienteDAO
-        return clienteDAO.getClienteDNI(dni); // Usa el método de ClienteDAO
-
-    }
-
 }
