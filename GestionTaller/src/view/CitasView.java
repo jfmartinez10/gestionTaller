@@ -1,10 +1,9 @@
 package view;
 
 import dao.CitasDao;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.util.Scanner;
+import java.time.*;
+import java.time.format.*;
+import java.util.*;
 import model.CitasModel;
 import model.ClienteModel;
 import model.EmpleadosModel;

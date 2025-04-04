@@ -1,7 +1,7 @@
 package view;
 
 import dao.VehiculoDAO;
-import java.util.Scanner;
+import java.util.*;
 import model.VehiculosModel;
 
 public class VehiculosView {

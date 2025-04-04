@@ -1,7 +1,7 @@
 package view;
 
-import dao.ClienteDAO;
 import java.util.*;
+import dao.ClienteDAO;
 import model.ClienteModel;
 
 public class ClienteView {
@@ -68,7 +68,8 @@ public class ClienteView {
     public ClienteModel getClienteDNI() {
         System.out.println("Introduzca el DNI del cliente: ");
         String dni = sc.nextLine();
-        return new ClienteModel(dni); // Asumiendo que ClienteModel tiene un constructor que acepta el DNI
+        ClienteDAO clienteDAO = new ClienteDAO(); // Crea una instancia de ClienteDAO
+        return clienteDAO.getClienteDNI(dni); // Usa el método de ClienteDAO
     }
 
 }
