@@ -3,12 +3,14 @@ package view;
 import dao.ClienteDAO;
 import java.util.*;
 import model.ClienteModel;
+import view.ClienteView;
 
 public class ClienteView {
     private Scanner sc = new Scanner(System.in);
     public void mostrarMenuCliente() {
         Scanner scanner = new Scanner(System.in);
         int opcion;
+        CitasView citasView = new CitasView();
         VehiculosView vehiculosView = new VehiculosView();
 
         do {
@@ -18,7 +20,7 @@ public class ClienteView {
             System.out.println("3. Agregar Vehículo");
             System.out.println("4. Mostrar Vehículos");
             System.out.println("5. Eliminar Vehículo");
-            System.out.println("6. Eliminar Vehículo");
+            System.out.println("6. Citas");
             System.out.println("7. Reportar problema");
             System.out.println("8.Salir");
             System.out.print("Ingrese una opción: ");
@@ -30,11 +32,12 @@ public class ClienteView {
                 case 3 -> {
                 } // eliminarVehiculo()
                 case 4 -> {
-                } // reportarProblema()
+                } // mostrarVehiculo()
                 case 5 ->{   
-                }
-                case 6->{}
-                case 7->{}
+                } // eliminarVehiculo()
+                case 6-> citasView.menuCitasCliente();
+                case 7 -> {
+                } // reportarProblema()
             }
 
         } while (opcion != 8);
