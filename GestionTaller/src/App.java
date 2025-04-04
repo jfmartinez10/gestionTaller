@@ -1,8 +1,9 @@
 import dao.ConexionBD;
 import java.sql.Connection;
 import java.util.Scanner;
+import view.ClienteView;
 import view.EmpleadoView;
-import view.TallerView;
+
 
 public class App {
     public static void main(String[] args) throws Exception {
@@ -19,8 +20,8 @@ public class App {
         int opcion;
         int subopcion;
         String contraseñaCorrecta = "MecanicosZGZ";
-        TallerView taller = new TallerView();
         EmpleadoView empleadoView = new EmpleadoView();
+        ClienteView clienteView = new ClienteView();
 
         do {
             System.out.println("¡Bienvenido al mejor taller de Zaragoza!");
@@ -28,26 +29,12 @@ public class App {
             System.out.println("2. Empleado");
             System.out.println("3. Salir");
             System.out.print("Seleccione una opción: ");
+
             opcion = scanner.nextInt();
             scanner.nextLine();
 
             switch (opcion) {
-                case 1 -> {
-                    do {
-                        System.out.println("1. Iniciar sesion");
-                        System.out.println("2. Crear usuario");
-                        System.out.println("3. Salir");
-                        System.out.println("Introduce una opción: ");
-                        subopcion = scanner.nextInt();
-                        scanner.nextLine();
-
-                        switch (subopcion) {
-                            case 1 -> taller.iniciarSesion();
-                            case 2 -> taller.crearCuenta();
-                        }
-                    }while(subopcion !=3);
-                    System.out.println("Has salido.");
-                }
+                case 1 -> clienteView.mostrarMenuCliente();
 
                 case 2 -> {
                     System.out.print("Introduzca contraseña necesaria: ");

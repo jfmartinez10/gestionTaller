@@ -6,12 +6,14 @@ public class VehiculosModel {
     int año;
     String modelo;
     String marca;
+    String dni;
 
-    public VehiculosModel(String matricula, int año, String marca, String modelo){
+    public VehiculosModel(String matricula, int año, String marca, String modelo, String dni){
         this.matricula = matricula;
         this.año = año;
         this.marca = marca;
         this.modelo=modelo;
+        this.dni=dni;
     }
 
     public String getMatricula() {return matricula;}
@@ -29,6 +31,10 @@ public class VehiculosModel {
     public String getModelo() {return modelo;}
 
     public void setModelo(String modelo) {this.modelo = modelo;}
+
+    public String getDni() {return dni;}
+
+    public void setDni(String dni) {this.dni = dni; }
 
     
 

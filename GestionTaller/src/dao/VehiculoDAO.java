@@ -9,18 +9,20 @@ public class VehiculoDAO {
         int año = vehiculo.getAño();
         String marca = vehiculo.getMarca();
         String modelo = vehiculo.getModelo();
+        String dni = vehiculo.getDni();
     
         ConexionBD bd = new ConexionBD();
         Connection conexion = bd.conectar();
 
         if(conexion != null){
-            String query = "INSERT INTO Vehiculo (matricula, año, marca, modelo) VALUES (?, ?, ?, ?)";
+            String query = "INSERT INTO Vehiculo (matricula, año, marca, modelo, dni) VALUES (?, ?, ?, ?, ?)";
         
             try (PreparedStatement ps = conexion.prepareStatement(query)){
                 ps.setString(1, matricula);
                 ps.setInt(2, año);
                 ps.setString(3, marca);
                 ps.setString(4, modelo);
+                ps.setString(5, dni);
 
                 ps.executeUpdate();
              } catch (SQLException e) {
@@ -45,6 +47,7 @@ public class VehiculoDAO {
                         System.out.println("año: " + rs.getString("año "));
                         System.out.println("marca: " + rs.getString("marca"));
                         System.out.println("modelo: " + rs.getString("modelo"));
+                        System.out.println("dni: " + rs.getString("dni"));
 
                         }
                 

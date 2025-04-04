@@ -15,6 +15,7 @@ public class EmpleadoView {
         int opcion;
 
         do {
+            System.out.println("---------------------");
             System.out.println("¡Bienvenido al menú de empleados!");
             System.out.println("1. Insertar Empleado");
             System.out.println("2. Modificar Empleado");

@@ -22,7 +22,10 @@ public class VehiculosView {
         System.out.println("Introduce la modelo del vehiculo: ");
         String modelo = scanner.next();
 
-        VehiculosModel vehiculo = new VehiculosModel(matricula, año, marca, modelo);
+        System.out.println("Introduce tu dni:  ");
+        String dni = scanner.next();
+
+        VehiculosModel vehiculo = new VehiculosModel(matricula, año, marca, modelo, dni);
 
         VehiculoDAO vehiculodb = new VehiculoDAO();
 

@@ -26,7 +26,7 @@ CREATE TABLE Vehiculo (
     modelo VARCHAR(100) NOT NULL,
     año int NOT NULL,
     dni VARCHAR(9) NOT NULL,
-    FOREIGN KEY (dni) REFERENCES Clientes (dni)
+    FOREIGN KEY (dni) REFERENCES Clientes(dni)
 );
 
 CREATE TABLE Citas (

@@ -13,6 +13,7 @@ public class ClienteView {
         VehiculosView vehiculosView = new VehiculosView();
 
         do {
+            System.out.println("---------------------");
             System.out.println("¡Bienvenido al menú de clientes!");
             System.out.println("1. Introducir tus datos");
             System.out.println("2. Modificar tus datos");
