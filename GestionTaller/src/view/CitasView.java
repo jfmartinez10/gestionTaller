@@ -24,31 +24,6 @@ public class CitasView {
         this.empleadoView = empleadoView;
     }
 
-    public void gestionCitas() {
-        int opcion;
-        do {
-            System.out.println("Gestion de citas");
-            System.out.println("-------------------");
-            System.out.println("1. Agregar cita");
-            System.out.println("2. Modificar cita");
-            System.out.println("3. Eliminar cita");
-            System.out.println("4. Listar citas");
-            System.out.println("5. Volver al menu principal");
-            System.out.print("Ingrese una opción: ");
-            opcion = sc.nextInt();
-            sc.nextLine();
-
-            switch (opcion) {
-                case 1 -> agregarCita();
-                case 2 -> modificarCita();
-                case 3 -> eliminarCita();
-                case 4 -> listarCitas();
-                case 5 -> System.out.println("Volviendo al menu principal");
-                default -> System.out.println("Opción no válida. Intente nuevamente.");
-            }
-        } while (opcion != 5);
-    }
-
     public void menuCitasCliente() {
         int opcion;
         do {
