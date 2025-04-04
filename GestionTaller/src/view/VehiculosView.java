@@ -31,8 +31,8 @@ public class VehiculosView {
         System.out.println("Vehiculo agregado correctamente");
     }
     
-    public void mostrarVehiculos(){
+    /*public void mostrarVehiculos(){
         VehiculosModel vehiculo = new VehiculosModel(matricula, año, marca, modelo);
         vehiculoDao.mostrarVehiculos(vehiculo);
-    }
+    }*/
 }

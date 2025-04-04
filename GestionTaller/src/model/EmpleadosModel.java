@@ -30,4 +30,9 @@ public class EmpleadosModel {
     public int getId() {return id;}
 
     public void setId(int id) {this.id = id;}
+
+    @Override
+    public String toString() {
+        return "Empleado [id= " + id + ", nombre=" + nombre + ", apellido=" + apellido + ", telefono=" + telefono + "]";
+    }
 }
