@@ -2,48 +2,32 @@ package model;
 
 public class EmpleadosModel {
 
-    int idEmpleado; // Cambiado a idEmpleado
+    int id; // Cambiado a idEmpleado
     int telefono;
 
     String nombre;
     String apellido;
 
-    public EmpleadosModel(int idEmpleado, String nombre, String apellido, int telefono) {
-        this.idEmpleado = idEmpleado; // Cambiado a idEmpleado
+    public EmpleadosModel(int id, String nombre, String apellido, int telefono) {
+        this.id = id; // Cambiado a idEmpleado
         this.nombre = nombre;
         this.apellido = apellido;
         this.telefono = telefono;
     }
 
-    public int getIdEmpleado() { // Cambiado a getIdEmpleado
-        return idEmpleado;
-    }
+    public String getNombre() {return nombre;}
 
-    public void setIdEmpleado(int idEmpleado) { // Cambiado a setIdEmpleado
-        this.idEmpleado = idEmpleado;
-    }
+    public void setNombre(String nombre) {this.nombre = nombre;}
 
-    public String getNombre() {
-        return nombre;
-    }
+    public String getApellido() {return apellido;}
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
+    public void setApellido(String apellido) {this.apellido = apellido;}
 
-    public String getApellido() {
-        return apellido;
-    }
+    public int getTelefono() {return telefono;}
 
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
-    }
+    public void setTelefono(int telefono) {this.telefono = telefono;}
 
-    public int getTelefono() {
-        return telefono;
-    }
+    public int getId() {return id;}
 
-    public void setTelefono(int telefono) {
-        this.telefono = telefono;
-    }
+    public void setId(int id) {this.id = id;}
 }

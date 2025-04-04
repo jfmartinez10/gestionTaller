@@ -72,10 +72,10 @@ public class EmpleadoView {
 
     public void modificarEmpleado() {
         System.out.print("Ingrese el ID del empleado a modificar: ");
-        int idEmpleado = sc.nextInt();
+        int id = sc.nextInt();
         sc.nextLine();
 
-        EmpleadosModel empleado = empleadoDAO.getIdEmpleado(idEmpleado);
+        EmpleadosModel empleado = empleadoDAO.getIdEmpleado(id);
         if (empleado == null) {
             System.out.println("Empleado no encontrado.");
             return;
@@ -87,8 +87,7 @@ public class EmpleadoView {
             System.out.println("1. Modificar nombre");
             System.out.println("2. Modificar apellido");
             System.out.println("3. Modificar teléfono");
-            System.out.println("4. Modificar ID");
-            System.out.println("5. Salir");
+            System.out.println("4. Salir");
             System.out.print("Ingrese una opción: ");
             opcion = sc.nextInt();
             sc.nextLine();
@@ -97,41 +96,35 @@ public class EmpleadoView {
                 case 1 -> {
                     System.out.print("Introducir nombre: ");
                     String nombre = sc.nextLine();
-                    empleadoDAO.modificarNombreEmpleado(nombre, idEmpleado);
+                    empleadoDAO.modificarNombreEmpleado(nombre, id);
                     System.out.println("Nombre modificado correctamente");
                 }
                 case 2 -> {
                     System.out.print("Introducir apellido: ");
                     String apellido = sc.nextLine();
-                    empleadoDAO.modificarApellidoEmpleado(apellido, idEmpleado);
+                    empleadoDAO.modificarApellidoEmpleado(apellido, id);
                     System.out.println("Apellido modificado correctamente");
                 }
                 case 3 -> {
                     System.out.print("Introducir teléfono: ");
                     int telefono = sc.nextInt();
                     sc.nextLine();
-                    empleadoDAO.modificarTlfEmpleado(telefono, idEmpleado);
+                    empleadoDAO.modificarTlfEmpleado(telefono, id);
                     System.out.println("Teléfono modificado correctamente");
                 }
-                case 4 -> {
-                    System.out.print("Introducir nuevo ID: ");
-                    int nuevoId = sc.nextInt();
-                    sc.nextLine();
-                    empleadoDAO.modificarIdEmpleado(nuevoId, idEmpleado);
-                    System.out.println("ID modificado correctamente");
-                }
+            
             }
-        } while (opcion != 5);
+        } while (opcion != 4);
         System.out.println("Saliendo del menú de modificación");
     }
 
     public void buscarEmpleadoPorId() {
         try {
             System.out.print("Ingrese el ID del empleado a buscar: ");
-            int idEmpleado = sc.nextInt();
+            int id = sc.nextInt();
             sc.nextLine();
 
-            EmpleadosModel empleado = empleadoDAO.getIdEmpleado(idEmpleado);
+            EmpleadosModel empleado = empleadoDAO.getIdEmpleado(id);
             if (empleado == null) {
                 System.out.println("Empleado no encontrado.");
             } else {

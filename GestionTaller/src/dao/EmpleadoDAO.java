@@ -13,7 +13,7 @@ public class EmpleadoDAO {
         ConexionBD bd = new ConexionBD();
 
         try (Connection conexion = bd.conectar();
-             PreparedStatement ps = conexion.prepareStatement("INSERT INTO Empleado (nombre, apellido, idEmpleado, telefono) VALUES (?, ?, ?, ?)")) {
+             PreparedStatement ps = conexion.prepareStatement("INSERT INTO Empleados (nombre, apellido, id, telefono) VALUES (?, ?, ?, ?)")) {
 
             ps.setString(1, empleado.getNombre());
             ps.setString(2, empleado.getApellido());
@@ -26,19 +26,19 @@ public class EmpleadoDAO {
         }
     }
 
-    public EmpleadosModel getIdEmpleado(int idEmpleado) { // Corregido aquí
+    public EmpleadosModel getIdEmpleado(int id) { // Corregido aquí
         EmpleadosModel empleado = null;
         ConexionBD bd = new ConexionBD();
         Connection conexion = bd.conectar();
 
         if (conexion != null) {
-            String query = "SELECT * FROM Empleados WHERE idEmpleado = ?";
+            String query = "SELECT * FROM Empleados WHERE id = ?";
             try (PreparedStatement ps = conexion.prepareStatement(query)) {
-                ps.setInt(1, idEmpleado);
+                ps.setInt(1, id);
                 try (ResultSet rs = ps.executeQuery()) {
                     if (rs.next()) {
                         empleado = new EmpleadosModel(
-                            rs.getInt("idEmpleado"),
+                            rs.getInt("id"),
                             rs.getString("nombre"),
                             rs.getString("apellido"),
                             rs.getInt("telefono")
@@ -52,14 +52,14 @@ public class EmpleadoDAO {
         return empleado;
     }
 
-    public void modificarNombreEmpleado(String nombre, int idEmpleado) {
+    public void modificarNombreEmpleado(String nombre, int id) {
         ConexionBD bd = new ConexionBD();
 
         try (Connection conexion = bd.conectar();
-             PreparedStatement ps = conexion.prepareStatement("UPDATE Empleado SET nombre = ? WHERE idEmpleado = ?")) {
+             PreparedStatement ps = conexion.prepareStatement("UPDATE Empleados SET nombre = ? WHERE id = ?")) {
 
             ps.setString(1, nombre);
-            ps.setInt(2, idEmpleado);
+            ps.setInt(2, id);
             ps.executeUpdate();
 
         } catch (SQLException e) {
@@ -67,14 +67,14 @@ public class EmpleadoDAO {
         }
     }
 
-    public void modificarApellidoEmpleado(String apellido, int idEmpleado) {
+    public void modificarApellidoEmpleado(String apellido, int id) {
         ConexionBD bd = new ConexionBD();
 
         try (Connection conexion = bd.conectar();
-             PreparedStatement stmt = conexion.prepareStatement("UPDATE Empleado SET apellido = ? WHERE idEmpleado = ?")) {
+             PreparedStatement stmt = conexion.prepareStatement("UPDATE Empleados SET apellido = ? WHERE id = ?")) {
 
             stmt.setString(1, apellido);
-            stmt.setInt(2, idEmpleado);
+            stmt.setInt(2, id);
             stmt.executeUpdate();
 
         } catch (SQLException e) {
@@ -82,14 +82,14 @@ public class EmpleadoDAO {
         }
     }
 
-    public void modificarTlfEmpleado(int telefono, int idEmpleado) {
+    public void modificarTlfEmpleado(int telefono, int id) {
         ConexionBD bd = new ConexionBD();
 
         try (Connection conexion = bd.conectar();
-             PreparedStatement stmt = conexion.prepareStatement("UPDATE Empleado SET telefono = ? WHERE idEmpleado = ?")) {
+             PreparedStatement stmt = conexion.prepareStatement("UPDATE Empleados SET telefono = ? WHERE id = ?")) {
 
             stmt.setInt(1, telefono);
-            stmt.setInt(2, idEmpleado);
+            stmt.setInt(2, id);
             stmt.executeUpdate();
 
         } catch (SQLException e) {
@@ -97,26 +97,12 @@ public class EmpleadoDAO {
         }
     }
 
-    public void modificarIdEmpleado(int id, int idEmpleado) {
-        ConexionBD bd = new ConexionBD();
 
-        try (Connection conexion = bd.conectar();
-             PreparedStatement stmt = conexion.prepareStatement("UPDATE Empleado SET idEmpleado = ? WHERE idEmpleado = ?")) {
-
-            stmt.setInt(1, id);
-            stmt.setInt(2, idEmpleado);
-            stmt.executeUpdate();
-
-        } catch (SQLException e) {
-            System.err.println("Error al actualizar ID del empleado: " + e.getMessage());
-        }
-    }
-
-    public void eliminarEmpleado(int idEmpleado) {
+    public void eliminarEmpleado(int id) {
         ConexionBD bd = new ConexionBD();
         try (Connection conexion = bd.conectar();
-             PreparedStatement ps = conexion.prepareStatement("DELETE FROM Empleado WHERE idEmpleado = ?")) {
-            ps.setInt(1, idEmpleado);
+             PreparedStatement ps = conexion.prepareStatement("DELETE FROM Empleados WHERE id = ?")) {
+            ps.setInt(1, id);
             ps.executeUpdate();
         } catch (SQLException e) {
             System.err.println("Error al eliminar empleado: " + e.getMessage());
