@@ -1,10 +1,10 @@
 package view;
 
-import java.util.*;
-import dao.EmpleadoDAO;
 import dao.ClienteDAO;
-import model.EmpleadosModel;
+import dao.EmpleadoDAO;
+import java.util.*;
 import model.ClienteModel;
+import model.EmpleadosModel;
 
 public class EmpleadoView {
     private Scanner sc = new Scanner(System.in);
@@ -12,7 +12,7 @@ public class EmpleadoView {
     private ClienteDAO clienteDAO = new ClienteDAO();
 
     public void mostrarMenuEmpleado() {
-        int opcion; 
+        int opcion;
 
         do {
             System.out.println("¡Bienvenido al menú de empleados!");
@@ -26,11 +26,11 @@ public class EmpleadoView {
 
             try {
                 opcion = sc.nextInt();
-                sc.nextLine(); 
+                sc.nextLine();
             } catch (InputMismatchException e) {
                 System.out.println("Opción no válida. Ingrese un número.");
-                sc.nextLine(); 
-                opcion = 0; 
+                sc.nextLine();
+                opcion = 0;
             }
 
             switch (opcion) {
@@ -42,7 +42,7 @@ public class EmpleadoView {
                 case 6 -> System.out.println("Saliendo del programa.");
                 default -> {
                     if (opcion != 6 && opcion != 0) {
-                    System.out.println("Opción no válida.");
+                        System.out.println("Opción no válida.");
                     }
                 }
             }
@@ -66,7 +66,7 @@ public class EmpleadoView {
             System.out.println("Empleado insertado correctamente.");
         } catch (InputMismatchException e) {
             System.out.println("Error al ingresar datos. Asegúrese de que los datos sean correctos.");
-            sc.nextLine(); 
+            sc.nextLine();
         }
     }
 
@@ -148,7 +148,7 @@ public class EmpleadoView {
         System.out.print("Ingrese el DNI del cliente a buscar: ");
         String dni = sc.nextLine();
 
-        ClienteModel cliente = clienteDAO.getDNI(dni);
+        ClienteModel cliente = clienteDAO.getClienteDNI(dni);
         if (cliente == null) {
             System.out.println("Cliente no encontrado.");
         } else {
@@ -163,7 +163,7 @@ public class EmpleadoView {
             int idEmpleado = sc.nextInt();
             sc.nextLine();
 
-            EmpleadosModel empleado = empleadoDAO.getIdEmpleado(idEmpleado);
+            EmpleadosModel empleado = empleadoDAO.getIdEmpleado(idEmpleado); // Corregido aquí
             if (empleado == null) {
                 System.out.println("Empleado no encontrado.");
             } else {
@@ -180,5 +180,9 @@ public class EmpleadoView {
             System.out.println("ID no válido. Ingrese un número.");
             sc.nextLine();
         }
+    }
+
+    public EmpleadosModel getIdEmpleado(int idEmpleado) {
+        return empleadoDAO.getIdEmpleado(idEmpleado);
     }
 }
