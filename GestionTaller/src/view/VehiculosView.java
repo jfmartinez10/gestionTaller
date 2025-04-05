@@ -42,8 +42,5 @@ public class VehiculosView {
         }
     }
     
-    /*public void mostrarVehiculos(){
-        VehiculosModel vehiculo = new VehiculosModel(matricula, ano, marca, modelo);
-        vehiculoDao.mostrarVehiculos(vehiculo);
-    }*/
+    
 }
