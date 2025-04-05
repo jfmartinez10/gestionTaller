@@ -20,11 +20,12 @@ public class EmpleadoView {
             System.out.println("¡Bienvenido al menú de empleados!");
             System.out.println("1. Insertar Empleado");
             System.out.println("2. Modificar Empleado");
-            System.out.println("3. Buscar Empleado por ID");
-            System.out.println("4. Buscar Cliente por ID");
-            System.out.println("5. Eliminar Empleado");
-            System.out.println("6. Menú Proveedores");
-            System.out.println("7. Salir");
+            System.out.println("3. Mostrar Empleados");
+            System.out.println("4. Buscar Empleado por ID");
+            System.out.println("5. Buscar Cliente por ID");
+            System.out.println("6. Eliminar Empleado");
+            System.out.println("7. Menú Proveedores");
+            System.out.println("8. Salir");
             System.out.print("Ingrese una opción: ");
 
             try {
@@ -39,18 +40,17 @@ public class EmpleadoView {
             switch (opcion) {
                 case 1 -> insertarEmpleado();
                 case 2 -> modificarEmpleado();
-                case 3 -> buscarEmpleadoPorId();
-                case 4 -> buscarClientePorId();
-                case 5 -> eliminarEmpleado();
-                case 6 -> System.out.println("Saliendo del programa.");
+                case 3 ->{}
+                case 4 -> buscarEmpleadoPorId();
+                case 5 -> buscarClientePorId();
+                case 6 -> eliminarEmpleado();
                 case 7 -> proveedoresView.mostrarMenuProveedor();
                 default -> {
-                    if (opcion != 6 && opcion != 0) {
-                        System.out.println("Opción no válida.");
-                    }
+                    System.out.println("Opción no válida.");
                 }
             }
-        } while (opcion != 7);
+        } while (opcion != 8);
+        System.out.println("Saliendo del programa.");
     }
 
     public void insertarEmpleado() {
@@ -121,6 +121,8 @@ public class EmpleadoView {
         } while (opcion != 4);
         System.out.println("Saliendo del menú de modificación");
     }
+
+    
 
     public void buscarEmpleadoPorId() {
         try {

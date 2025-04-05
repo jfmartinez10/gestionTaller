@@ -25,10 +25,10 @@ public class ClienteView {
             System.out.println("2. Modificar tus datos");
             System.out.println("3. Eliminar Cliente");
             System.out.println("4. Agregar Vehículo");
-            System.out.println("5. Mostrar Vehículos");
-            System.out.println("6. Eliminar Vehículo");
-            System.out.println("7. Citas");
-            System.out.println("8. Reportar problema");
+            System.out.println("5. Modificar Vehículo");
+            System.out.println("6. Mostrar Vehículos");
+            System.out.println("7. Eliminar Vehículo");
+            System.out.println("8. Citas");
             System.out.println("9.Salir");
             System.out.print("Ingrese una opción: ");
             opcion = scanner.nextInt();
@@ -38,10 +38,10 @@ public class ClienteView {
                 case 2 -> modificarCliente();
                 case 3 -> eliminarCliente(); 
                 case 4 -> vehiculosView.agregarVehiculos();
-                case 5 -> {}
-                case 6 ->{}
-                case 7 -> citasView.menuCitasCliente();
-                case 8-> {}
+                case 5 -> vehiculosView.modificarVehiculos();
+                case 6 -> vehiculosView.mostrarVehiculos();
+                case 7 -> vehiculosView.eliminarVehiculos();
+                case 8 -> citasView.menuCitasCliente();
             }
 
         } while (opcion != 9);
