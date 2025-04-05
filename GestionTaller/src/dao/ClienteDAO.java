@@ -2,9 +2,8 @@ package dao;
 
 import java.sql.*;
 import model.ClienteModel;
+
 public class ClienteDAO {
-    
-//metodo añardirCliente()
 
  public void añadirCliente(ClienteModel cliente) {
 
@@ -38,25 +37,24 @@ public class ClienteDAO {
         }
     }
 
-    //método añadido
     public ClienteModel getClienteDNI(String dni) {
         ClienteModel cliente = null;
         ConexionBD bd = new ConexionBD();
         Connection conexion = bd.conectar();
 
         if (conexion != null) {
-            String query = "SELECT * FROM Cliente WHERE DNI = ?";
+            String query = "SELECT * FROM Clientes WHERE dni = ?"; 
             try (PreparedStatement ps = conexion.prepareStatement(query)) {
                 ps.setString(1, dni);
                 try (ResultSet rs = ps.executeQuery()) {
                     if (rs.next()) {
                         cliente = new ClienteModel(
-                            rs.getString("DNI"),
-                            rs.getString("nombre"),
-                            rs.getString("apellido"),
-                            rs.getInt("telefono"),
-                            rs.getString("email"),
-                            rs.getString("contraseña")
+                                rs.getString("dni"),
+                                rs.getString("nombre"),
+                                rs.getString("apellido"),
+                                rs.getInt("telefono"),
+                                rs.getString("email"),
+                                rs.getString("contraseña")
                         );
                     }
                 }
@@ -66,6 +64,7 @@ public class ClienteDAO {
         }
         return cliente;
     }
+
     public void actualizarNombreCliente(String dni, String nombre) {
 
         ConexionBD bd = new ConexionBD();

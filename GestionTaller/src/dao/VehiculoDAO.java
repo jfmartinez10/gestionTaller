@@ -32,48 +32,43 @@ public class VehiculoDAO {
         }
     }
 
-    public void mostrarVehiculos(VehiculosModel vehiculo){
-
+    public void mostrarVehiculos() { 
         ConexionBD bd = new ConexionBD();
         Connection conexion = bd.conectar();
 
         if (conexion != null) {
-            String query = "SELECT * FROM Vehiculo";
+            String query = "SELECT * FROM Vehiculo"; 
 
-            try (Statement stmt = conexion.createStatement(); 
-            ResultSet rs = stmt.executeQuery(query)) {
-                    while (rs.next()) {
-                        System.out.println("matricula: " + rs.getInt("matricula"));
-                        System.out.println("año: " + rs.getString("año "));
-                        System.out.println("marca: " + rs.getString("marca"));
-                        System.out.println("modelo: " + rs.getString("modelo"));
-                        System.out.println("dni: " + rs.getString("dni"));
-
-                        }
-                
+            try (Statement stmt = conexion.createStatement();
+                 ResultSet rs = stmt.executeQuery(query)) {
+                System.out.println("--- Listado de Vehículos ---");
+                while (rs.next()) {
+                    System.out.println("Matrícula: " + rs.getString("matricula"));
+                    System.out.println("Año: " + rs.getInt("año")); 
+                    System.out.println("Marca: " + rs.getString("marca"));
+                    System.out.println("Modelo: " + rs.getString("modelo"));
+                    System.out.println("DNI Propietario: " + rs.getString("dni"));
+                    System.out.println("-------------------------");
+                }
             } catch (SQLException e) {
-                System.err.println("Error al listar vehiculos: " + e.getMessage());
-                
+                System.err.println("Error al listar vehículos: " + e.getMessage());
             }
         }
     }
 
     public void eliminarVehiculo(VehiculosModel vehiculo){
-
         String matricula = vehiculo.getMatricula();
-
         ConexionBD bd = new ConexionBD();
         Connection conexion = bd.conectar();
 
         if (conexion != null) {
-            String query = "DELETE FROM Vehiculos WHERE matricula = ?";
+            String query = "DELETE FROM Vehiculo WHERE matricula = ?"; 
             try (PreparedStatement stmt = conexion.prepareStatement(query)) {
-                stmt.setString(1, matricula); 
+                stmt.setString(1, matricula);
                 stmt.executeUpdate();
-
-                System.out.println("Cliente eliminado.");
+                System.out.println("Vehículo eliminado."); 
             } catch (SQLException e) {
-                System.out.println("Error al eliminar cliente: " + e.getMessage());
+                System.out.println("Error al eliminar vehículo: " + e.getMessage());
             }
         }
     }

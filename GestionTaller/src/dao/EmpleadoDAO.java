@@ -6,8 +6,6 @@ import model.EmpleadosModel;
 public class EmpleadoDAO {
 
     public void insertarEmpleado(EmpleadosModel empleado) {
-        
-        int id = empleado.getId();
         String nombre = empleado.getNombre();
         String apellido = empleado.getApellido();
         int telefono = empleado.getTelefono();
@@ -15,12 +13,11 @@ public class EmpleadoDAO {
         ConexionBD bd = new ConexionBD();
 
         try (Connection conexion = bd.conectar();
-             PreparedStatement ps = conexion.prepareStatement("INSERT INTO Empleados (nombre, apellido, id, telefono) VALUES (?, ?, ?, ?)")) {
+             PreparedStatement ps = conexion.prepareStatement("INSERT INTO Empleados (nombre, apellido, telefono) VALUES (?, ?, ?)")) {
 
-            ps.setString(1, empleado.getNombre());
-            ps.setString(2, empleado.getApellido());
-            ps.setInt(3, empleado.getId());
-            ps.setInt(4, empleado.getTelefono());
+            ps.setString(1, nombre);
+            ps.setString(2, apellido);
+            ps.setInt(3, telefono);
             ps.executeUpdate();
 
         } catch (SQLException e) {
