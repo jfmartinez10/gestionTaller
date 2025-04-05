@@ -72,7 +72,7 @@ public class ClienteView {
         System.out.println("Introduce el email: ");
         String email = scanner.nextLine();
     
-        ClienteModel cliente = new ClienteModel(dni, nombre, apellido, telefono, email, "");
+        ClienteModel cliente = new ClienteModel(dni, nombre, apellido, telefono, email);
     
         ClienteDAO clientedb = new ClienteDAO();
     
@@ -87,4 +87,5 @@ public class ClienteView {
         ClienteDAO clienteDAO = new ClienteDAO(); 
         return clienteDAO.getClienteDNI(dni); 
     }
+    
 }

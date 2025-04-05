@@ -8,9 +8,7 @@ CREATE TABLE Clientes (
     apellido VARCHAR(255) NOT NULL,
     telefono INT,
     email VARCHAR(255),
-    contrasena VARCHAR(255)
 );
-
 
 CREATE TABLE Empleados (
     id INT PRIMARY KEY AUTO_INCREMENT,
