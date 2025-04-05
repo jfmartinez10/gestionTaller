@@ -19,7 +19,7 @@ public class VehiculosView {
 
     public void agregarVehiculos() {
         System.out.println("Agregar vehículo:");
-        System.out.print("Introduce la matrícula: ");
+        System.out.print("Introduce la matrícula (7 caracteres sin espacios): ");
         String matricula = scanner.nextLine();
         System.out.print("Introduce el ano de fabricación: ");
         int ano = scanner.nextInt();
@@ -57,7 +57,6 @@ public class VehiculosView {
         
         VehiculosModel vehiculo = this.getVehiculoMatricula();
         String matricula = vehiculo.getMatricula();
-
         int opcion;
         do {
             System.out.println("Modificar vehiculo");
@@ -68,6 +67,7 @@ public class VehiculosView {
             System.out.println("5. Volver al menu anterior");
             System.out.println("Ingrese una opcion: ");
             opcion = scanner.nextInt();
+            scanner.nextLine();
 
             switch (opcion) {
                 case 1 -> {
@@ -92,12 +92,12 @@ public class VehiculosView {
                     System.out.println("Modelo modificado correctamente");
                 }
                 case 4 -> {
-                    int year;
+                    int anio;
                     do {
                         System.out.println("Introduce el ano: ");
-                        year = scanner.nextInt();
-                    } while (year < 1769 || year > 2025);
-                    vehiculoDAO.modificarAnoVehiculo(matricula, year);
+                        anio = scanner.nextInt();
+                    } while (anio < 1769 || anio > 2025);
+                    vehiculoDAO.modificarAnoVehiculo(matricula, anio);
                     System.out.println("Ano modificado correctamente");
                 }
             }

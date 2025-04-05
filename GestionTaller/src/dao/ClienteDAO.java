@@ -68,7 +68,7 @@ public class ClienteDAO {
         ClienteModel cliente = null;
 
         if (conexion != null) {
-            String query = "SELECT * FROM Cliente WHERE dni = ?";
+            String query = "SELECT * FROM Clientes WHERE dni = ?";
 
             try (PreparedStatement ps = conexion.prepareStatement(query)) {
                 ps.setString(1, dni);

@@ -103,7 +103,7 @@ public class EmpleadoDAO {
         ArrayList<EmpleadosModel> empleados = new ArrayList<>();
 
         if (conexion != null) {
-            String query = "SELECT * FROM Empleado";
+            String query = "SELECT * FROM Empleados";
 
             try (Statement stmt = conexion.createStatement();
             ResultSet rs = stmt.executeQuery(query)) {

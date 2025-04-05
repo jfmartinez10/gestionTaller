@@ -22,7 +22,7 @@ public class EmpleadoView {
             System.out.println("2. Modificar Empleado");
             System.out.println("3. Mostrar Empleados");
             System.out.println("4. Buscar Empleado por ID");
-            System.out.println("5. Buscar Cliente por ID");
+            System.out.println("5. Buscar Cliente por dni");
             System.out.println("6. Eliminar Empleado");
             System.out.println("7. Menú Proveedores");
             System.out.println("8. Salir");
@@ -42,7 +42,7 @@ public class EmpleadoView {
                 case 2 -> modificarEmpleado();
                 case 3 -> mostrarEmpleados();
                 case 4 -> buscarEmpleadoPorId();
-                case 5 -> buscarClientePorId();
+                case 5 -> buscarClientePorDni();
                 case 6 -> eliminarEmpleado();
                 case 7 -> proveedoresView.mostrarMenuProveedor();
                 default -> {
@@ -149,7 +149,7 @@ public class EmpleadoView {
         }
     }
 
-    public void buscarClientePorId() {
+    public void buscarClientePorDni() {
         System.out.print("Ingrese el DNI del cliente a buscar: ");
         String dni = sc.nextLine();
 
