@@ -1,18 +1,19 @@
 package view;
 
 import dao.CitasDao;
+import dao.ClienteDAO; 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
-import view.ClienteView;
 import model.CitasModel;
 import model.ClienteModel;
 
 public class CitasView {
     private Scanner sc = new Scanner(System.in);
     private CitasDao citasDAO = new CitasDao();
+    private ClienteDAO clienteDAO = new ClienteDAO(); 
     private ClienteView clienteView;
     private EmpleadoView empleadoView;
 
@@ -106,23 +107,22 @@ public class CitasView {
         } while (!minutoValido);
 
         String hora = String.format("%02d:%02d", horas, minutos);
-        sc.nextLine(); // Consumir la nueva línea después de leer los minutos
+        sc.nextLine(); 
 
         System.out.println("Ingrese el DNI del cliente para la cita:");
         String dniCliente = sc.nextLine();
 
-        // Utilizar clienteView para buscar el cliente por su DNI
-        ClienteModel cliente = clienteView.getClienteDNI(dniCliente);
+        ClienteModel cliente = clienteDAO.getClienteDNI(dniCliente);
 
         if (cliente == null) {
             System.out.println("Error: No se encontró ningún cliente con el DNI proporcionado.");
-            return; // Salir del método si no se encuentra el cliente
+            return; 
         }
 
         System.out.println("Agregue una descripcion a la cita: ");
         String descripcion = sc.nextLine();
 
-        CitasModel cita = new CitasModel(cliente, fecha, hora, descripcion); // No incluimos el 'id' aquí
+        CitasModel cita = new CitasModel(cliente, fecha, hora, descripcion); 
         citasDAO.insertarCita(cita);
         System.out.println("Cita agregada correctamente.");
     }
@@ -131,22 +131,22 @@ public class CitasView {
         System.out.println("Eliminar Cita");
         System.out.println("Introduzca su DNI para ver sus citas: ");
         String dniCliente = sc.nextLine();
-    
+
         ArrayList<CitasModel> citas = citasDAO.listarCitasCliente(dniCliente);
-    
+
         if (citas.isEmpty()) {
             System.out.println("No se encontraron citas para el DNI proporcionado.");
             return;
         }
-    
+
         System.out.println("\n--- Sus Citas ---");
-        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy"); // Define el formatter aquí
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy"); 
         for (int i = 0; i < citas.size(); i++) {
             CitasModel cita = citas.get(i);
             System.out.print((i + 1) + ". ID: " + cita.getIdCita() +
-                               ", Fecha: ");
+                             ", Fecha: ");
             try {
-                LocalDate fechaCita = LocalDate.parse(cita.getFecha(), dateFormatter); // Usa el formatter para parsear
+                LocalDate fechaCita = LocalDate.parse(cita.getFecha(), dateFormatter); 
                 System.out.print(fechaCita.format(dateFormatter));
             } catch (DateTimeParseException e) {
                 System.err.println("Error al formatear fecha para ID " + cita.getIdCita() + ": " + e.getMessage() + ". Fecha original: " + cita.getFecha());
@@ -155,16 +155,16 @@ public class CitasView {
             System.out.println(", Hora: " + cita.getHora() +
                                ", Descripción: " + cita.getDescripcion());
         }
-    
+
         System.out.print("Seleccione el número de la cita que desea eliminar (o 0 para volver): ");
         int seleccion = sc.nextInt();
-        sc.nextLine(); // Consumir la nueva línea
-    
+        sc.nextLine(); 
+
         if (seleccion == 0) {
             System.out.println("Volviendo al menú de citas.");
             return;
         }
-    
+
         if (seleccion > 0 && seleccion <= citas.size()) {
             CitasModel citaAEliminar = citas.get(seleccion - 1);
             citasDAO.eliminarCita(citaAEliminar.getIdCita());
@@ -203,7 +203,7 @@ public class CitasView {
                         System.out.println("Fecha: " + fechaCita.format(dateFormatter));
                     } catch (DateTimeParseException e) {
                         System.err.println("Error al formatear fecha para ID " + cita.getIdCita() + ": " + e.getMessage() + ". Fecha original: " + fechaStr);
-                        System.out.println("Fecha: " + fechaStr + " (formato no reconocido)"); // Mostrar la fecha original
+                        System.out.println("Fecha: " + fechaStr + " (formato no reconocido)"); 
                     }
                 } else {
                     System.out.println("Fecha: No disponible");
@@ -248,7 +248,7 @@ public class CitasView {
         }
         System.out.print("Seleccione el número de la cita que desea modificar (o 0 para volver): ");
         int seleccion = sc.nextInt();
-        sc.nextLine(); // Consumir la nueva línea
+        sc.nextLine(); 
 
         if (seleccion == 0) {
             System.out.println("Volviendo al menú de citas.");
@@ -284,7 +284,7 @@ public class CitasView {
                 case 1 -> {
                     System.out.println("Introduzca el DNI del nuevo cliente: ");
                     String nuevoDniCliente = sc.nextLine();
-                    ClienteModel clienteNuevo = clienteView.getClienteDNI(nuevoDniCliente);
+                    ClienteModel clienteNuevo = clienteDAO.getClienteDNI(nuevoDniCliente);
                     if (clienteNuevo != null) {
                         citasDAO.modificarClienteCita(clienteNuevo, cita);
                         cita.setCliente(clienteNuevo); // Actualizar el objeto cita local
