@@ -4,7 +4,6 @@ import java.sql.*;
 import java.util.*;
 import model.CitasModel;
 import model.ClienteModel;
-import model.EmpleadosModel;
 
 public class CitasDao {
     ClienteDAO clienteDAO = new ClienteDAO();
@@ -15,19 +14,17 @@ public class CitasDao {
         String hora = cita.getHora();
         String descripcion = cita.getDescripcion();
         ClienteModel cliente = cita.getCliente();
-        EmpleadosModel empleado = cita.getEmpleado();
 
         ConexionBD bd = new ConexionBD();
         Connection conexion = bd.conectar();
         if (conexion != null) {
-            String query = "INSERT INTO Citas (fecha, hora, descripcion, clienteDNI, empleadoID) VALUES (?, ?, ?, ?, ?)";
+            String query = "INSERT INTO Citas (fecha, hora, descripcion, clienteDNI) VALUES (?, ?, ?, ?)";
 
             try (PreparedStatement ps = conexion.prepareStatement(query)) {
                 ps.setString(1, fecha);
                 ps.setString(2, hora);
                 ps.setString(3, descripcion);
                 ps.setString(4, cliente.getDni());
-                ps.setInt(5, empleado.getId());
                 ps.executeUpdate();
 
             } catch (SQLException e) {
@@ -67,8 +64,7 @@ public class CitasDao {
                     String hora = rs.getString("hora");
                     String descripcion = rs.getString("descripcion");
                     ClienteModel cliente = clienteDAO.getClienteDNI(rs.getString("clienteDNI"));
-                    EmpleadosModel empleado = empleadoDAO.getIdEmpleado(rs.getInt("empleadoID"));
-                    CitasModel cita = new CitasModel(cliente, empleado, fecha, hora, descripcion);
+                    CitasModel cita = new CitasModel(cliente, fecha, hora, descripcion);
                     cita.setIdCita(rs.getInt("idCita"));
                     citas.add(cita);
                 }
@@ -94,8 +90,7 @@ public class CitasDao {
                         String hora = rs.getString("hora");
                         String descripcion = rs.getString("descripcion");
                         ClienteModel cliente = clienteDAO.getClienteDNI(rs.getString("clienteDNI"));
-                        EmpleadosModel empleado = empleadoDAO.getIdEmpleado(rs.getInt("empleadoID"));
-                        CitasModel cita = new CitasModel(cliente, empleado, fecha, hora, descripcion);
+                        CitasModel cita = new CitasModel(cliente, fecha, hora, descripcion);
                         cita.setIdCita(rs.getInt("idCita"));
                         citas.add(cita);
                     }
@@ -122,8 +117,7 @@ public class CitasDao {
                         String hora = rs.getString("hora");
                         String descripcion = rs.getString("descripcion");
                         ClienteModel cliente = clienteDAO.getClienteDNI(rs.getString("clienteDNI"));
-                        EmpleadosModel empleado = empleadoDAO.getIdEmpleado(rs.getInt("empleadoID"));
-                        cita = new CitasModel(cliente, empleado, fecha, hora, descripcion);
+                        cita = new CitasModel(cliente, fecha, hora, descripcion);
                         cita.setIdCita(idCita);
                     }
                 }
@@ -145,25 +139,6 @@ public class CitasDao {
 
             try (PreparedStatement ps = conexion.prepareStatement(query)) {
                 ps.setString(1, dni);
-                ps.setInt(2, idCita);
-                ps.executeUpdate();
-            } catch (SQLException e) {
-                System.err.println("Error al modificar cita: " + e.getMessage());
-            }
-        }
-    }
-
-    public void modificarEmpleadoCita(EmpleadosModel empleado, CitasModel cita) {
-        int empleadoId = empleado.getId();
-        int idCita = cita.getIdCita();
-        ConexionBD bd = new ConexionBD();
-        Connection conexion = bd.conectar();
-
-        if (conexion != null) {
-            String query = "UPDATE Citas SET empleadoID = ? WHERE idCita = ?";
-
-            try (PreparedStatement ps = conexion.prepareStatement(query)) {
-                ps.setInt(1, empleadoId);
                 ps.setInt(2, idCita);
                 ps.executeUpdate();
             } catch (SQLException e) {

@@ -22,8 +22,8 @@ INSERT INTO Vehiculo (matricula, marca, modelo, ano, dni) VALUES
 ('3333CCC', 'Renault', 'Clio', 2019, '56789012C'),
 ('4444DDD', 'Peugeot', '208', 2021, '34567890D');
 
-INSERT INTO Citas (fecha, hora, descripcion, clienteDNI, empleadoID) VALUES
-('2025-04-10', '10:00', 'Revisión de frenos', '12345678A', 1),
-('2025-04-12', '16:30', 'Cambio de aceite', '98765432B', 2),
-('2025-04-15', '09:15', 'Sustitución de neumáticos', '56789012C', 3),
-('2025-04-18', '11:45', 'Alineación y equilibrado', '34567890D', 4);
+INSERT INTO Citas (fecha, hora, descripcion, clienteDNI) VALUES
+('2025-04-10', '10:00', 'Revisión de frenos', '12345678A'),
+('2025-04-12', '16:30', 'Cambio de aceite', '98765432B'),
+('2025-04-15', '09:15', 'Sustitución de neumáticos', '56789012C'),
+('2025-04-18', '11:45', 'Alineación y equilibrado', '34567890D');

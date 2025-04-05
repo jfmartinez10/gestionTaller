@@ -4,30 +4,23 @@ package model;
 public class CitasModel {
     private int idCita;
     private ClienteModel cliente;
-    private EmpleadosModel empleado;
     private String fecha;
     private String hora;
     private String descripcion;
 
     // Constructor
-    public CitasModel(ClienteModel cliente, EmpleadosModel empleado, String fecha, String hora, String descripcion) {
+    public CitasModel(ClienteModel cliente, String fecha, String hora, String descripcion) {
         this.cliente = cliente;
-        this.empleado = empleado;
         this.fecha = fecha;
         this.hora = hora;
         this.descripcion = descripcion;
     }
 
     // Getters
-    public int getIdCita() {
-        return idCita;
-    }
-    public ClienteModel getCliente() {
-        return cliente;
-    }
-    public EmpleadosModel getEmpleado() {
-        return empleado;
-    }
+    public int getIdCita() {return idCita;}
+
+    public ClienteModel getCliente() {return cliente;}
+    
     public String getFecha() {
         return fecha;
     }
@@ -44,9 +37,6 @@ public class CitasModel {
     }
     public void setCliente(ClienteModel cliente) {
         this.cliente = cliente;
-    }
-    public void setEmpleado(EmpleadosModel empleado) {
-        this.empleado = empleado;
     }
     public void setFecha(String fecha) {
         this.fecha = fecha;
