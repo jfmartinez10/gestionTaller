@@ -1,8 +1,8 @@
-INSERT INTO Clientes (dni, nombre, apellido, telefono, email, contrasena) VALUES
-('12345678A', 'Ana', 'García', 612345678, 'ana.garcia@email.com', 'clave123'),
-('98765432B', 'Pedro', 'López', 698765432, 'pedro.lopez@email.com', 'secreto456'),
-('56789012C', 'Sofía', 'Martínez', 654321098, 'sofia.martinez@email.com', 'micontra789'),
-('34567890D', 'Javier', 'Ruiz', 632109876, 'javier.ruiz@email.com', 'password00');
+INSERT INTO Clientes (dni, nombre, apellido, telefono, email) VALUES
+('12345678A', 'Ana', 'García', 612345678, 'ana.garcia@email.com'),
+('98765432B', 'Pedro', 'López', 698765432, 'pedro.lopez@email.com'),
+('56789012C', 'Sofía', 'Martínez', 654321098, 'sofia.martinez@email.com'),
+('34567890D', 'Javier', 'Ruiz', 632109876, 'javier.ruiz@email.com');
 
 INSERT INTO Empleados (nombre, apellido, telefono) VALUES
 ('Laura', 'Fernández', 678901234),

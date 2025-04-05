@@ -53,8 +53,7 @@ public class ClienteDAO {
                                 rs.getString("nombre"),
                                 rs.getString("apellido"),
                                 rs.getInt("telefono"),
-                                rs.getString("email"),
-                                rs.getString("contrasena")
+                                rs.getString("email")
                         );
                     }
                 }

@@ -10,190 +10,263 @@ public class CitasDao {
     EmpleadoDAO empleadoDAO = new EmpleadoDAO();
 
     public void insertarCita(CitasModel cita) {
-        String fecha = cita.getFecha();
-        String hora = cita.getHora();
-        String descripcion = cita.getDescripcion();
-        ClienteModel cliente = cita.getCliente();
-
+        Connection conexion = null;
+        PreparedStatement ps = null;
         ConexionBD bd = new ConexionBD();
-        Connection conexion = bd.conectar();
-        if (conexion != null) {
-            String query = "INSERT INTO Citas (fecha, hora, descripcion, clienteDNI) VALUES (?, ?, ?, ?)";
-
-            try (PreparedStatement ps = conexion.prepareStatement(query)) {
-                ps.setString(1, fecha);
-                ps.setString(2, hora);
-                ps.setString(3, descripcion);
-                ps.setString(4, cliente.getDni());
+        try {
+            conexion = bd.conectar();
+            if (conexion != null) {
+                String query = "INSERT INTO Citas (fecha, hora, descripcion, clienteDNI) VALUES (?, ?, ?, ?)";
+                ps = conexion.prepareStatement(query);
+                ps.setString(1, cita.getFecha());
+                ps.setString(2, cita.getHora());
+                ps.setString(3, cita.getDescripcion());
+                ps.setString(4, cita.getCliente().getDni());
                 ps.executeUpdate();
-
+            }
+        } catch (SQLException e) {
+            System.err.println("Error al insertar cita: " + e.getMessage());
+        } finally {
+            try {
+                if (ps != null) ps.close();
+                if (conexion != null && !conexion.isClosed()) conexion.close();
             } catch (SQLException e) {
-                System.err.println("Error al insertar cita: " + e.getMessage());
+                System.err.println("Error al cerrar recursos: " + e.getMessage());
             }
         }
     }
 
-    public void eliminarCita(CitasModel cita) {
-        int idCita = cita.getIdCita();
+    public void eliminarCita(int idCita) {
+        Connection conexion = null;
+        PreparedStatement ps = null;
         ConexionBD bd = new ConexionBD();
-        Connection conexion = bd.conectar();
-
-        if (conexion != null) {
-            String query = "DELETE FROM Citas WHERE idCita = ?";
-
-            try (PreparedStatement ps = conexion.prepareStatement(query)) {
+        try {
+            conexion = bd.conectar();
+            if (conexion != null) {
+                String query = "DELETE FROM Citas WHERE id = ?"; // Asumiendo que tu columna ID se llama 'id'
+                ps = conexion.prepareStatement(query);
                 ps.setInt(1, idCita);
                 ps.executeUpdate();
+            }
+        } catch (SQLException e) {
+            System.err.println("Error al eliminar cita: " + e.getMessage());
+        } finally {
+            try {
+                if (ps != null) ps.close();
+                if (conexion != null && !conexion.isClosed()) conexion.close();
             } catch (SQLException e) {
-                System.err.println("Error al eliminar cita: " + e.getMessage());
+                System.err.println("Error al cerrar recursos: " + e.getMessage());
             }
         }
     }
 
     public ArrayList<CitasModel> listarCitas() {
-        ConexionBD bd = new ConexionBD();
-        Connection conexion = bd.conectar();
+        Connection conexion = null;
+        Statement stmt = null;
+        ResultSet rs = null;
         ArrayList<CitasModel> citas = new ArrayList<>();
-
-        if (conexion != null) {
-            String query = "SELECT * FROM Citas";
-            try (Statement stmt = conexion.createStatement();
-                 ResultSet rs = stmt.executeQuery(query)) {
+        ConexionBD bd = new ConexionBD();
+        try {
+            conexion = bd.conectar();
+            if (conexion != null) {
+                String query = "SELECT id, fecha, hora, descripcion, clienteDNI FROM Citas";
+                stmt = conexion.createStatement();
+                rs = stmt.executeQuery(query);
                 while (rs.next()) {
+                    int id = rs.getInt("id"); // Obtener el ID de la base de datos
                     String fecha = rs.getString("fecha");
                     String hora = rs.getString("hora");
                     String descripcion = rs.getString("descripcion");
-                    ClienteModel cliente = clienteDAO.getClienteDNI(rs.getString("clienteDNI"));
-                    CitasModel cita = new CitasModel(cliente, fecha, hora, descripcion);
-                    cita.setIdCita(rs.getInt("idCita"));
+                    String clienteDNI = rs.getString("clienteDNI");
+                    ClienteModel cliente = clienteDAO.getClienteDNI(clienteDNI);
+                    CitasModel cita = new CitasModel(cliente, id, fecha, hora, descripcion);
                     citas.add(cita);
                 }
+            }
+        } catch (SQLException e) {
+            System.err.println("Error al listar citas: " + e.getMessage());
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (stmt != null) stmt.close();
+                if (conexion != null && !conexion.isClosed()) conexion.close();
             } catch (SQLException e) {
-                System.err.println("Error al listar citas: " + e.getMessage());
+                System.err.println("Error al cerrar recursos: " + e.getMessage());
             }
         }
         return citas;
     }
 
     public ArrayList<CitasModel> listarCitasCliente(String dni) {
-        ConexionBD bd = new ConexionBD();
-        Connection conexion = bd.conectar();
+        Connection conexion = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         ArrayList<CitasModel> citas = new ArrayList<>();
-
-        if (conexion != null) {
-            String query = "SELECT * FROM Citas WHERE clienteDNI = ?";
-            try (PreparedStatement ps = conexion.prepareStatement(query)) {
+        ConexionBD bd = new ConexionBD();
+        try {
+            conexion = bd.conectar();
+            if (conexion != null) {
+                String query = "SELECT id, fecha, hora, descripcion, clienteDNI FROM Citas WHERE clienteDNI = ?";
+                ps = conexion.prepareStatement(query);
                 ps.setString(1, dni);
-                try (ResultSet rs = ps.executeQuery()) {
-                    while (rs.next()) {
-                        String fecha = rs.getString("fecha");
-                        String hora = rs.getString("hora");
-                        String descripcion = rs.getString("descripcion");
-                        ClienteModel cliente = clienteDAO.getClienteDNI(rs.getString("clienteDNI"));
-                        CitasModel cita = new CitasModel(cliente, fecha, hora, descripcion);
-                        cita.setIdCita(rs.getInt("idCita"));
-                        citas.add(cita);
-                    }
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    int id = rs.getInt("id"); // Obtener el ID de la base de datos
+                    String fecha = rs.getString("fecha");
+                    String hora = rs.getString("hora");
+                    String descripcion = rs.getString("descripcion");
+                    String clienteDNI = rs.getString("clienteDNI");
+                    ClienteModel cliente = clienteDAO.getClienteDNI(clienteDNI);
+                    CitasModel cita = new CitasModel(cliente, id, fecha, hora, descripcion);
+                    citas.add(cita);
                 }
+            }
+        } catch (SQLException e) {
+            System.err.println("Error al listar citas: " + e.getMessage());
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (ps != null) ps.close();
+                if (conexion != null && !conexion.isClosed()) conexion.close();
             } catch (SQLException e) {
-                System.err.println("Error al listar citas: " + e.getMessage());
+                System.err.println("Error al cerrar recursos: " + e.getMessage());
             }
         }
         return citas;
     }
 
-    public CitasModel getCitaId(int idCita) {
-        ConexionBD bd = new ConexionBD();
-        Connection conexion = bd.conectar();
+    public CitasModel getCitaId(int id) {
+        Connection conexion = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         CitasModel cita = null;
-
-        if (conexion != null) {
-            String query = "SELECT * FROM Citas WHERE idCita = ?";
-            try (PreparedStatement ps = conexion.prepareStatement(query)) {
-                ps.setInt(1, idCita);
-                try (ResultSet rs = ps.executeQuery()) {
-                    if (rs.next()) {
-                        String fecha = rs.getString("fecha");
-                        String hora = rs.getString("hora");
-                        String descripcion = rs.getString("descripcion");
-                        ClienteModel cliente = clienteDAO.getClienteDNI(rs.getString("clienteDNI"));
-                        cita = new CitasModel(cliente, fecha, hora, descripcion);
-                        cita.setIdCita(idCita);
-                    }
+        ConexionBD bd = new ConexionBD();
+        try {
+            conexion = bd.conectar();
+            if (conexion != null) {
+                String query = "SELECT id, fecha, hora, descripcion, clienteDNI FROM Citas WHERE id = ?";
+                ps = conexion.prepareStatement(query);
+                ps.setInt(1, id);
+                rs = ps.executeQuery();
+                if (rs.next()) {
+                    String fecha = rs.getString("fecha");
+                    String hora = rs.getString("hora");
+                    String descripcion = rs.getString("descripcion");
+                    ClienteModel cliente = clienteDAO.getClienteDNI(rs.getString("clienteDNI"));
+                    cita = new CitasModel(cliente, id, fecha, hora, descripcion);
+                    cita.setIdCita(id);
                 }
+            }
+        } catch (SQLException e) {
+            System.err.println("Error al obtener cita: " + e.getMessage());
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (ps != null) ps.close();
+                if (conexion != null && !conexion.isClosed()) conexion.close();
             } catch (SQLException e) {
-                System.err.println("Error al obtener cita: " + e.getMessage());
+                System.err.println("Error al cerrar recursos: " + e.getMessage());
             }
         }
         return cita;
     }
 
     public void modificarClienteCita(ClienteModel cliente, CitasModel cita) {
-        String dni = cliente.getDni();
-        int idCita = cita.getIdCita();
+        Connection conexion = null;
+        PreparedStatement ps = null;
         ConexionBD bd = new ConexionBD();
-        Connection conexion = bd.conectar();
-
-        if (conexion != null) {
-            String query = "UPDATE Citas SET clienteDNI = ? WHERE idCita = ?";
-
-            try (PreparedStatement ps = conexion.prepareStatement(query)) {
-                ps.setString(1, dni);
-                ps.setInt(2, idCita);
+        try {
+            conexion = bd.conectar();
+            if (conexion != null) {
+                String query = "UPDATE Citas SET clienteDNI = ? WHERE id = ?";
+                ps = conexion.prepareStatement(query);
+                ps.setString(1, cliente.getDni());
+                ps.setInt(2, cita.getIdCita());
                 ps.executeUpdate();
+            }
+        } catch (SQLException e) {
+            System.err.println("Error al modificar cita: " + e.getMessage());
+        } finally {
+            try {
+                if (ps != null) ps.close();
+                if (conexion != null && !conexion.isClosed()) conexion.close();
             } catch (SQLException e) {
-                System.err.println("Error al modificar cita: " + e.getMessage());
+                System.err.println("Error al cerrar recursos: " + e.getMessage());
             }
         }
     }
 
     public void modificarFechaCita(CitasModel cita, String fecha) {
+        Connection conexion = null;
+        PreparedStatement ps = null;
         ConexionBD bd = new ConexionBD();
-        Connection conexion = bd.conectar();
-        int idCita = cita.getIdCita();
-        if (conexion != null) {
-            String query = "UPDATE Citas SET fecha = ? WHERE idCita = ?";
-
-            try (PreparedStatement ps = conexion.prepareStatement(query)) {
+        try {
+            conexion = bd.conectar();
+            if (conexion != null) {
+                String query = "UPDATE Citas SET fecha = ? WHERE id = ?";
+                ps = conexion.prepareStatement(query);
                 ps.setString(1, fecha);
-                ps.setInt(2, idCita);
+                ps.setInt(2, cita.getIdCita());
                 ps.executeUpdate();
+            }
+        } catch (SQLException e) {
+            System.err.println("Error al modificar cita: " + e.getMessage());
+        } finally {
+            try {
+                if (ps != null) ps.close();
+                if (conexion != null && !conexion.isClosed()) conexion.close();
             } catch (SQLException e) {
-                System.err.println("Error al modificar cita: " + e.getMessage());
+                System.err.println("Error al cerrar recursos: " + e.getMessage());
             }
         }
     }
 
     public void modificarHoraCita(CitasModel cita, String hora) {
+        Connection conexion = null;
+        PreparedStatement ps = null;
         ConexionBD bd = new ConexionBD();
-        Connection conexion = bd.conectar();
-        int idCita = cita.getIdCita();
-        if (conexion != null) {
-            String query = "UPDATE Citas SET hora = ? WHERE idCita = ?";
-
-            try (PreparedStatement ps = conexion.prepareStatement(query)) {
+        try {
+            conexion = bd.conectar();
+            if (conexion != null) {
+                String query = "UPDATE Citas SET hora = ? WHERE id = ?";
+                ps = conexion.prepareStatement(query);
                 ps.setString(1, hora);
-                ps.setInt(2, idCita);
+                ps.setInt(2, cita.getIdCita());
                 ps.executeUpdate();
+            }
+        } catch (SQLException e) {
+            System.err.println("Error al modificar cita: " + e.getMessage());
+        } finally {
+            try {
+                if (ps != null) ps.close();
+                if (conexion != null && !conexion.isClosed()) conexion.close();
             } catch (SQLException e) {
-                System.err.println("Error al modificar cita: " + e.getMessage());
+                System.err.println("Error al cerrar recursos: " + e.getMessage());
             }
         }
     }
 
     public void modificarDescripcionCita(CitasModel cita, String descripcion) {
+        Connection conexion = null;
+        PreparedStatement ps = null;
         ConexionBD bd = new ConexionBD();
-        Connection conexion = bd.conectar();
-        int idCita = cita.getIdCita();
-        if (conexion != null) {
-            String query = "UPDATE Citas SET descripcion = ? WHERE idCita = ?";
-
-            try (PreparedStatement ps = conexion.prepareStatement(query)) {
+        try {
+            conexion = bd.conectar();
+            if (conexion != null) {
+                String query = "UPDATE Citas SET descripcion = ? WHERE id = ?";
+                ps = conexion.prepareStatement(query);
                 ps.setString(1, descripcion);
-                ps.setInt(2, idCita);
+                ps.setInt(2, cita.getIdCita());
                 ps.executeUpdate();
+            }
+        } catch (SQLException e) {
+            System.err.println("Error al modificar cita: " + e.getMessage());
+        } finally {
+            try {
+                if (ps != null) ps.close();
+                if (conexion != null && !conexion.isClosed()) conexion.close();
             } catch (SQLException e) {
-                System.err.println("Error al modificar cita: " + e.getMessage());
+                System.err.println("Error al cerrar recursos: " + e.getMessage());
             }
         }
     }

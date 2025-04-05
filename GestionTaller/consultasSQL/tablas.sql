@@ -7,7 +7,7 @@ CREATE TABLE Clientes (
     nombre VARCHAR(255) NOT NULL,
     apellido VARCHAR(255) NOT NULL,
     telefono INT,
-    email VARCHAR(255),
+    email VARCHAR(255)
 );
 
 CREATE TABLE Empleados (
