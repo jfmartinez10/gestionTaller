@@ -7,7 +7,6 @@ import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import model.CitasModel;
 import model.ClienteModel;
-import model.EmpleadosModel;
 
 public class CitasView {
     private Scanner sc = new Scanner(System.in);
@@ -54,22 +53,22 @@ public class CitasView {
 
     public void agregarCita() {
         System.out.println("Agregar Cita");
-
+    
         String fecha;
         boolean fechaValida = false;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         LocalDate fechaHoy = LocalDate.now();
-
+    
         do {
             System.out.println("Insertar fecha de cita (DIA-MES-AnO, formato dd-MM-yyyy): ");
             fecha = sc.nextLine();
-
+    
             try {
                 LocalDate fechaCita = LocalDate.parse(fecha, formatter);
-
+    
                 if (fechaCita.isBefore(fechaHoy)) {
                     System.out.println("Error: La fecha no puede ser anterior a hoy ("
-                            + fechaHoy.format(formatter) + ")");
+                                       + fechaHoy.format(formatter) + ")");
                 } else {
                     fechaValida = true;
                 }
@@ -77,12 +76,12 @@ public class CitasView {
                 System.out.println("Formato de fecha incorrecto. Use dd-MM-yyyy (ej: 25-12-2023)");
             }
         } while (!fechaValida);
-
+    
         int horas;
         int minutos;
         boolean horaValida = false;
         boolean minutoValido = false;
-
+    
         System.out.println("Insertar hora para la cita:");
         do {
             System.out.println("Insertar hora: (formato 24H - SOLO INTRODUCIR LA HORA: )");
@@ -93,7 +92,7 @@ public class CitasView {
                 horaValida = true;
             }
         } while (!horaValida);
-
+    
         do {
             System.out.println("Insertar minutos: (xx) (SOLO LOS MINUTOS)");
             minutos = sc.nextInt();
@@ -103,25 +102,27 @@ public class CitasView {
                 minutoValido = true;
             }
         } while (!minutoValido);
-
+    
         String hora = String.format("%02d:%02d", horas, minutos);
-        sc.nextLine();
-
+        sc.nextLine(); // Consumir la nueva línea después de leer los minutos
+    
+        System.out.println("Ingrese el DNI del cliente para la cita:");
+        String dniCliente = sc.nextLine();
+    
+        // Utilizar clienteView para buscar el cliente por su DNI
+        ClienteModel cliente = clienteView.getClienteDNI(dniCliente);
+    
+        if (cliente == null) {
+            System.out.println("Error: No se encontró ningún cliente con el DNI proporcionado.");
+            return; // Salir del método si no se encuentra el cliente
+        }
+    
         System.out.println("Agregue una descripcion a la cita: ");
         String descripcion = sc.nextLine();
-
-        ClienteModel cliente = clienteView.getClienteDNI();
-        System.out.println("Introduzca el ID del empleado: ");
-        int idEmpleado = sc.nextInt();
-        sc.nextLine();
-        EmpleadosModel empleado = empleadoView.getIdEmpleado(idEmpleado);
-        if (empleado == null) {
-            System.out.println("El empleado con el id: " + idEmpleado + " no existe.");
-            return;
-        }
-
-        CitasModel cita = new CitasModel(cliente, empleado, fecha, hora, descripcion);
+    
+        CitasModel cita = new CitasModel(cliente, fecha, hora, descripcion);
         citasDAO.insertarCita(cita);
+        System.out.println("Cita agregada correctamente.");
     }
 
     public void eliminarCita() {
@@ -163,11 +164,10 @@ public class CitasView {
         do {
             System.out.println("Modificar cita");
             System.out.println("1. Modificar cliente");
-            System.out.println("2. Modificar empleado");
-            System.out.println("3. Modificar fecha");
-            System.out.println("4. Modificar hora");
-            System.out.println("5. Modificar descripción");
-            System.out.println("6. Volver al menu anterior");
+            System.out.println("2. Modificar fecha");
+            System.out.println("3. Modificar hora");
+            System.out.println("4. Modificar descripción");
+            System.out.println("5. Volver al menu anterior");
             System.out.print("Ingrese una opción: ");
             opcion = sc.nextInt();
             sc.nextLine();
@@ -175,23 +175,12 @@ public class CitasView {
             switch (opcion) {
                 case 1 -> {
                     System.out.println("Introduzca el DNI del nuevo cliente: ");
-                    ClienteModel cliente = clienteView.getClienteDNI();
+                    String nuevoDniCliente = sc.nextLine();
+                    ClienteModel cliente = clienteView.getClienteDNI(nuevoDniCliente); // Pasar el DNI aquí
                     citasDAO.modificarClienteCita(cliente, cita);
                     System.out.println("Cliente modificado correctamente");
                 }
                 case 2 -> {
-                    System.out.println("Introduzca el ID del nuevo empleado: ");
-                    int idEmpleado = sc.nextInt();
-                    sc.nextLine();
-                    EmpleadosModel empleado = empleadoView.getIdEmpleado(idEmpleado);
-                    if (empleado == null) {
-                        System.out.println("El empleado con el id: " + idEmpleado + " no existe.");
-                        return;
-                    }
-                    citasDAO.modificarEmpleadoCita(empleado, cita);
-                    System.out.println("Empleado modificado correctamente");
-                }
-                case 3 -> {
                     String nuevaFecha;
                     boolean fechaValida = false;
 
@@ -215,7 +204,7 @@ public class CitasView {
                         }
                     } while (!fechaValida);
                 }
-                case 4 -> {
+                case 3 -> {
                     int horas;
                     int minutos;
                     boolean horaValida = false;
@@ -249,15 +238,15 @@ public class CitasView {
                     citasDAO.modificarHoraCita(cita, nuevaHora);
                     System.out.println("Hora modificada correctamente a: " + nuevaHora);
                 }
-                case 5 -> {
+                case 4 -> {
                     System.out.println("Introduzca la nueva descripción: ");
                     String descripcion = sc.nextLine();
                     citasDAO.modificarDescripcionCita(cita, descripcion);
                     System.out.println("Descripción modificada correctamente");
                 }
-                case 6 -> System.out.println("Volviendo al menu anterior");
                 default -> System.out.println("Opción no válida. Intente nuevamente.");
             }
         } while (opcion != 6);
+        System.out.println("Volviendo al menu anterior");
     }
 }

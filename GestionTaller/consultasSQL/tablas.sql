@@ -41,7 +41,5 @@ CREATE TABLE Citas (
     hora VARCHAR(5) NOT NULL,
     descripcion VARCHAR(255),
     clienteDNI VARCHAR(20) NOT NULL,
-    empleadoID INT NOT NULL,
-    FOREIGN KEY (clienteDNI) REFERENCES Clientes(dni),
-    FOREIGN KEY (empleadoID) REFERENCES Empleados(id)
+    FOREIGN KEY (clienteDNI) REFERENCES Clientes(dni)
 );
