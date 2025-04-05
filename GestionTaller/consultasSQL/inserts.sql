@@ -1,4 +1,4 @@
-INSERT INTO Clientes (dni, nombre, apellido, telefono, email, contraseña) VALUES
+INSERT INTO Clientes (dni, nombre, apellido, telefono, email, contrasena) VALUES
 ('12345678A', 'Ana', 'García', 612345678, 'ana.garcia@email.com', 'clave123'),
 ('98765432B', 'Pedro', 'López', 698765432, 'pedro.lopez@email.com', 'secreto456'),
 ('56789012C', 'Sofía', 'Martínez', 654321098, 'sofia.martinez@email.com', 'micontra789'),
@@ -16,7 +16,7 @@ INSERT INTO Proveedores (nombre, email, telefono) VALUES
 ('Distribuciones C', 'pedidos.c@distribucionesc.net', 976543210),
 ('Materiales D', 'info@materialesd.org', 601112233);
 
-INSERT INTO Vehiculo (matricula, marca, modelo, año, dni) VALUES
+INSERT INTO Vehiculo (matricula, marca, modelo, ano, dni) VALUES
 ('1111AAA', 'Seat', 'Ibiza', 2018, '12345678A'),
 ('2222BBB', 'Ford', 'Focus', 2020, '98765432B'),
 ('3333CCC', 'Renault', 'Clio', 2019, '56789012C'),

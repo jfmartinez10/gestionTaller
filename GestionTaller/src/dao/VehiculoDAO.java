@@ -4,9 +4,9 @@ import java.sql.*;
 import model.VehiculosModel;
 public class VehiculoDAO {
 
-    public void añadirVehiculo(VehiculosModel vehiculo){
+    public void anadirVehiculo(VehiculosModel vehiculo){
         String matricula = vehiculo.getMatricula();
-        int año = vehiculo.getAño();
+        int ano = vehiculo.getAno();
         String marca = vehiculo.getMarca();
         String modelo = vehiculo.getModelo();
         String dni = vehiculo.getDni();
@@ -15,11 +15,11 @@ public class VehiculoDAO {
         Connection conexion = bd.conectar();
 
         if(conexion != null){
-            String query = "INSERT INTO Vehiculo (matricula, año, marca, modelo, dni) VALUES (?, ?, ?, ?, ?)";
+            String query = "INSERT INTO Vehiculo (matricula, ano, marca, modelo, dni) VALUES (?, ?, ?, ?, ?)";
         
             try (PreparedStatement ps = conexion.prepareStatement(query)){
                 ps.setString(1, matricula);
-                ps.setInt(2, año);
+                ps.setInt(2, ano);
                 ps.setString(3, marca);
                 ps.setString(4, modelo);
                 ps.setString(5, dni);
@@ -44,7 +44,7 @@ public class VehiculoDAO {
                 System.out.println("--- Listado de Vehículos ---");
                 while (rs.next()) {
                     System.out.println("Matrícula: " + rs.getString("matricula"));
-                    System.out.println("Año: " + rs.getInt("año")); 
+                    System.out.println("Ano: " + rs.getInt("ano")); 
                     System.out.println("Marca: " + rs.getString("marca"));
                     System.out.println("Modelo: " + rs.getString("modelo"));
                     System.out.println("DNI Propietario: " + rs.getString("dni"));

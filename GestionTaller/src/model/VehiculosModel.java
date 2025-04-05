@@ -3,14 +3,14 @@ package model;
 public class VehiculosModel {
 
     String matricula;
-    int año;
+    int ano;
     String modelo;
     String marca;
     String dni;
 
-    public VehiculosModel(String matricula, int año, String marca, String modelo, String dni){
+    public VehiculosModel(String matricula, int ano, String marca, String modelo, String dni){
         this.matricula = matricula;
-        this.año = año;
+        this.ano = ano;
         this.marca = marca;
         this.modelo=modelo;
         this.dni=dni;
@@ -20,9 +20,9 @@ public class VehiculosModel {
 
     public void setMatricula(String matricula) {this.matricula = matricula;}
 
-    public int getAño() {return año;}
+    public int getAno() {return ano;}
 
-    public void setAño(int año) { this.año = año;}
+    public void setAno(int ano) { this.ano = ano;}
 
     public String getMarca() {return marca;}
 

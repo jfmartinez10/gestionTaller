@@ -19,7 +19,7 @@ public class App {
         Scanner scanner = new Scanner(System.in);
         int opcion;
         int subopcion;
-        String contraseñaCorrecta = "MecanicosZGZ";
+        String contrasenaCorrecta = "MecanicosZGZ";
         EmpleadoView empleadoView = new EmpleadoView();
         ClienteView clienteView = new ClienteView(empleadoView);
 
@@ -37,12 +37,12 @@ public class App {
                 case 1 -> clienteView.mostrarMenuCliente();
 
                 case 2 -> {
-                    System.out.print("Introduzca contraseña necesaria: ");
-                    String contraseñaIngresada = scanner.nextLine();
-                    if (contraseñaIngresada.equals(contraseñaCorrecta)) {
+                    System.out.print("Introduzca contrasena necesaria: ");
+                    String contrasenaIngresada = scanner.nextLine();
+                    if (contrasenaIngresada.equals(contrasenaCorrecta)) {
                         empleadoView.mostrarMenuEmpleado();
                     } else {
-                        System.out.println("Contraseña incorrecta. Inténtalo de nuevo.");
+                        System.out.println("Contrasena incorrecta. Inténtalo de nuevo.");
                     }
                 }
                 default -> System.out.println("\u001B[31mOpción inválida. Por favor, selecciona una opción válida.\u001B[0m");

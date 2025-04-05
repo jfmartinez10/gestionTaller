@@ -76,7 +76,7 @@ public class ClienteView {
     
         ClienteDAO clientedb = new ClienteDAO();
     
-        clientedb.añadirCliente(cliente);
+        clientedb.anadirCliente(cliente);
     
         System.out.println("Cliente agregado correctamente");
     }

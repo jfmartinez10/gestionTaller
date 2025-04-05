@@ -61,7 +61,7 @@ public class CitasView {
         LocalDate fechaHoy = LocalDate.now();
 
         do {
-            System.out.println("Insertar fecha de cita (DIA-MES-AÑO, formato dd-MM-yyyy): ");
+            System.out.println("Insertar fecha de cita (DIA-MES-AnO, formato dd-MM-yyyy): ");
             fecha = sc.nextLine();
 
             try {

@@ -20,8 +20,8 @@ public class VehiculosView {
         System.out.println("Agregar vehículo:");
         System.out.print("Introduce la matrícula: ");
         String matricula = scanner.nextLine();
-        System.out.print("Introduce el año de fabricación: ");
-        int año = scanner.nextInt();
+        System.out.print("Introduce el ano de fabricación: ");
+        int ano = scanner.nextInt();
         scanner.nextLine(); 
         System.out.print("Introduce la marca: ");
         String marca = scanner.nextLine();
@@ -34,8 +34,8 @@ public class VehiculosView {
         ClienteModel cliente = clienteDAO.getClienteDNI(dniCliente);
 
         if (cliente != null) {
-            VehiculosModel nuevoVehiculo = new VehiculosModel(matricula, año, marca, modelo, dniCliente);
-            vehiculoDAO.añadirVehiculo(nuevoVehiculo);
+            VehiculosModel nuevoVehiculo = new VehiculosModel(matricula, ano, marca, modelo, dniCliente);
+            vehiculoDAO.anadirVehiculo(nuevoVehiculo);
             System.out.println("Vehículo agregado correctamente.");
         } else {
             System.out.println("\u001B[31mError al agregar vehículo: No existe ningún cliente registrado con el DNI: " + dniCliente + ". Por favor, registre al cliente primero.\u001B[0m");
@@ -43,7 +43,7 @@ public class VehiculosView {
     }
     
     /*public void mostrarVehiculos(){
-        VehiculosModel vehiculo = new VehiculosModel(matricula, año, marca, modelo);
+        VehiculosModel vehiculo = new VehiculosModel(matricula, ano, marca, modelo);
         vehiculoDao.mostrarVehiculos(vehiculo);
     }*/
 }

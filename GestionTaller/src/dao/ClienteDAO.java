@@ -5,7 +5,7 @@ import model.ClienteModel;
 
 public class ClienteDAO {
 
- public void añadirCliente(ClienteModel cliente) {
+ public void anadirCliente(ClienteModel cliente) {
 
         String nombre = cliente.getNombre();
         String apellido = cliente.getApellido();
@@ -54,7 +54,7 @@ public class ClienteDAO {
                                 rs.getString("apellido"),
                                 rs.getInt("telefono"),
                                 rs.getString("email"),
-                                rs.getString("contraseña")
+                                rs.getString("contrasena")
                         );
                     }
                 }

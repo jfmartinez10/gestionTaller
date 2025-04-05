@@ -8,7 +8,7 @@ CREATE TABLE Clientes (
     apellido VARCHAR(255) NOT NULL,
     telefono INT,
     email VARCHAR(255),
-    contraseña VARCHAR(255)
+    contrasena VARCHAR(255)
 );
 
 
@@ -30,7 +30,7 @@ CREATE TABLE Vehiculo (
     matricula VARCHAR(20) PRIMARY KEY,
     marca VARCHAR(50) NOT NULL,
     modelo VARCHAR(100) NOT NULL,
-    año int NOT NULL,
+    ano int NOT NULL,
     dni VARCHAR(9) NOT NULL,
     FOREIGN KEY (dni) REFERENCES Clientes(dni)
 );

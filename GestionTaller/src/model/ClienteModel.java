@@ -7,15 +7,15 @@ public class ClienteModel {
     String apellido;
     int telefono;
     String email;
-    String contraseña;
+    String contrasena;
 
-    public ClienteModel (String dni, String nombre, String apellido, int telefono, String email, String contraseña){
+    public ClienteModel (String dni, String nombre, String apellido, int telefono, String email, String contrasena){
         this.dni = dni;
         this.nombre = nombre;
         this.apellido = apellido;
         this.telefono = telefono;
         this.email = email;
-        this.contraseña=contraseña;
+        this.contrasena=contrasena;
         
     }
 
@@ -40,9 +40,9 @@ public class ClienteModel {
 
     public void setEmail(String email) {this.email = email;}
 
-    public String getContraseña() {return contraseña;}
+    public String getContrasena() {return contrasena;}
 
-    public void setContraseña(String contraseña) {this.contraseña = contraseña;}
+    public void setContrasena(String contrasena) {this.contrasena = contrasena;}
 
     
 }
