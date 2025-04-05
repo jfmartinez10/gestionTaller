@@ -111,7 +111,7 @@ public class VehiculoDAO {
                 ps.setString(2, matricula);
                 ps.executeUpdate();
             } catch (SQLException e) {
-                System.err.println("Error al modificar año: " + e.getMessage());
+                System.err.println("Error al modificar ano: " + e.getMessage());
             }
         }
     } 

@@ -36,6 +36,9 @@ public class VehiculosModel {
 
     public void setDni(String dni) {this.dni = dni; }
 
-    
+    @Override
+    public String toString() {
+        return "Vehiculos [matricula = " + matricula + ", ano =" + ano + ", marca =" + marca + ", modelo =" + modelo + ", dni =" + dni + "]";
+    }
 
 }

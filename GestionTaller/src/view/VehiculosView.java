@@ -64,7 +64,7 @@ public class VehiculosView {
             System.out.println("1. Modificar matricula");
             System.out.println("2. Modificar marca");
             System.out.println("3. Modificar modelo");
-            System.out.println("4. Modificar año");
+            System.out.println("4. Modificar ano");
             System.out.println("5. Volver al menu anterior");
             System.out.println("Ingrese una opcion: ");
             opcion = scanner.nextInt();
@@ -94,11 +94,11 @@ public class VehiculosView {
                 case 4 -> {
                     int year;
                     do {
-                        System.out.println("Introduce el año: ");
+                        System.out.println("Introduce el ano: ");
                         year = scanner.nextInt();
                     } while (year < 1769 || year > 2025);
                     vehiculoDAO.modificarAnoVehiculo(matricula, year);
-                    System.out.println("Año modificado correctamente");
+                    System.out.println("Ano modificado correctamente");
                 }
             }
         } while (opcion != 5);
