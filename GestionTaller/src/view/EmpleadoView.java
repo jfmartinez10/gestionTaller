@@ -40,7 +40,7 @@ public class EmpleadoView {
             switch (opcion) {
                 case 1 -> insertarEmpleado();
                 case 2 -> modificarEmpleado();
-                case 3 ->{}
+                case 3 -> mostrarEmpleados();
                 case 4 -> buscarEmpleadoPorId();
                 case 5 -> buscarClientePorId();
                 case 6 -> eliminarEmpleado();
@@ -122,7 +122,13 @@ public class EmpleadoView {
         System.out.println("Saliendo del menú de modificación");
     }
 
-    
+    public void mostrarEmpleados() {
+        ArrayList<EmpleadosModel> empleados = empleadoDAO.listarEmpleados();
+        System.out.println("Lista de empleados: ");
+        for (EmpleadosModel empleado : empleados) {
+            System.out.println(empleado.toString());
+        }
+    }
 
     public void buscarEmpleadoPorId() {
         try {

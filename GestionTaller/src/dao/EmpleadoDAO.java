@@ -1,6 +1,7 @@
 package dao;
 
 import java.sql.*;
+import java.util.ArrayList;
 import model.EmpleadosModel;
 
 public class EmpleadoDAO {
@@ -96,6 +97,32 @@ public class EmpleadoDAO {
         }
     }
 
+    public ArrayList<EmpleadosModel> listarEmpleados() {
+        ConexionBD bd = new ConexionBD();
+        Connection conexion = bd.conectar();
+        ArrayList<EmpleadosModel> empleados = new ArrayList<>();
+
+        if (conexion != null) {
+            String query = "SELECT * FROM Empleado";
+
+            try (Statement stmt = conexion.createStatement();
+            ResultSet rs = stmt.executeQuery(query)) {
+                while (rs.next()) {
+                    int id = rs.getInt("id");
+                    String nombre = rs.getString("nombre");
+                    String apellido = rs.getString("apellido");
+                    int telefono = rs.getInt("telefono");
+
+                    EmpleadosModel empleado = new EmpleadosModel(id, nombre, apellido, telefono);
+                    empleados.add(empleado);
+                }
+            } catch (SQLException e) {
+                System.err.println("Error al listar empleados: " + e.getMessage());
+            }
+        return empleados;
+        }
+        return null;
+    }
 
     public void eliminarEmpleado(int id) {
         ConexionBD bd = new ConexionBD();
