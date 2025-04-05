@@ -2,8 +2,7 @@ CREATE DATABASE GestionTaller;
 USE GestionTaller;
 
 CREATE TABLE Clientes ( 
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    dni VARCHAR(20) UNIQUE NOT NULL,
+    dni VARCHAR(20) PRIMARY KEY,
     nombre VARCHAR(255) NOT NULL,
     apellido VARCHAR(255) NOT NULL,
     telefono INT,

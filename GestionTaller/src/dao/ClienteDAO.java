@@ -89,6 +89,7 @@ public class ClienteDAO {
         }
         return null;
     }
+    
     public void actualizarNombreCliente(String dni, String nombre) {
         ConexionBD bd = new ConexionBD();
         Connection conexion = bd.conectar();
