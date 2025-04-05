@@ -19,6 +19,12 @@ CREATE TABLE Empleados (
     telefono INT NOT NULL
 );
 
+CREATE TABLE Proveedores (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nombre VARCHAR(100) NOT NULL,
+    email VARCHAR(150) NOT NULL,
+    telefono INT NOT NULL
+);
 
 CREATE TABLE Vehiculo (
     matricula VARCHAR(20) PRIMARY KEY,

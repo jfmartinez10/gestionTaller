@@ -6,11 +6,18 @@ import model.ClienteModel;
 
 public class ClienteView {
     private Scanner sc = new Scanner(System.in);
+    private CitasView citasView; 
+    private EmpleadoView empleadoView; 
+
+    public ClienteView(EmpleadoView empleadoView) {
+        this.empleadoView = empleadoView;
+        this.citasView = new CitasView(this, empleadoView);
+    }
+
     public void mostrarMenuCliente() {
         Scanner scanner = new Scanner(System.in);
         int opcion;
-        CitasView citasView = new CitasView();
-        VehiculosView vehiculosView = new VehiculosView();
+        VehiculosView vehiculosView = new VehiculosView(this); 
 
         do {
             System.out.println("---------------------");
@@ -38,7 +45,7 @@ public class ClienteView {
                 } // mostrarVehiculo()
                 case 6 ->{   
                 } // eliminarVehiculo()
-                case 7-> citasView.menuCitasCliente();
+                case 7 -> citasView.menuCitasCliente(); 
                 case 8-> {
                 } // reportarProblema()
             }
@@ -60,7 +67,7 @@ public class ClienteView {
     
         System.out.println("Introduce el telefono: ");
         int telefono = scanner.nextInt();
-        scanner.nextLine(); // Consumir el carácter de nueva línea
+        scanner.nextLine(); 
     
         System.out.println("Introduce el email: ");
         String email = scanner.nextLine();

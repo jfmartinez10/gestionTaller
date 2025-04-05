@@ -10,6 +10,7 @@ public class EmpleadoView {
     private Scanner sc = new Scanner(System.in);
     private EmpleadoDAO empleadoDAO = new EmpleadoDAO();
     private ClienteDAO clienteDAO = new ClienteDAO();
+    private ProveedoresView proveedoresView = new ProveedoresView();
 
     public void mostrarMenuEmpleado() {
         int opcion;
@@ -22,7 +23,8 @@ public class EmpleadoView {
             System.out.println("3. Buscar Empleado por ID");
             System.out.println("4. Buscar Cliente por ID");
             System.out.println("5. Eliminar Empleado");
-            System.out.println("6. Salir");
+            System.out.println("6. Menú Proveedores");
+            System.out.println("7. Salir");
             System.out.print("Ingrese una opción: ");
 
             try {
@@ -41,13 +43,14 @@ public class EmpleadoView {
                 case 4 -> buscarClientePorId();
                 case 5 -> eliminarEmpleado();
                 case 6 -> System.out.println("Saliendo del programa.");
+                case 7 -> proveedoresView.mostrarMenuProveedor();
                 default -> {
                     if (opcion != 6 && opcion != 0) {
                         System.out.println("Opción no válida.");
                     }
                 }
             }
-        } while (opcion != 6);
+        } while (opcion != 7);
     }
 
     public void insertarEmpleado() {

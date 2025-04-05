@@ -25,7 +25,7 @@ public class EmpleadoDAO {
         }
     }
 
-    public EmpleadosModel getIdEmpleado(int id) { // Corregido aquí
+    public EmpleadosModel getIdEmpleado(int id) { 
         EmpleadosModel empleado = null;
         ConexionBD bd = new ConexionBD();
         Connection conexion = bd.conectar();

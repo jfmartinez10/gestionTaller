@@ -1,9 +1,10 @@
 package view;
 
 import dao.CitasDao;
-import java.time.*;
-import java.time.format.*;
-import java.util.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.Scanner;
 import model.CitasModel;
 import model.ClienteModel;
 import model.EmpleadosModel;
@@ -14,7 +15,10 @@ public class CitasView {
     private ClienteView clienteView;
     private EmpleadoView empleadoView;
 
-    public CitasView() {}
+    public CitasView(ClienteView clienteView, EmpleadoView empleadoView) {
+        this.clienteView = clienteView;
+        this.empleadoView = empleadoView;
+    }
 
     public void setClienteView(ClienteView clienteView) {
         this.clienteView = clienteView;

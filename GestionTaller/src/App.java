@@ -21,7 +21,7 @@ public class App {
         int subopcion;
         String contraseñaCorrecta = "MecanicosZGZ";
         EmpleadoView empleadoView = new EmpleadoView();
-        ClienteView clienteView = new ClienteView();
+        ClienteView clienteView = new ClienteView(empleadoView);
 
         do {
             System.out.println("¡Bienvenido al mejor taller de Zaragoza!");

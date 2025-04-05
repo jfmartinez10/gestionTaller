@@ -10,6 +10,11 @@ public class VehiculosView {
     private Scanner scanner = new Scanner(System.in);
     private VehiculoDAO vehiculoDAO = new VehiculoDAO();
     private ClienteDAO clienteDAO = new ClienteDAO(); 
+    private ClienteView clienteView;
+
+    public VehiculosView(ClienteView clienteView) {
+        this.clienteView = clienteView;
+    }
 
     public void agregarVehiculos() {
         System.out.println("Agregar vehículo:");
