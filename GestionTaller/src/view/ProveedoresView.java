@@ -23,8 +23,9 @@ public class ProveedoresView {
             System.out.println("   1. [AGREGAR] Nuevo Proveedor");
             System.out.println("   2. [EDITAR] Datos de Proveedor");
             System.out.println("   3. [BUSCAR] Proveedor por ID");
-            System.out.println("   4. [BORRAR] Proveedor");
-            System.out.println("   5. [SALIR] del Menú de Proveedores");
+            System.out.println("   4. [MOSTRAR] Lista de Proveedores");
+            System.out.println("   5. [BORRAR] Proveedor");
+            System.out.println("   6. [SALIR] del Menú de Proveedores");
             System.out.print("   Ingrese una opción: ");
 
             try {
@@ -41,7 +42,8 @@ public class ProveedoresView {
                 case 1 -> insertarProveedor();
                 case 2 -> modificarProveedor();
                 case 3 -> buscarProveedorPorId();
-                case 4 -> eliminarProveedor();
+                case 4 -> mostrarProveedores();
+                case 5 -> eliminarProveedor();
                 default -> {
                     if (opcion != 0) {
                         System.out.println("   Opción no válida.");
@@ -49,7 +51,7 @@ public class ProveedoresView {
                 }
             }
 
-        } while (opcion != 5);
+        } while (opcion != 6);
         System.out.println("Saliendo del menú de proveedores...");
     }
 
@@ -173,6 +175,14 @@ public class ProveedoresView {
         System.out.println("-".repeat(35));
     }
 
+    public void mostrarProveedores() {
+        ArrayList<ProveedoresModel> proveedores = proveedorDAO.listarProveedores();
+        System.out.println("Lista de Proveedores: ");
+        for (ProveedoresModel proveedor : proveedores) {
+            System.out.println(proveedor.toString());
+        }
+    }
+    
     public void eliminarProveedor() {
         System.out.println("\n" + "-".repeat(35));
         System.out.println("   ** Borrar Proveedor **");
