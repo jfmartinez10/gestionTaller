@@ -1,6 +1,7 @@
 package dao;
 
 import java.sql.*;
+import java.util.ArrayList;
 import model.ProveedoresModel;
 
 public class ProveedoresDAO {
@@ -98,6 +99,32 @@ public class ProveedoresDAO {
         }
     }
 
+    public ArrayList<ProveedoresModel> listarProveedores() {
+        ConexionBD bd = new ConexionBD();
+        Connection conexion = bd.conectar();
+        ArrayList<ProveedoresModel> proveedores = new ArrayList<>();
+
+        if (conexion != null) {
+            String query = "SELECT * FROM Proveedores";
+                
+            try (PreparedStatement ps = conexion.prepareStatement(query)) {
+                ResultSet rs = ps.executeQuery();
+                while (rs.next()) {
+                    int id = rs.getInt("id");
+                    int telefono = rs.getInt("telefono");
+                    String nombre = rs.getString("nombre");
+                    String email = rs.getString("email");
+
+                    ProveedoresModel proveedor = new ProveedoresModel(id, telefono, nombre, email);
+                    proveedores.add(proveedor);
+                }
+                } catch (SQLException e) {
+                    System.err.println("Error al listar proveedores: " + e.getMessage());
+                }
+                return proveedores;
+            }
+            return null;
+        }
 
     public void eliminarProveedor(int id) {
         ConexionBD bd = new ConexionBD();
