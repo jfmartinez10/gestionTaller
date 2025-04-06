@@ -25,21 +25,53 @@ public class VehiculosView {
         System.out.println("   ** Anadir Nuevo Vehículo **");
         System.out.println("+".repeat(35));
 
-        System.out.print("   Matrícula (7 caracteres sin espacios): ");
-        String matricula = scanner.nextLine();
+        String matricula;
+        do {
+            System.out.print("   Matrícula (7 caracteres sin espacios. Ej: 1234ABC): ");
+            matricula = scanner.nextLine();
+            if (matricula.length() != 7) {
+                System.out.println("   " + RED + "\n   Error: La matrícula debe tener exactamente 7 caracteres. Ejemplo: 1234ABC" + RESET);
+            } else if (!matricula.matches("[A-Za-z0-9]{7}")) {
+                System.out.println("   " + RED + "\n   Error: La matrícula debe contener solo letras y números sin espacios. Ejemplo: 1234ABC" + RESET);
+            } else {
+                break;
+            }
+        } while (true);
 
-        System.out.print("   Ano de fabricación: ");
-        int ano = scanner.nextInt();
-        scanner.nextLine(); 
+        int ano;
+        do {
+            System.out.print("   Ano de fabricación (Ej: 2023): ");
+            try {
+                ano = scanner.nextInt();
+                if (ano < 1769 || ano > Calendar.getInstance().get(Calendar.YEAR)) {
+                    System.out.println("   " + RED + "\n   Error: Ano inválido. Debe estar entre 1769 y " + Calendar.getInstance().get(Calendar.YEAR) + ". Ejemplo: 2023" + RESET);
+                } else {
+                    scanner.nextLine(); 
+                    break;
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("   " + RED + "\n   Error: Por favor, introduce un número para el año. Ejemplo: 2023" + RESET);
+                scanner.next(); 
+                scanner.nextLine(); 
+                ano = -1; 
+            }
+        } while (true);
 
         System.out.print("   Marca: ");
         String marca = scanner.nextLine();
 
         System.out.print("   Modelo: ");
         String modelo = scanner.nextLine();
-
-        System.out.print("   DNI del cliente propietario: ");
-        String dniCliente = scanner.nextLine();
+        String dniCliente;
+        do {
+            System.out.print("   DNI del cliente propietario (Ej: 12345678A): ");
+            dniCliente = scanner.nextLine();
+            if (!clienteView.validarDNI(dniCliente)) { 
+                System.out.println("   " + RED + "\n   Error: El DNI debe tener 8 números y una letra al final. Ejemplo: 12345678A" + RESET);
+            } else {
+                break;
+            }
+        } while (true);
 
         ClienteModel cliente = clienteDAO.getClienteDNI(dniCliente);
 
@@ -48,25 +80,28 @@ public class VehiculosView {
             vehiculoDAO.anadirVehiculo(nuevoVehiculo);
             System.out.println("\n   " + GREEN + "¡Vehículo agregado correctamente!" + RESET);
         } else {
-            System.out.println("   " + RED + "Error al agregar vehículo:" + RESET + " No existe ningún cliente registrado con el DNI: " + dniCliente + ". Por favor, registre al cliente primero.");
+            System.out.println("   " + RED + "\n   Error al agregar vehículo:" + RESET + " No existe ningún cliente registrado con el DNI: " + dniCliente + ". Por favor, registre al cliente primero.");
         }
-        System.out.println("-".repeat(35));
     }
 
     public VehiculosModel getVehiculoMatricula() {
         String matricula;
         do {
             System.out.println("\n   ** Buscar Vehículo por Matrícula **");
-            System.out.print("   Introduce la matrícula (7 caracteres): ");
+            System.out.print("   Introduce la matrícula (7 caracteres. Ej: 1234ABC): ");
             matricula = scanner.nextLine();
             if (matricula.length() != 7) {
-                System.out.println("   " + RED + "Error:" + RESET + " La matrícula debe tener exactamente 7 caracteres.");
+                System.out.println("   " + RED + "\n   Error: La matrícula debe tener exactamente 7 caracteres. Ejemplo: 1234ABC" + RESET);
+            } else if (!matricula.matches("[A-Za-z0-9]{7}")) {
+                System.out.println("   " + RED + "\n   Error: La matrícula debe contener solo letras y números sin espacios. Ejemplo: 1234ABC" + RESET);
+            } else {
+                break;
             }
-        } while (matricula.length() != 7);
+        } while (true);
         VehiculosModel vehiculo = vehiculoDAO.getVehiculoMatricula(matricula);
         if (vehiculo == null) {
-            System.out.println("   " + RED + "Error:" + RESET + " No se encontró ningún vehículo con la matrícula: " + matricula + ".");
-        }
+            System.out.println("   " + RED + "\n   Error: No se encontró ningún vehículo con la matrícula: " + matricula + "." + RESET);
+         }
         return vehiculo;
     }
 
@@ -77,11 +112,11 @@ public class VehiculosView {
 
         VehiculosModel vehiculo = this.getVehiculoMatricula();
         if (vehiculo == null) {
-            return; 
+            return;
         }
 
         String matriculaOriginal = vehiculo.getMatricula();
-        int opcion;
+        int opcion = 0;
         do {
             System.out.println("\n   --- ¿Qué desea modificar del vehículo con matrícula " + matriculaOriginal + "? ---");
             System.out.println("   1. Matrícula");
@@ -90,21 +125,29 @@ public class VehiculosView {
             System.out.println("   4. Ano de fabricación");
             System.out.println("   5. [VOLVER] al menú anterior");
             System.out.print("   Seleccione una opción: ");
-            opcion = scanner.nextInt();
-            scanner.nextLine(); 
-
+            try {
+                opcion = scanner.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("   " + RED + "\n   Error: Por favor, introduce un número como opción." + RESET);
+                scanner.next();
+                opcion = -1;
+                continue;
+            }
+            scanner.nextLine();
             System.out.println("-".repeat(35));
 
             switch (opcion) {
                 case 1 -> {
                     String nuevaMatricula;
                     do {
-                        System.out.println("   Introduce la nueva matrícula (7 caracteres): ");
+                        System.out.println("   Introduce la nueva matrícula (7 caracteres. Ej: 1234ABC): ");
                         nuevaMatricula = scanner.nextLine();
                         if (nuevaMatricula.length() != 7) {
-                            System.out.println("   " + RED + "Error:" + RESET + " La matrícula debe tener exactamente 7 caracteres.");
+                            System.out.println("   " + RED + "\n   Error: La matrícula debe tener exactamente 7 caracteres. Ejemplo: 1234ABC" + RESET);
+                        } else if (!nuevaMatricula.matches("[A-Za-z0-9]{7}")) {
+                            System.out.println("   " + RED + "\n   Error: La matrícula debe contener solo letras y números sin espacios. Ejemplo: 1234ABC" + RESET);
                         } else if (vehiculoDAO.getVehiculoMatricula(nuevaMatricula) != null && !nuevaMatricula.equals(matriculaOriginal)) {
-                            System.out.println("   " + RED + "Error:" + RESET + " Ya existe un vehículo registrado con la matrícula: " + nuevaMatricula + ".");
+                            System.out.println("   " + RED + "\n   Error: Ya existe un vehículo registrado con la matrícula: " + nuevaMatricula + "." + RESET);
                         } else {
                             break;
                         }
@@ -112,18 +155,18 @@ public class VehiculosView {
                     } while (true);
                     vehiculoDAO.modificarMatriculaVehiculo(nuevaMatricula);
                     System.out.println("   " + GREEN + "Matrícula modificada correctamente." + RESET);
-                    matriculaOriginal = nuevaMatricula; 
+                    matriculaOriginal = nuevaMatricula;
                 }
 
                 case 2 -> {
-                    System.out.println("   Introduce la nueva marca: ");
+                    System.out.println("   Introduce la nueva marca (Ej: Seat): ");
                     String marca = scanner.nextLine();
                     vehiculoDAO.modificarMarcaVehiculo(matriculaOriginal, marca);
                     System.out.println("   " + GREEN + "Marca modificada correctamente." + RESET);
                 }
 
                 case 3 -> {
-                    System.out.println("   Introduce el nuevo modelo: ");
+                    System.out.println("   Introduce el nuevo modelo (Ej: León): ");
                     String modelo = scanner.nextLine();
                     vehiculoDAO.modificarModeloVehiculo(matriculaOriginal, modelo);
                     System.out.println("   " + GREEN + "Modelo modificado correctamente." + RESET);
@@ -132,17 +175,23 @@ public class VehiculosView {
                 case 4 -> {
                     int anio;
                     do {
-                        System.out.println("   Introduce el nuevo ano de fabricación: ");
-                        anio = scanner.nextInt();
-                        if (anio < 1769 || anio > 2025) {
-                            System.out.println("   " + RED + "Error:" + RESET + " Ano inválido. Debe estar entre 1769 y 2025.");
-                        } else {
-                            break;
+                        System.out.println("   Introduce el nuevo ano de fabricación (Ej: 2023): ");
+                        try {
+                            anio = scanner.nextInt();
+                            if (anio < 1769 || anio > Calendar.getInstance().get(Calendar.YEAR)) {
+                                System.out.println("   " + RED + "\n   Error: Ano inválido. Debe estar entre 1769 y " + Calendar.getInstance().get(Calendar.YEAR) + ". Ejemplo: 2023" + RESET);
+                            } else {
+                                break;
+                            }
+                        } catch (InputMismatchException e) {
+                            System.out.println("   " + RED + "\n   Error: Por favor, introduce un número para el año. Ejemplo: 2023" + RESET);
+                            scanner.next();
+                            anio = -1;
                         }
-                    } while (anio < 1769 || anio > 2025);
+                        scanner.nextLine();
+                    } while (true);
                     vehiculoDAO.modificarAnoVehiculo(matriculaOriginal, anio);
                     System.out.println("   " + GREEN + "Ano modificado correctamente." + RESET);
-                    scanner.nextLine(); 
                 }
 
                 default -> System.out.println("   " + RED + "Opción no válida. Intente nuevamente." + RESET);
