@@ -31,6 +31,6 @@ public class ProveedoresModel {
 
     @Override
     public String toString() {
-        return "Proveedores: [id= " + id + ", nombre=" + nombre + ", email=" + email + ", telefono=" + telefono + "]";
+        return "Proveedores: [id = " + id + ", nombre = " + nombre + ", email = " + email + ", telefono = " + telefono + "]";
     }
 }

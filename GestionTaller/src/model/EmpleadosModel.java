@@ -31,6 +31,6 @@ public class EmpleadosModel {
 
     @Override
     public String toString() {
-        return "Empleado [id= " + id + ", nombre=" + nombre + ", apellido=" + apellido + ", telefono=" + telefono + "]";
+        return "Empleado [id = " + id + ", nombre = " + nombre + ", apellido = " + apellido + ", telefono = " + telefono + "]";
     }
 }

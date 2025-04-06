@@ -35,7 +35,7 @@ public class VehiculosModel {
 
     @Override
     public String toString() {
-        return "Vehiculos [matricula = " + matricula + ", ano =" + ano + ", marca =" + marca + ", modelo =" + modelo + ", dni =" + dni + "]";
+        return "Vehiculos [matricula = " + matricula + ", ano = " + ano + ", marca = " + marca + ", modelo = " + modelo + ", dni = " + dni + "]";
     }
 
 }

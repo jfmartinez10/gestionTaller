@@ -32,11 +32,10 @@ public class ProveedoresView {
                 opcion = sc.nextInt();
                 sc.nextLine(); 
             } catch (InputMismatchException e) {
-                System.out.println("   " + RED + "Error:" + RESET + " Opción no válida. Ingrese un número.");
+                System.out.println("   " + RED + "\n Error:" + RESET + " Opción no válida. Ingrese un número.");
                 sc.nextLine(); 
                 opcion = 0; 
             }
-            System.out.println("-".repeat(35)); 
 
             switch (opcion) {
                 case 1 -> insertarProveedor();
@@ -44,15 +43,10 @@ public class ProveedoresView {
                 case 3 -> buscarProveedorPorId();
                 case 4 -> mostrarProveedores();
                 case 5 -> eliminarProveedor();
-                default -> {
-                    if (opcion != 0) {
-                        System.out.println("   Opción no válida.");
-                    }
-                }
             }
 
         } while (opcion != 6);
-        System.out.println("Saliendo del menú de proveedores...");
+        System.out.println("\n Saliendo del menú de proveedores...");
     }
 
     public void insertarProveedor() {
@@ -73,13 +67,12 @@ public class ProveedoresView {
 
             ProveedoresModel proveedor = new ProveedoresModel(id, telefono, nombre, email);
             proveedorDAO.insertarProveedor(proveedor);
-            System.out.println("\n   " + GREEN + "Proveedor agregado correctamente." + RESET);
+            System.out.println("\n   " + GREEN + "\n Proveedor agregado correctamente." + RESET);
 
         } catch (InputMismatchException e) {
-            System.out.println("   " + RED + "Error:" + RESET + " Al ingresar datos. Asegúrese de que el ID y el teléfono sean números.");
+            System.out.println("   " + RED + "\n Error:" + RESET + " Al ingresar datos. Asegúrese de que el ID y el teléfono sean números.");
             sc.nextLine(); 
         }
-        System.out.println("-".repeat(35));
     }
 
     public void modificarProveedor() {
@@ -94,7 +87,7 @@ public class ProveedoresView {
 
             ProveedoresModel proveedor = proveedorDAO.getIdProveedores(id);
             if (proveedor == null) {
-                System.out.println("   " + RED + "Error:" + RESET + " Proveedor no encontrado con el ID: " + id + ".");
+                System.out.println("   " + RED + "\n Error:" + RESET + " Proveedor no encontrado con el ID: " + id + ".");
                 return;
             }
 
@@ -116,39 +109,38 @@ public class ProveedoresView {
                         System.out.print("   Introducir nuevo nombre: ");
                         String nombre = sc.nextLine();
                         proveedorDAO.modificarNombreProveedores(nombre, id);
-                        System.out.println("   " + GREEN + "Nombre modificado correctamente." + RESET);
+                        System.out.println("   " + GREEN + "\n Nombre modificado correctamente." + RESET);
                     }
 
                     case 2 -> {
                         System.out.print("   Introducir nuevo email: ");
                         String email = sc.nextLine();
                         proveedorDAO.modificarEmailProveedor(email, id);
-                        System.out.println("   " + GREEN + "Email modificado correctamente." + RESET);
+                        System.out.println("   " + GREEN + "\n Email modificado correctamente." + RESET);
                     }
 
                     case 3 -> {
                         System.out.print("   Introducir nuevo teléfono: ");
                         try {
                             int telefono = sc.nextInt();
-                            sc.nextLine(); // Consume la nueva línea
+                            sc.nextLine(); 
                             proveedorDAO.modificarTlfProveedor(telefono, id);
-                            System.out.println("   " + GREEN + "Teléfono modificado correctamente." + RESET);
+                            System.out.println("   " + GREEN + "\n Teléfono modificado correctamente." + RESET);
                         } catch (InputMismatchException e) {
-                            System.out.println("   " + RED + "Error:" + RESET + " Teléfono debe ser un número.");
-                            sc.nextLine(); // Limpiar el buffer
+                            System.out.println("   " + RED + "\n Error:" + RESET + " Teléfono debe ser un número.");
+                            sc.nextLine(); 
                         }
                     }
-                    default -> System.out.println("   Opción no válida.");
+                    default -> System.out.println("   "+ RED +"Opción no válida." + RESET);
                 }
 
             } while (opcion != 4);
-            System.out.println("Volviendo al menú de modificación de proveedor...");
+            System.out.println("Saliendo del panel de proveedores...");
 
         } catch (InputMismatchException e) {
-            System.out.println("   " + RED + "Error:" + RESET + " ID de proveedor no válido. Debe ser un número.");
+            System.out.println("   " + RED + "\n Error:" + RESET + " ID de proveedor no válido. Debe ser un número.");
             sc.nextLine(); 
         }
-        System.out.println("-".repeat(35));
     }
 
     public void buscarProveedorPorId() {
@@ -163,16 +155,15 @@ public class ProveedoresView {
 
             ProveedoresModel proveedor = proveedorDAO.getIdProveedores(id);
             if (proveedor == null) {
-                System.out.println("   " + RED + "Error:" + RESET + " Proveedor no encontrado con el ID: " + id + ".");
+                System.out.println("   " + RED + "\n Error:" + RESET + " Proveedor no encontrado con el ID: " + id + ".");
             } else {
                 System.out.println("   Proveedor encontrado:");
                 System.out.println("   " + proveedor);
             }
         } catch (InputMismatchException e) {
-            System.out.println("   " + RED + "Error:" + RESET + " ID no válido. Ingrese un número.");
+            System.out.println("   " + RED + "\n Error:" + RESET + " ID no válido. Ingrese un número.");
             sc.nextLine(); 
         }
-        System.out.println("-".repeat(35));
     }
 
     public void mostrarProveedores() {
@@ -195,7 +186,7 @@ public class ProveedoresView {
 
             ProveedoresModel proveedor = proveedorDAO.getIdProveedores(id);
             if (proveedor == null) {
-                System.out.println("   " + RED + "Error:" + RESET + " Proveedor no encontrado con el ID: " + id + ".");
+                System.out.println("   " + RED + "\n Error:" + RESET + " Proveedor no encontrado con el ID: " + id + ".");
             } else {
                 System.out.print("   ¿Está seguro de que desea borrar a este proveedor? (s/n): ");
                 String confirmacion = sc.nextLine();
@@ -203,15 +194,14 @@ public class ProveedoresView {
                     proveedorDAO.eliminarProveedor(id);
                     System.out.println("   " + GREEN + "Proveedor borrado correctamente." + RESET);
                 } else {
-                    System.out.println("   Borrado cancelado.");
+                    System.out.println("   " + RED + "Borrado cancelado.");
                 }
             }
 
         } catch (InputMismatchException e) {
-            System.out.println("   " + RED + "Error:" + RESET + " ID no válido. Ingrese un número.");
-            sc.nextLine(); // Limpiar el buffer
+            System.out.println("   " + RED + "\n Error:" + RESET + " ID no válido. Ingrese un número.");
+            sc.nextLine(); 
         }
-        System.out.println("-".repeat(35));
     }
 
     public ProveedoresModel getIdProveedores(int id) {

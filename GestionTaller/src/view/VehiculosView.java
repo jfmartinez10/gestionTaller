@@ -22,13 +22,13 @@ public class VehiculosView {
 
     public void agregarVehiculos() {
         System.out.println("\n" + "+".repeat(35));
-        System.out.println("   ** Añadir Nuevo Vehículo **");
+        System.out.println("   ** Anadir Nuevo Vehículo **");
         System.out.println("+".repeat(35));
 
         System.out.print("   Matrícula (7 caracteres sin espacios): ");
         String matricula = scanner.nextLine();
 
-        System.out.print("   Año de fabricación: ");
+        System.out.print("   Ano de fabricación: ");
         int ano = scanner.nextInt();
         scanner.nextLine(); 
 
@@ -87,7 +87,7 @@ public class VehiculosView {
             System.out.println("   1. Matrícula");
             System.out.println("   2. Marca");
             System.out.println("   3. Modelo");
-            System.out.println("   4. Año de fabricación");
+            System.out.println("   4. Ano de fabricación");
             System.out.println("   5. [VOLVER] al menú anterior");
             System.out.print("   Seleccione una opción: ");
             opcion = scanner.nextInt();
@@ -132,16 +132,16 @@ public class VehiculosView {
                 case 4 -> {
                     int anio;
                     do {
-                        System.out.println("   Introduce el nuevo año de fabricación: ");
+                        System.out.println("   Introduce el nuevo ano de fabricación: ");
                         anio = scanner.nextInt();
                         if (anio < 1769 || anio > 2025) {
-                            System.out.println("   " + RED + "Error:" + RESET + " Año inválido. Debe estar entre 1769 y 2025.");
+                            System.out.println("   " + RED + "Error:" + RESET + " Ano inválido. Debe estar entre 1769 y 2025.");
                         } else {
                             break;
                         }
                     } while (anio < 1769 || anio > 2025);
                     vehiculoDAO.modificarAnoVehiculo(matriculaOriginal, anio);
-                    System.out.println("   " + GREEN + "Año modificado correctamente." + RESET);
+                    System.out.println("   " + GREEN + "Ano modificado correctamente." + RESET);
                     scanner.nextLine(); 
                 }
 

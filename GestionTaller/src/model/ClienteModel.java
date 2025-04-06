@@ -35,6 +35,6 @@ public class ClienteModel {
  
     @Override
     public String toString() {
-        return "Cliente [dni = " + dni + ", nombre =" + nombre + ", apellido =" + apellido + ", telefono =" + telefono + ", email =" + email + "]";
+        return "Cliente [dni = " + dni + ", nombre = " + nombre + ", apellido = " + apellido + ", telefono = " + telefono + ", email = " + email + "]";
     }
 }

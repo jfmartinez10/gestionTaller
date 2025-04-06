@@ -38,11 +38,11 @@ public class EmpleadoView {
                 opcion = sc.nextInt();
                 sc.nextLine(); 
             } catch (InputMismatchException e) {
-                System.out.println("   " + RED + "Error:" + RESET + " Opción no válida. Ingrese un número.");
+                System.out.println("   " + RED + "\n Error:" + RESET + " Opción no válida. Ingrese un número.");
                 sc.nextLine(); 
                 opcion = 0; 
             }
-            System.out.println("-".repeat(35)); 
+; 
 
             switch (opcion) {
                 case 1 -> insertarEmpleado();
@@ -52,13 +52,10 @@ public class EmpleadoView {
                 case 5 -> buscarClientePorDni();
                 case 6 -> eliminarEmpleado();
                 case 7 -> proveedoresView.mostrarMenuProveedor();
-                default -> {
-                    System.out.println("   Opción no válida.");
-                }
             }
 
         } while (opcion != 8);
-        System.out.println("Saliendo del panel de empleados...");
+        System.out.println("\n Saliendo del panel de empleados...");
 
     }
 
@@ -76,15 +73,15 @@ public class EmpleadoView {
             int idEmpleado = sc.nextInt();
             System.out.print("   Ingrese el teléfono del empleado: ");
             int telefono = sc.nextInt();
-            sc.nextLine(); // Consume la nueva línea
+            sc.nextLine(); 
 
             EmpleadosModel empleado = new EmpleadosModel(idEmpleado, nombre, apellido, telefono);
             empleadoDAO.insertarEmpleado(empleado);
             System.out.println("\n   " + GREEN + "Empleado insertado correctamente." + RESET);
 
         } catch (InputMismatchException e) {
-            System.out.println("   " + RED + "Error:" + RESET + " Al ingresar datos. Asegúrese de que el ID y el teléfono sean números.");
-            sc.nextLine(); // Limpiar el buffer del scanner
+            System.out.println("   " + RED + "\n Error:" + RESET + " Al ingresar datos. Asegúrese de que el ID y el teléfono sean números.");
+            sc.nextLine(); 
         }
         System.out.println("-".repeat(35));
     }
@@ -101,7 +98,7 @@ public class EmpleadoView {
 
             EmpleadosModel empleado = empleadoDAO.getIdEmpleado(id);
             if (empleado == null) {
-                System.out.println("   " + RED + "Error:" + RESET + " Empleado no encontrado con el ID: " + id + ".");
+                System.out.println("   " + RED + "\n Error:" + RESET + " Empleado no encontrado con el ID: " + id + ".");
                 return;
             }
 
@@ -115,7 +112,6 @@ public class EmpleadoView {
                 System.out.print("   Ingrese una opción: ");
                 opcion = sc.nextInt();
                 sc.nextLine(); 
-                System.out.println("-".repeat(35));
 
                 switch (opcion) {
                     case 1 -> {
@@ -136,12 +132,12 @@ public class EmpleadoView {
                         System.out.print("   Introducir nuevo teléfono: ");
                         try {
                             int telefono = sc.nextInt();
-                            sc.nextLine(); // Consume la nueva línea
+                            sc.nextLine(); 
                             empleadoDAO.modificarTlfEmpleado(telefono, id);
                             System.out.println("   " + GREEN + "Teléfono modificado correctamente." + RESET);
                         } catch (InputMismatchException e) {
-                            System.out.println("   " + RED + "Error:" + RESET + " Teléfono debe ser un número.");
-                            sc.nextLine(); // Limpiar el buffer
+                            System.out.println("   " + RED + "\n Error:" + RESET + " Teléfono debe ser un número.");
+                            sc.nextLine(); 
                         }
                     }
                     default -> System.out.println("   Opción no válida.");
@@ -150,10 +146,9 @@ public class EmpleadoView {
             System.out.println("Saliendo del menú de modificación de empleado...");
 
         } catch (InputMismatchException e) {
-            System.out.println("   " + RED + "Error:" + RESET + " ID de empleado no válido. Debe ser un número.");
+            System.out.println("   " + RED + "\n Error:" + RESET + " ID de empleado no válido. Debe ser un número.");
             sc.nextLine(); 
         }
-        System.out.println("-".repeat(35));
     }
 
     public void mostrarEmpleados() {
@@ -166,11 +161,10 @@ public class EmpleadoView {
             System.out.println("   No hay empleados registrados.");
         } else {
             for (EmpleadosModel empleado : empleados) {
-                System.out.println("   " + empleado);
+                System.out.println("\n   " + empleado);
                 System.out.println("   " + "-".repeat(70));
             }
         }
-        System.out.println("-".repeat(35));
     }
 
     public void buscarEmpleadoPorId() {
@@ -185,17 +179,16 @@ public class EmpleadoView {
 
             EmpleadosModel empleado = empleadoDAO.getIdEmpleado(id);
             if (empleado == null) {
-                System.out.println("   " + RED + "Error:" + RESET + " Empleado no encontrado con el ID: " + id + ".");
+                System.out.println("   " + RED + "\n Error:" + RESET + " Empleado no encontrado con el ID: " + id + ".");
             } else {
                 System.out.println("   Empleado encontrado:");
                 System.out.println("   " + empleado);
             }
 
         } catch (InputMismatchException e) {
-            System.out.println("   " + RED + "Error:" + RESET + " ID no válido. Ingrese un número.");
+            System.out.println("   " + RED + "\n Error:" + RESET + " ID no válido. Ingrese un número.");
             sc.nextLine(); 
         }
-        System.out.println("-".repeat(35));
     }
 
     public void buscarClientePorDni() {
@@ -208,12 +201,11 @@ public class EmpleadoView {
 
         ClienteModel cliente = clienteDAO.getClienteDNI(dni);
         if (cliente == null) {
-            System.out.println("   " + RED + "Error:" + RESET + " Cliente no encontrado con el DNI: " + dni + ".");
+            System.out.println("   " + RED + "\n Error:" + RESET + " Cliente no encontrado con el DNI: " + dni + ".");
         } else {
             System.out.println("   Cliente encontrado:");
             System.out.println("   " + cliente);
         }
-        System.out.println("-".repeat(35));
     }
 
     public void eliminarEmpleado() {
@@ -228,7 +220,7 @@ public class EmpleadoView {
 
             EmpleadosModel empleado = empleadoDAO.getIdEmpleado(idEmpleado);
             if (empleado == null) {
-                System.out.println("   " + RED + "Error:" + RESET + " Empleado no encontrado con el ID: " + idEmpleado + ".");
+                System.out.println("   " + RED + "\n Error:" + RESET + " Empleado no encontrado con el ID: " + idEmpleado + ".");
             } else {
                 System.out.print("   ¿Está seguro de que desea eliminar a este empleado? (s/n): ");
                 String confirmacion = sc.nextLine();
@@ -241,10 +233,9 @@ public class EmpleadoView {
             }
 
         } catch (InputMismatchException e) {
-            System.out.println("   " + RED + "Error:" + RESET + " ID no válido. Ingrese un número.");
+            System.out.println("   " + RED + "\n Error:" + RESET + " ID no válido. Ingrese un número.");
             sc.nextLine(); 
         }
-        System.out.println("-".repeat(35));
     }
 
     public EmpleadosModel getIdEmpleado(int idEmpleado) {

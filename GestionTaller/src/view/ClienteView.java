@@ -30,7 +30,7 @@ public class ClienteView {
             System.out.println("  1. [REGISTRAR] Datos personales");
             System.out.println("  2. [MODIFICAR] Datos personales");
             System.out.println("  3. [ELIMINAR] Cuenta de cliente");
-            System.out.println("  4. [AÑADIR] Un vehículo");
+            System.out.println("  4. [AnADIR] Un vehículo");
             System.out.println("  5. [MODIFICAR] Un vehículo");
             System.out.println("  6. [MOSTRAR] Mis vehículos");
             System.out.println("  7. [ELIMINAR] Un vehículo");
