@@ -4,9 +4,7 @@ import java.sql.*;
 import model.ClienteModel;
 
 public class ClienteDAO {
-
- public void anadirCliente(ClienteModel cliente) {
-
+    public void anadirCliente(ClienteModel cliente) {
         String nombre = cliente.getNombre();
         String apellido = cliente.getApellido();
         int telefono = cliente.getTelefono();
@@ -18,14 +16,12 @@ public class ClienteDAO {
         
         if (conexion != null) {
             String query = "INSERT INTO Clientes (dni, nombre, apellido, telefono, email) VALUES ( ?, ?, ?, ?, ?)";
-            
             try (PreparedStatement ps = conexion.prepareStatement(query)) {
                 ps.setString(1, dni);
                 ps.setString(2, nombre);
                 ps.setString(3, apellido);
                 ps.setInt(4, telefono);
                 ps.setString(5, email);
-                
                 ps.executeUpdate();
  
             } catch (SQLException e) {
@@ -46,11 +42,11 @@ public class ClienteDAO {
                 try (ResultSet rs = ps.executeQuery()) {
                     if (rs.next()) {
                         cliente = new ClienteModel(
-                                rs.getString("dni"),
-                                rs.getString("nombre"),
-                                rs.getString("apellido"),
-                                rs.getInt("telefono"),
-                                rs.getString("email")
+                            rs.getString("dni"),
+                            rs.getString("nombre"),
+                            rs.getString("apellido"),
+                            rs.getInt("telefono"),
+                            rs.getString("email")
                         );
                     }
                 }
@@ -82,6 +78,7 @@ public class ClienteDAO {
                         cliente = new ClienteModel(dni, nombre, apellido, telefono, email);
                     }
                 }
+
             } catch (SQLException e) {
                 System.err.println("Error al obtener cliente por DNI: " + e.getMessage());
             }
@@ -110,12 +107,14 @@ public class ClienteDAO {
     public void actualizarApellidoCliente(String dni,String apellido) {
         ConexionBD bd = new ConexionBD();
         Connection conexion = bd.conectar();
+        
         if (conexion != null) {
             String query = "UPDATE Clientes SET apellido = ? WHERE dni = ?";
             try(PreparedStatement stmt = conexion.prepareStatement(query)){
                 stmt.setString(1, apellido);
                 stmt.setString(2, dni);
                 stmt.executeUpdate();
+
             } catch (SQLException e) {
                 System.err.println("Error al actualizar apellido del cliente: " + e.getMessage());
             }
@@ -125,6 +124,7 @@ public class ClienteDAO {
     public void actualizarTlfCliente(String dni, int telefono) {
         ConexionBD bd = new ConexionBD();
         Connection conexion = bd.conectar();
+        
         if (conexion != null) {
             String query = "UPDATE Clientes SET telefono = ? WHERE dni = ?";
             try(PreparedStatement stmt = conexion.prepareStatement(query)){
@@ -140,7 +140,8 @@ public class ClienteDAO {
     public void actualizarEmailCliente(String dni, String email) {
         ConexionBD bd = new ConexionBD();
         Connection conexion = bd.conectar();       
-         if (conexion != null) {
+        
+        if (conexion != null) {
             String query = "UPDATE Clientes SET email = ? WHERE dni = ?";
             try(PreparedStatement stmt = conexion.prepareStatement(query)){
                 stmt.setString(1, email);
@@ -155,6 +156,7 @@ public class ClienteDAO {
     public void actualizarDniCliente(String dniActual, String dniNuevo) {
         ConexionBD bd = new ConexionBD();
         Connection conexion = bd.conectar();        
+        
         if (conexion != null) {
             String query = "UPDATE Clientes SET dni = ? WHERE dni = ?";
             try (PreparedStatement stmt = conexion.prepareStatement(query)) {
@@ -199,6 +201,7 @@ public class ClienteDAO {
                 try (ResultSet rs = ps.executeQuery()) {
                     existe = rs.next();
                 }
+
             } catch (SQLException e) {
                 System.err.println("Error al verificar existencia de telefono: " + e.getMessage());
             }
@@ -213,7 +216,6 @@ public class ClienteDAO {
 
         if (conexion != null) {
             String query = "SELECT * FROM Clientes WHERE email = ?";
-
             try (PreparedStatement ps = conexion.prepareStatement(query)) {
                 ps.setString(1, email);
                 try (ResultSet rs = ps.executeQuery()) {

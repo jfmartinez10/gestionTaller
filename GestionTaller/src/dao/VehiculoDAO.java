@@ -1,8 +1,9 @@
 package dao;
 
 import java.sql.*;
-import java.util.ArrayList;
+import java.util.*;
 import model.VehiculosModel;
+
 public class VehiculoDAO {
 
     public void anadirVehiculo(VehiculosModel vehiculo){

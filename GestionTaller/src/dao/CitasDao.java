@@ -13,6 +13,7 @@ public class CitasDao {
         Connection conexion = null;
         PreparedStatement ps = null;
         ConexionBD bd = new ConexionBD();
+        
         try {
             conexion = bd.conectar();
             if (conexion != null) {
@@ -24,6 +25,7 @@ public class CitasDao {
                 ps.setString(4, cita.getCliente().getDni());
                 ps.executeUpdate();
             }
+
         } catch (SQLException e) {
             System.err.println("Error al insertar cita: " + e.getMessage());
         } finally {
@@ -40,6 +42,7 @@ public class CitasDao {
         Connection conexion = null;
         PreparedStatement ps = null;
         ConexionBD bd = new ConexionBD();
+        
         try {
             conexion = bd.conectar();
             if (conexion != null) {
@@ -48,6 +51,7 @@ public class CitasDao {
                 ps.setInt(1, idCita);
                 ps.executeUpdate();
             }
+
         } catch (SQLException e) {
             System.err.println("Error al eliminar cita: " + e.getMessage());
         } finally {
@@ -66,6 +70,7 @@ public class CitasDao {
         ResultSet rs = null;
         ArrayList<CitasModel> citas = new ArrayList<>();
         ConexionBD bd = new ConexionBD();
+        
         try {
             conexion = bd.conectar();
             if (conexion != null) {
@@ -83,6 +88,7 @@ public class CitasDao {
                     citas.add(cita);
                 }
             }
+
         } catch (SQLException e) {
             System.err.println("Error al listar citas: " + e.getMessage());
         } finally {
@@ -103,6 +109,7 @@ public class CitasDao {
         ResultSet rs = null;
         ArrayList<CitasModel> citas = new ArrayList<>();
         ConexionBD bd = new ConexionBD();
+        
         try {
             conexion = bd.conectar();
             if (conexion != null) {
@@ -121,6 +128,7 @@ public class CitasDao {
                     citas.add(cita);
                 }
             }
+
         } catch (SQLException e) {
             System.err.println("Error al listar citas: " + e.getMessage());
         } finally {
@@ -141,6 +149,7 @@ public class CitasDao {
         ResultSet rs = null;
         CitasModel cita = null;
         ConexionBD bd = new ConexionBD();
+        
         try {
             conexion = bd.conectar();
             if (conexion != null) {
@@ -157,6 +166,7 @@ public class CitasDao {
                     cita.setIdCita(id);
                 }
             }
+
         } catch (SQLException e) {
             System.err.println("Error al obtener cita: " + e.getMessage());
         } finally {
@@ -175,6 +185,7 @@ public class CitasDao {
         Connection conexion = null;
         PreparedStatement ps = null;
         ConexionBD bd = new ConexionBD();
+        
         try {
             conexion = bd.conectar();
             if (conexion != null) {
@@ -184,6 +195,7 @@ public class CitasDao {
                 ps.setInt(2, cita.getIdCita());
                 ps.executeUpdate();
             }
+
         } catch (SQLException e) {
             System.err.println("Error al modificar cita: " + e.getMessage());
         } finally {
@@ -200,6 +212,7 @@ public class CitasDao {
         Connection conexion = null;
         PreparedStatement ps = null;
         ConexionBD bd = new ConexionBD();
+        
         try {
             conexion = bd.conectar();
             if (conexion != null) {
@@ -209,6 +222,7 @@ public class CitasDao {
                 ps.setInt(2, cita.getIdCita());
                 ps.executeUpdate();
             }
+
         } catch (SQLException e) {
             System.err.println("Error al modificar cita: " + e.getMessage());
         } finally {
@@ -225,6 +239,7 @@ public class CitasDao {
         Connection conexion = null;
         PreparedStatement ps = null;
         ConexionBD bd = new ConexionBD();
+
         try {
             conexion = bd.conectar();
             if (conexion != null) {
@@ -234,6 +249,7 @@ public class CitasDao {
                 ps.setInt(2, cita.getIdCita());
                 ps.executeUpdate();
             }
+
         } catch (SQLException e) {
             System.err.println("Error al modificar cita: " + e.getMessage());
         } finally {
@@ -252,6 +268,7 @@ public class CitasDao {
         ConexionBD bd = new ConexionBD();
         try {
             conexion = bd.conectar();
+            
             if (conexion != null) {
                 String query = "UPDATE Citas SET descripcion = ? WHERE id = ?";
                 ps = conexion.prepareStatement(query);
@@ -259,6 +276,7 @@ public class CitasDao {
                 ps.setInt(2, cita.getIdCita());
                 ps.executeUpdate();
             }
+            
         } catch (SQLException e) {
             System.err.println("Error al modificar cita: " + e.getMessage());
         } finally {

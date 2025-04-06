@@ -1,11 +1,10 @@
 package dao;
 
 import java.sql.*;
-import java.util.ArrayList;
+import java.util.*;
 import model.EmpleadosModel;
 
 public class EmpleadoDAO {
-
     public void insertarEmpleado(EmpleadosModel empleado) {
         String nombre = empleado.getNombre();
         String apellido = empleado.getApellido();
@@ -45,6 +44,7 @@ public class EmpleadoDAO {
                         );
                     }
                 }
+
             } catch (SQLException e) {
                 System.err.println("Error al obtener empleado: " + e.getMessage());
             }
@@ -56,8 +56,7 @@ public class EmpleadoDAO {
         ConexionBD bd = new ConexionBD();
 
         try (Connection conexion = bd.conectar();
-             PreparedStatement ps = conexion.prepareStatement("UPDATE Empleados SET nombre = ? WHERE id = ?")) {
-
+            PreparedStatement ps = conexion.prepareStatement("UPDATE Empleados SET nombre = ? WHERE id = ?")) {
             ps.setString(1, nombre);
             ps.setInt(2, id);
             ps.executeUpdate();
@@ -71,7 +70,7 @@ public class EmpleadoDAO {
         ConexionBD bd = new ConexionBD();
 
         try (Connection conexion = bd.conectar();
-             PreparedStatement stmt = conexion.prepareStatement("UPDATE Empleados SET apellido = ? WHERE id = ?")) {
+            PreparedStatement stmt = conexion.prepareStatement("UPDATE Empleados SET apellido = ? WHERE id = ?")) {
 
             stmt.setString(1, apellido);
             stmt.setInt(2, id);
@@ -86,7 +85,7 @@ public class EmpleadoDAO {
         ConexionBD bd = new ConexionBD();
 
         try (Connection conexion = bd.conectar();
-             PreparedStatement stmt = conexion.prepareStatement("UPDATE Empleados SET telefono = ? WHERE id = ?")) {
+            PreparedStatement stmt = conexion.prepareStatement("UPDATE Empleados SET telefono = ? WHERE id = ?")) {
 
             stmt.setInt(1, telefono);
             stmt.setInt(2, id);
@@ -105,7 +104,7 @@ public class EmpleadoDAO {
         if (conexion != null) {
             String query = "SELECT * FROM Empleados";
 
-            try (Statement stmt = conexion.createStatement();
+            try (Statement stmt = conexion.createStatement(); 
             ResultSet rs = stmt.executeQuery(query)) {
                 while (rs.next()) {
                     int id = rs.getInt("id");
@@ -116,6 +115,7 @@ public class EmpleadoDAO {
                     EmpleadosModel empleado = new EmpleadosModel(id, nombre, apellido, telefono);
                     empleados.add(empleado);
                 }
+
             } catch (SQLException e) {
                 System.err.println("Error al listar empleados: " + e.getMessage());
             }
@@ -126,8 +126,9 @@ public class EmpleadoDAO {
 
     public void eliminarEmpleado(int id) {
         ConexionBD bd = new ConexionBD();
+        
         try (Connection conexion = bd.conectar();
-             PreparedStatement ps = conexion.prepareStatement("DELETE FROM Empleados WHERE id = ?")) {
+        PreparedStatement ps = conexion.prepareStatement("DELETE FROM Empleados WHERE id = ?")) {
             ps.setInt(1, id);
             ps.executeUpdate();
         } catch (SQLException e) {
