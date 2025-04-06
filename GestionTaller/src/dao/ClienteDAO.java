@@ -95,7 +95,7 @@ public class ClienteDAO {
         Connection conexion = bd.conectar();
 
         if (conexion != null) {
-            String query = "UPDATE Cliente SET nombre = ? WHERE dni = ?";
+            String query = "UPDATE Clientes SET nombre = ? WHERE dni = ?";
 
             try (PreparedStatement ps = conexion.prepareStatement(query)) {
                 ps.setString(1, nombre);
@@ -111,7 +111,7 @@ public class ClienteDAO {
         ConexionBD bd = new ConexionBD();
         Connection conexion = bd.conectar();
         if (conexion != null) {
-            String query = "UPDATE Cliente SET apellido = ? WHERE dni = ?";
+            String query = "UPDATE Clientes SET apellido = ? WHERE dni = ?";
             try(PreparedStatement stmt = conexion.prepareStatement(query)){
                 stmt.setString(1, apellido);
                 stmt.setString(2, dni);
@@ -126,7 +126,7 @@ public class ClienteDAO {
         ConexionBD bd = new ConexionBD();
         Connection conexion = bd.conectar();
         if (conexion != null) {
-            String query = "UPDATE Cliente SET telefono = ? WHERE dni = ?";
+            String query = "UPDATE Clientes SET telefono = ? WHERE dni = ?";
             try(PreparedStatement stmt = conexion.prepareStatement(query)){
                 stmt.setInt(1, telefono);
                 stmt.setString(2, dni);
@@ -141,7 +141,7 @@ public class ClienteDAO {
         ConexionBD bd = new ConexionBD();
         Connection conexion = bd.conectar();       
          if (conexion != null) {
-            String query = "UPDATE Cliente SET email = ? WHERE dni = ?";
+            String query = "UPDATE Clientes SET email = ? WHERE dni = ?";
             try(PreparedStatement stmt = conexion.prepareStatement(query)){
                 stmt.setString(1, email);
                 stmt.setString(2, dni);
@@ -156,7 +156,7 @@ public class ClienteDAO {
         ConexionBD bd = new ConexionBD();
         Connection conexion = bd.conectar();        
         if (conexion != null) {
-            String query = "UPDATE Cliente SET dni = ? WHERE dni = ?";
+            String query = "UPDATE Clientes SET dni = ? WHERE dni = ?";
             try (PreparedStatement stmt = conexion.prepareStatement(query)) {
                 stmt.setString(1, dniNuevo);
                 stmt.setString(2, dniActual);
@@ -173,7 +173,7 @@ public class ClienteDAO {
         boolean existe = false;
 
         if (conexion != null) {
-            String query = "SELECT * FROM Cliente WHERE dni = ?";
+            String query = "SELECT * FROM Clientes WHERE dni = ?";
 
             try (PreparedStatement ps = conexion.prepareStatement(query)) {
                 ps.setString(1, dni);
@@ -193,7 +193,7 @@ public class ClienteDAO {
         boolean existe = false;
 
         if (conexion != null) {
-            String query = "SELECT * FROM Cliente WHERE telefono = ?";
+            String query = "SELECT * FROM Clientes WHERE telefono = ?";
             try (PreparedStatement ps = conexion.prepareStatement(query)) {
                 ps.setInt(1, telefono);
                 try (ResultSet rs = ps.executeQuery()) {
@@ -212,7 +212,7 @@ public class ClienteDAO {
         boolean existe = false;
 
         if (conexion != null) {
-            String query = "SELECT * FROM Cliente WHERE email = ?";
+            String query = "SELECT * FROM Clientes WHERE email = ?";
 
             try (PreparedStatement ps = conexion.prepareStatement(query)) {
                 ps.setString(1, email);
@@ -233,7 +233,7 @@ public class ClienteDAO {
         Connection conexion = bd.conectar();
 
         if (conexion != null) {
-            String query = "DELETE FROM Cliente WHERE dni = ?";
+            String query = "DELETE FROM Clientes WHERE dni = ?";
 
             try (PreparedStatement ps = conexion.prepareStatement(query)) {
                 ps.setString(1, dni);

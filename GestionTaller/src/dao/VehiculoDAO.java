@@ -24,12 +24,11 @@ public class VehiculoDAO {
                 ps.setString(3, marca);
                 ps.setString(4, modelo);
                 ps.setString(5, dni);
-
                 ps.executeUpdate();
+
              } catch (SQLException e) {
                 System.err.println("Error al insertar cliente: " + e.getMessage());
             }
-        
         }
     }
 
@@ -50,6 +49,7 @@ public class VehiculoDAO {
                     System.out.println("Modelo: " + rs.getString("modelo"));
                     System.out.println("DNI Propietario: " + rs.getString("dni"));
                 }
+
             } catch (SQLException e) {
                 System.err.println("Error al listar vehículos: " + e.getMessage());
             }
@@ -65,6 +65,7 @@ public class VehiculoDAO {
                 ps.setString(1, matricula);
                 ps.setString(2, matricula);
                 ps.executeUpdate();
+
             } catch (SQLException e) {
                 System.err.println("Error al modificar matricula: " + e.getMessage());
             }
@@ -80,6 +81,7 @@ public class VehiculoDAO {
                 ps.setString(1, marca);
                 ps.setString(2, matricula);
                 ps.executeUpdate();
+
             } catch (SQLException e) {
                 System.err.println("Error al modificar marca: " + e.getMessage());
             }
@@ -95,6 +97,7 @@ public class VehiculoDAO {
                 ps.setString(1, modelo);
                 ps.setString(2, matricula);
                 ps.executeUpdate();
+
             } catch (SQLException e) {
                 System.err.println("Error al modificar modelo: " + e.getMessage());
             }
@@ -110,6 +113,7 @@ public class VehiculoDAO {
                 ps.setInt(1, ano);
                 ps.setString(2, matricula);
                 ps.executeUpdate();
+
             } catch (SQLException e) {
                 System.err.println("Error al modificar ano: " + e.getMessage());
             }
@@ -136,6 +140,7 @@ public class VehiculoDAO {
                         vehiculo = new VehiculosModel(matricula, ano, marca, modelo, dni);
                     }
                 }
+
             } catch (SQLException e) {
                 System.err.println("Error al obtener vehiculo: " + e.getMessage());
             }
@@ -152,18 +157,18 @@ public class VehiculoDAO {
             String query = "SELECT * FROM Vehiculo";
             try (Statement stmt = conexion.createStatement();
              ResultSet rs = stmt.executeQuery(query)) {
-            while (rs.next()) {
-                String matricula = rs.getString("matricula");
-                int ano = rs.getInt("ano");
-                String marca = rs.getString("marca");
-                String modelo = rs.getString("modelo");
-                String dni = rs.getString("dni");
+                while (rs.next()) {
+                    String matricula = rs.getString("matricula");
+                    int ano = rs.getInt("ano");
+                    String marca = rs.getString("marca");
+                    String modelo = rs.getString("modelo");
+                    String dni = rs.getString("dni");
 
-                vehiculos.add(new VehiculosModel(matricula, ano, marca, modelo, dni));
-            }
+                    vehiculos.add(new VehiculosModel(matricula, ano, marca, modelo, dni));
+                }
+
             } catch (SQLException e) {
                 System.err.println("Error al listar vehiculos: " + e.getMessage());
-                
             }
             return vehiculos;
         }
@@ -186,6 +191,3 @@ public class VehiculoDAO {
         }
     }
 }
-    
-    
-
